@@ -1,5 +1,7 @@
 package org.zerock.config;
 
+import javax.servlet.ServletRegistration;
+
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /* 이 파일은 WAS(Web Application Server)가 최초 구동될 때 즉 톰켓이 최초 구동될 때 
@@ -21,5 +23,10 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
 		protected String[] getServletMappings() {
 			// TODO Auto-generated method stub
 			return new String[] {"/"};
+		}
+		
+		@Override
+		protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+			registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
 		}
 }
