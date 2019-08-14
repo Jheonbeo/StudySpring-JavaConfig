@@ -15,6 +15,7 @@ import com.zaxxer.hikari.HikariDataSource;
 /* 공통빈을 설정하는 곳으로 주로 View 지원을 제외한 bean을 설정 */
 @Configuration
 @ComponentScan(basePackages= {"org.zerock.sample"})
+@ComponentScan(basePackages= {"org.zerock.service"})
 @MapperScan(basePackages= {"org.zerock.mapper"})
 public class RootConfig {
 	@Bean

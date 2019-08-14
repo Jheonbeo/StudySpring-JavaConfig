@@ -21,4 +21,18 @@
 	insert into tkk_item(CD_ITEM, NM_ITEM, DTS_START, BOX_SNP, ITEM_UPH, SEG_ASSET, CRT_DAT, UPD_DAT)
 	values (#{CD_ITEM}, #{NM_ITEM}, #{DTS_START}, #{BOX_SNP}, #{ITEM_UPH}, #{SEG_ASSET}, SYSDATE, SYSDATE)
 </insert>
+
+<select id="read" resultType="org.zerock.domain.ItemVO">
+	select * from tkk_item where cd_item = #{CD_ITEM}
+</select>
+
+<delete id="delete">
+	delete tkk_item where cd_item = #{CD_ITEM}
+</delete>
+
+<update id="update">
+	update tkk_item set
+	upd_dat = SYSDATE
+	where cd_item = #{CD_ITEM}
+</update>
 </mapper>

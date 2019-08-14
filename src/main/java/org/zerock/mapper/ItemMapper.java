@@ -12,4 +12,10 @@ public interface ItemMapper {
 	public void insert(ItemVO item);
 	
 	public void insertSelectKey(ItemVO item);
+	
+	public ItemVO read(String CD_ITEM);
+	
+	public int delete(String CD_ITEM);
+	
+	public int update(ItemVO item);
 }

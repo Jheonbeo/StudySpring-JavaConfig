@@ -17,12 +17,12 @@ import lombok.extern.log4j.Log4j;
 public class ItemMapperTests {
 	@Setter(onMethod_ = @Autowired)
 	private ItemMapper mapper;
-	
+	/*
 	@Test
 	public void testGetList() {
 		mapper.getList().forEach(board -> log.info(board));
 	}
-	/*
+	
 	@Test
 	public void testInsert() {
 		ItemVO item = new ItemVO();
@@ -38,7 +38,7 @@ public class ItemMapperTests {
 		log.info("insert");
 		log.info(item);
 	}
-*/
+
 	@Test
 	public void testInsertSelectKey() {
 		ItemVO item = new ItemVO();
@@ -52,5 +52,27 @@ public class ItemMapperTests {
 
 		log.info("insertSelectKey");
 		log.info(item);
+	}
+
+	@Test
+	public void testRead() {
+		ItemVO item = mapper.read("88810J9100TRY");
+		
+		log.info(item);
+	}
+	
+	@Test
+	public void testDelete() {
+		log.info("DELETE COUNT: " + mapper.delete("88810TEST"));
+	}
+	*/
+
+	@Test
+	public void testUpdate() {
+		ItemVO item = new ItemVO();
+		item.setCD_ITEM("88810TEST");
+		
+		int count = mapper.update(item);
+		log.info("UPDATE COUNT: " + count);
 	}
 }
