@@ -28,25 +28,32 @@ public class ItemServiceImpl implements ItemService{
 
 	@Override
 	public ItemVO get(String cd_item) {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("get.........." + cd_item);
+		
+		return mapper.read(cd_item);
 	}
 
 	@Override
 	public boolean modify(ItemVO item) {
-		// TODO Auto-generated method stub
-		return false;
+		log.info("modify....." + item);
+		
+		//If sql success, it returns 1. 
+		return mapper.update(item) == 1;
 	}
 
 	@Override
-	public boolean remove(String cd_Item) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean remove(String cd_item) {
+		log.info("remove......" + cd_item);
+
+		//If sql success, it returns 1. 
+		return mapper.delete(cd_item) == 1;
 	}
 
 	@Override
 	public List<ItemVO> getList() {
 		// TODO Auto-generated method stub
-		return null;
+		log.info("getList.......");
+		
+		return mapper.getList();
 	}
 }

@@ -7,6 +7,7 @@ import org.zerock.domain.ItemVO;
 
 public interface ItemMapper {
 	//@Select("select * from tkk_item where crt_dat >= sysdate - 1")
+	//src/resources/org/zerock/mapper/ItemMapper.xml 참조
 	public List<ItemVO> getList();
 	
 	public void insert(ItemVO item);

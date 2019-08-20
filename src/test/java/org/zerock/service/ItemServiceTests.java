@@ -19,6 +19,7 @@ public class ItemServiceTests {
 	@Setter(onMethod_ = {@Autowired})
 	private ItemService service;
 	
+	/*
 	@Test
 	public void testExist() {
 		log.info(service);
@@ -37,5 +38,32 @@ public class ItemServiceTests {
 		service.register(item);
 		
 		log.info("생성된 품번 : " + item.getCD_ITEM());
+	}
+	*/
+	
+	@Test
+	public void testGetList() {
+		service.getList().forEach(item -> log.info(item));
+	}
+	
+	@Test
+	public void testGet() {
+		log.info(service.get("88810TEST"));
+	}
+	
+	@Test
+	public void testDelete() {
+		log.info("REMOVE RESULT: " + service.remove("88810TEST"));
+	}
+	
+	@Test
+	public void testUpdate() {
+		ItemVO item = service.get("88810TEST");
+		
+		if(item == null)
+			return;
+		
+		item.setBOX_SNP(5);
+		log.info("MODIFY RESULT: " + service.modify(item));
 	}
 }
