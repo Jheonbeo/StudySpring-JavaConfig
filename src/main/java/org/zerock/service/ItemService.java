@@ -1,5 +1,6 @@
 package org.zerock.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.zerock.domain.ItemVO;
@@ -14,4 +15,6 @@ public interface ItemService {
 	public boolean remove(String cd_Item);
 	
 	public List<ItemVO> getList();
+	
+	public String getSupplierList(HashMap<String, Object> map);
 }

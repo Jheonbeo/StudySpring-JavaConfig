@@ -4,7 +4,7 @@
 	 select id 값도 역시 메서드 이름과 일치하게 작성해야한다.-->
 <mapper namespace="org.zerock.mapper.ItemMapper">
 <select id="getList" resultType="org.zerock.domain.ItemVO">
-	<![CDATA[select * from tkk_item where crt_dat >= sysdate - 1]]>
+	<![CDATA[select * from tkk_item where crt_dat >= sysdate - 10]]>
 </select>
 
 <insert id="insert">
@@ -35,4 +35,22 @@
 	upd_dat = SYSDATE
 	where cd_item = #{CD_ITEM}
 </update>
+
+<resultMap id="supplierResult" type="org.zerock.domain.CompanyVO">
+		<result column="CORRESPONDENT" property="CD_COMPANY" javaType="string"/>
+		<result column="NM_CORRESPONDENT" property="NM_COMPANY" javaType="string"/>
+</resultMap>
+<select id="getSupplierList" statementType="CALLABLE">            
+	{
+		CALL SP_JBJ_GET_ITEM(
+				#{CDITEM, mode=IN, jdbcType=VARCHAR, javaType=String},
+				#{CDSUPPLIER, mode=IN, jdbcType=VARCHAR, javaType=String},
+				#{CDCUSTOMER, mode=IN, jdbcType=VARCHAR, javaType=String},
+				#{CDTYPE, mode=IN, jdbcType=VARCHAR, javaType=String},
+				#{CDATE, mode=IN, jdbcType=VARCHAR, javaType=String},
+				#{ACTION, mode=IN, jdbcType=NUMERIC, javaType=INTEGER},
+                #{resultCursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=supplierResult}
+            )
+    }
+</select>
 </mapper>

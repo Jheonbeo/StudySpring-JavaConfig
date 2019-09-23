@@ -1,5 +1,13 @@
 package org.zerock.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,11 +15,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.domain.CompanyVO;
 import org.zerock.domain.ItemVO;
 import org.zerock.service.ItemService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
+
+import org.json.simple.JSONObject;
 
 @Controller	//스프링의 빈으로 인식토록
 @Log4j
@@ -38,7 +49,7 @@ Order order = new Order(10000L, 5000L);로 바꿔줘야하는 번거로움이 �
 public class ItemController {
 	//@Setter(onMethod_= {@Autowired})
 	//위 @AllArgsConstructor를 이용한 생성자를 안 만들 경우 Setter 이용 
-	private ItemService service;
+	private ItemService service;    
 	
 	@GetMapping("/list")
 	public void list(Model model) {
@@ -46,8 +57,24 @@ public class ItemController {
 		model.addAttribute("list", service.getList());
 	}
 	
+	@SuppressWarnings("unchecked")
+	@GetMapping("/register")
+	public void register(Model model) {        
+		log.info("register");
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("CDITEM", "");
+		map.put("CDSUPPLIER", "");
+		map.put("CDCUSTOMER", "");
+		map.put("CDTYPE", "30");
+		map.put("CDATE", "");
+		map.put("ACTION", 3);
+		service.getSupplierList(map);
+		
+        model.addAttribute("supplierList", (ArrayList<CompanyVO>)map.get("resultCursor"));
+	}
+	
 	//RedirectAttributes를 매개변수로 받는 이유는 등록 작업 후 목록화면으로 돌아가기 위함
-	@PostMapping("/register")
 	public String register(ItemVO item, RedirectAttributes rttr) {
 		log.info("register: " + item);
 		
@@ -83,5 +110,23 @@ public class ItemController {
 			rttr.addFlashAttribute("result","success");
 		}
 		return "redirect:/item/list";
+	}
+	
+	@SuppressWarnings("unchecked")
+	@GetMapping("/getSupplier")
+	public void getSupplier(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String callBack = request.getParameter("callback");
+		String segValue = request.getParameter("segValue");
+
+		JSONObject obj = new JSONObject();
+		PrintWriter out = response.getWriter();
+		
+		obj.put("segValue", segValue);
+
+		out.write(callBack + "(" + obj.toString() + ")");
+		log.info(callBack + "(" + obj.toString() + ")");
+		out.flush();
+		out.close();
+		return;
 	}
 }

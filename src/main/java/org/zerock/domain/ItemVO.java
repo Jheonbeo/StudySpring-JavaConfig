@@ -13,5 +13,7 @@ public class ItemVO {
 	private int ITEM_UPH;
 	private String SEG_ASSET;
 	private Date CRT_DAT;
+	private String CRT_USR;
 	private Date UPD_DAT;
+	private String UPD_USR;
 }

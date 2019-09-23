@@ -1,5 +1,6 @@
 package org.zerock.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -55,5 +56,13 @@ public class ItemServiceImpl implements ItemService{
 		log.info("getList.......");
 		
 		return mapper.getList();
+	}
+
+	@Override
+	public String getSupplierList(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		log.info("Service : getSupplierList");
+		
+		return mapper.getSupplierList(map);
 	}
 }
