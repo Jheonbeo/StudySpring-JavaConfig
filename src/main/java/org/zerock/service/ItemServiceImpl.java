@@ -1,9 +1,15 @@
 package org.zerock.service;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
+import org.zerock.domain.CompanyVO;
 import org.zerock.domain.ItemVO;
 import org.zerock.mapper.ItemMapper;
 
@@ -58,11 +64,36 @@ public class ItemServiceImpl implements ItemService{
 		return mapper.getList();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public String getSupplierList(HashMap<String, Object> map) {
+	public JSONArray getCompanyList(String type) {
 		// TODO Auto-generated method stub
 		log.info("Service : getSupplierList");
-		
-		return mapper.getSupplierList(map);
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("CDITEM", "");
+		map.put("CDSUPPLIER", "");
+		map.put("CDCUSTOMER", "");
+		map.put("CDTYPE", type);
+		map.put("CDATE", "");
+		map.put("ACTION", 3);
+		mapper.getCompanyList(map);
+
+		try {
+			JSONArray arryObj = new JSONArray();
+			for(CompanyVO data : (ArrayList<CompanyVO>)map.get("resultCursor")) {
+				JSONObject jsonObj = new JSONObject();
+				jsonObj.put("CD_COMPANY", data.getCD_COMPANY());
+				jsonObj.put("NM_COMPANY", URLDecoder.decode(data.getNM_COMPANY(), "UTF-8"));
+				arryObj.add(jsonObj);
+			}
+
+			return arryObj;
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			return null;
+		}
 	}
 }

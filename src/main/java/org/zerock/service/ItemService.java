@@ -1,8 +1,11 @@
 package org.zerock.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.json.simple.JSONArray;
+import org.zerock.domain.CompanyVO;
 import org.zerock.domain.ItemVO;
 
 public interface ItemService {
@@ -16,5 +19,5 @@ public interface ItemService {
 	
 	public List<ItemVO> getList();
 	
-	public String getSupplierList(HashMap<String, Object> map);
+	public JSONArray getCompanyList(String type);
 }

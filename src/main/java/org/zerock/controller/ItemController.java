@@ -2,8 +2,11 @@ package org.zerock.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +25,9 @@ import org.zerock.service.ItemService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 @Controller	//스프링의 빈으로 인식토록
 @Log4j
@@ -49,7 +54,7 @@ Order order = new Order(10000L, 5000L);로 바꿔줘야하는 번거로움이 �
 public class ItemController {
 	//@Setter(onMethod_= {@Autowired})
 	//위 @AllArgsConstructor를 이용한 생성자를 안 만들 경우 Setter 이용 
-	private ItemService service;    
+	private ItemService service;  
 	
 	@GetMapping("/list")
 	public void list(Model model) {
@@ -57,21 +62,12 @@ public class ItemController {
 		model.addAttribute("list", service.getList());
 	}
 	
-	@SuppressWarnings("unchecked")
 	@GetMapping("/register")
-	public void register(Model model) {        
+	public void register(Model model) throws UnsupportedEncodingException {        
 		log.info("register");
 		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("CDITEM", "");
-		map.put("CDSUPPLIER", "");
-		map.put("CDCUSTOMER", "");
-		map.put("CDTYPE", "30");
-		map.put("CDATE", "");
-		map.put("ACTION", 3);
-		service.getSupplierList(map);
-		
-        model.addAttribute("supplierList", (ArrayList<CompanyVO>)map.get("resultCursor"));
+        model.addAttribute("supplierList", service.getCompanyList("30"));
+        model.addAttribute("customerList", service.getCompanyList("60"));
 	}
 	
 	//RedirectAttributes를 매개변수로 받는 이유는 등록 작업 후 목록화면으로 돌아가기 위함
@@ -120,8 +116,19 @@ public class ItemController {
 
 		JSONObject obj = new JSONObject();
 		PrintWriter out = response.getWriter();
+		response.setContentType("application/json");
 		
+		//service 객체를 controller가 붙잡고 있는거 같다. 새로운 객체로 DAO에 생성해서 하면 null 에러남
+		//이유? 모르겠다; 생명주기랑 관련있는거 같은데 알수가 없네...
+
 		obj.put("segValue", segValue);
+		if(segValue.equals("30")) {
+			obj.put("supplierList", service.getCompanyList("30"));
+		}
+		else {
+			obj.put("supplierList", "");//.toJSONString()
+		}
+	    
 
 		out.write(callBack + "(" + obj.toString() + ")");
 		log.info(callBack + "(" + obj.toString() + ")");

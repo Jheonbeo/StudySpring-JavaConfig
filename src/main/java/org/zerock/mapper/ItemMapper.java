@@ -3,7 +3,6 @@ package org.zerock.mapper;
 import java.util.HashMap;
 import java.util.List;
 
-import org.zerock.domain.CompanyVO;
 import org.zerock.domain.ItemVO;
 
 public interface ItemMapper {
@@ -21,5 +20,5 @@ public interface ItemMapper {
 	
 	public int update(ItemVO item);
 	
-	public String getSupplierList(HashMap<String, Object> map);
+	public String getCompanyList(HashMap<String, Object> map);
 }

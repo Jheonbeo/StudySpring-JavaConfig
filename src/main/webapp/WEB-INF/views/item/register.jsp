@@ -35,6 +35,9 @@
         				
         				<label>&nbsp 고객사 코드 &nbsp</label>
         				<select id="customerBox" class="form-control combobox">
+  	      					<c:forEach items="${customerList}" var="customerList">
+        						<option value="${customerList.CD_COMPANY}">${customerList.CD_COMPANY} : ${customerList.NM_COMPANY}</option>
+        					</c:forEach>
         				</select>
         			</div>
         		</form>
@@ -51,24 +54,33 @@ $(function(){
 			       dataType:"jsonp",
 			       data:{'segValue': segValue} ,
 			       jsonp : "callback",
-			       type:'get', 
-			       success:function(t){ 
-					    switch(segValue){
-				    	case "30":
-					    	combobox.disabled = false;
-					    	break;
-					    case "50":
-					    	removeOptions(combobox);
-					    	$("#supplierBox").append("<option value='1049'>1049 : 조이슨세이프티시스템스코리아</option>");
-					    	combobox.disabled = false;
-					    	break;
-					    case "60":
-					    	combobox.disabled = true;
-					    	break;
-					    default:
-		                    alert("DEFAULT");
-					    	break;
-					    }
+			       type:'GET', 
+			       success:function(t){
+			    	   	var supplierList = t.supplierList;
+			    	   	
+						switch(segValue){
+						case "30":
+							removeOptions(combobox);
+							combobox.disabled = false;
+							for(var i = 0; i < supplierList.length; i++){
+								$("#supplierBox").append("<option value='" + supplierList[i].CD_COMPANY + "'>" + supplierList[i].CD_COMPANY + ":" + supplierList[i].NM_COMPANY + " </option>");
+							}
+							break;
+						case "50":
+							removeOptions(combobox);
+							$("#supplierBox").append("<option value='1049'>1049 : 조이슨세이프티시스템스코리아</option>");
+							combobox.disabled = false;
+							break;
+						case "60":
+							combobox.disabled = true;
+							break;
+						default:
+							alert("DEFAULT");
+							break;
+						}
+			       },
+			       error:function(t){
+			    	   alret("Error");
 			       }
 		    });
 	});
