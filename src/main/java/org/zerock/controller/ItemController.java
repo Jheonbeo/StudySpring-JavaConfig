@@ -129,7 +129,6 @@ public class ItemController {
 			obj.put("supplierList", "");//.toJSONString()
 		}
 	    
-
 		out.write(callBack + "(" + obj.toString() + ")");
 		log.info(callBack + "(" + obj.toString() + ")");
 		out.flush();

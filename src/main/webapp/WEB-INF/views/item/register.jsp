@@ -40,6 +40,12 @@
         					</c:forEach>
         				</select>
         			</div>
+        			<div class="form-group row">
+        				<label>품번 &nbsp</label>
+						<div class="col-sm-6 mb-3 mb-sm-0">
+						  <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="First Name">
+						</div>
+        			</div>
         		</form>
         	</div>
 		</div>
