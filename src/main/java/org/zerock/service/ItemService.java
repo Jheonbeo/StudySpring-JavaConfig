@@ -19,5 +19,5 @@ public interface ItemService {
 	
 	public List<ItemVO> getList();
 	
-	public JSONArray getCompanyList(String type);
+	public JSONArray getItemDataList(String cditem, int type, String supplier, String customer, String cdate, int action);
 }

@@ -3,7 +3,6 @@ package org.zerock.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,12 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.zerock.domain.CompanyVO;
 import org.zerock.domain.ItemVO;
 import org.zerock.service.ItemService;
 
@@ -27,7 +22,6 @@ import lombok.extern.log4j.Log4j;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 
 @Controller	//스프링의 빈으로 인식토록
 @Log4j
@@ -55,7 +49,7 @@ public class ItemController {
 	//@Setter(onMethod_= {@Autowired})
 	//위 @AllArgsConstructor를 이용한 생성자를 안 만들 경우 Setter 이용 
 	private ItemService service;  
-	
+
 	@GetMapping("/list")
 	public void list(Model model) {
 		log.info("list");
@@ -66,8 +60,11 @@ public class ItemController {
 	public void register(Model model) throws UnsupportedEncodingException {        
 		log.info("register");
 		
-        model.addAttribute("supplierList", service.getCompanyList("30"));
-        model.addAttribute("customerList", service.getCompanyList("60"));
+        model.addAttribute("supplierList", service.getItemDataList("", 30, "", "", "", 3));
+        model.addAttribute("customerList", service.getItemDataList("", 60, "", "", "", 3));
+        model.addAttribute("jssLineList", service.getItemDataList("", 70, "", "", "", 3));
+        model.addAttribute("tomasLineList", service.getItemDataList("", 80, "", "", "", 3));
+        model.addAttribute("tomasWarehouseList", service.getItemDataList("", 85, "", "", "", 3));
 	}
 	
 	//RedirectAttributes를 매개변수로 받는 이유는 등록 작업 후 목록화면으로 돌아가기 위함
@@ -108,31 +105,64 @@ public class ItemController {
 		return "redirect:/item/list";
 	}
 	
-	@SuppressWarnings("unchecked")
-	@GetMapping("/getSupplier")
-	public void getSupplier(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String callBack = request.getParameter("callback");
-		String segValue = request.getParameter("segValue");
-
-		JSONObject obj = new JSONObject();
-		PrintWriter out = response.getWriter();
-		response.setContentType("application/json");
+	@PostMapping("/getSupplier")
+	@ResponseBody
+	public Object getSupplier(@RequestBody Map<String, Object> param) throws IOException {
+		String segValue = (String) param.get("seg_asset");
 		
 		//service 객체를 controller가 붙잡고 있는거 같다. 새로운 객체로 DAO에 생성해서 하면 null 에러남
 		//이유? 모르겠다; 생명주기랑 관련있는거 같은데 알수가 없네...
 
-		obj.put("segValue", segValue);
+		Map<String, Object> map = new HashMap<>();
+		
 		if(segValue.equals("30")) {
-			obj.put("supplierList", service.getCompanyList("30"));
+			JSONArray arryObj = service.getItemDataList("", Integer.parseInt(segValue), "", "", "", 3);
+			map.put("supplierList", mapping(arryObj));
 		}
 		else {
-			obj.put("supplierList", "");//.toJSONString()
+			map.put("supplierList", "");
+		}
+		map.put("segValue", segValue);
+		
+		return map;
+	}
+	
+	@PostMapping("/getItem")
+	@ResponseBody
+	public Object getItem(@RequestBody Map<String, Object> param) throws IOException {
+		Integer action = (Integer) param.get("action");
+		String cd_item = (String) param.get("cd_item");
+		String seg_asset = (String) param.get("seg_asset");
+		String supplier = (String) param.get("supplier");
+		String customer = (String) param.get("customer");
+
+		Map<String, Object> map = new HashMap<>();
+
+		if(action == 1) {
+			JSONArray arryObj = service.getItemDataList(cd_item, 0, "", "", "NG", action);
+			map.put("itemData", mapping(arryObj));
+		    
+			return map;
+		}
+		else {
+			JSONArray arryObj = service.getItemDataList(cd_item, Integer.parseInt(seg_asset), supplier, customer, "NG", action);
+			map.put("itemData", mapping(arryObj));
+		    
+			return map;
+		}
+	}
+	
+	private ArrayList<ItemVO> mapping(JSONArray arryObj) {
+		JSONObject jsonObj = null;
+		ArrayList<ItemVO> list = new ArrayList<ItemVO>();
+
+		for(int i=0; i<arryObj.size(); i++) {
+			jsonObj = new JSONObject();
+			jsonObj = (JSONObject)arryObj.get(i);
+			list.add((ItemVO) jsonObj.get("ItemVO"));
 		}
 	    
-		out.write(callBack + "(" + obj.toString() + ")");
-		log.info(callBack + "(" + obj.toString() + ")");
-		out.flush();
-		out.close();
-		return;
+		return list;
 	}
+	
 }

@@ -27,6 +27,7 @@
                     </tr>
                   </thead>
                   
+                  <!-- call getList() -->
                   <c:forEach items="${list}" var="item">
                   <tr>
                   	<td><c:out value="${item.CD_ITEM}"/></td>

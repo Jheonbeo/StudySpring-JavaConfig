@@ -1,5 +1,83 @@
-.combobox {
-	width: 40%; 
+.flex-container {
+	display: flex;
+}
+
+.boxcontrol { 
 	height: 30px; 
 	font-size: 0.8rem;
+	flex: 1;
 }
+
+fieldset {
+	display:inline;
+}
+.fieldsetcontrol { 
+	flex: 1;
+  	padding-top: 0.35em;
+  	padding-bottom: 0.625em;
+  	padding-right: 1em;
+}
+
+.relative-left{
+	position: relative;
+	left: 50px;
+}
+
+.relative-up{
+	position: relative;
+	bottom: 9px;
+}
+
+.btn-m-size{
+	height: 30px;
+	width: 50%; 
+}
+
+.btn-cancel{
+	height: 32px;
+}
+
+.attention-blue{
+	color: blue;
+}
+
+.attention-red{
+	color: red;
+	font-weight: medium;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+  	border: 1px solid #ddd;
+}
+table.scrollTable {
+	display: block;
+	height: 220px;
+	overflow: auto;
+}
+table th,table td{
+	text-align: center;
+	padding: 0%;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
+th:first-child, td:first-child {
+	text-align: left;
+}
+tr:nth-child(even) {
+	background-color: #f2f2f2
+}
+.scrollTable tbody tr:hover {
+	background: dodgerblue;
+}
+
+.textbtn {
+	width : 100%;
+	border: none;
+	background-color: inherit;
+	cursor: pointer;
+	display: inline-block;
+}
+.textbtn:hover {background: dodgerblue;}

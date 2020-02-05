@@ -20,5 +20,7 @@ public interface ItemMapper {
 	
 	public int update(ItemVO item);
 	
-	public String getCompanyList(HashMap<String, Object> map);
+	public void getItemList(HashMap<String, Object> map);
+	
+	public void getItemData(HashMap<String, Object> map);
 }

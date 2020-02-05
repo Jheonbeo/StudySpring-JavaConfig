@@ -59,40 +59,44 @@ public class ItemServiceImpl implements ItemService{
 	@Override
 	public List<ItemVO> getList() {
 		// TODO Auto-generated method stub
-		log.info("getList.......");
+		log.info("Service : getTotalItemList");
 		
 		return mapper.getList();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public JSONArray getCompanyList(String type) {
+	public JSONArray getItemDataList(String cditem, int type, String supplier, String customer, String cdate, int action) {
 		// TODO Auto-generated method stub
-		log.info("Service : getSupplierList");
+		log.info("Service : getItemDataList");
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("CDITEM", "");
-		map.put("CDSUPPLIER", "");
-		map.put("CDCUSTOMER", "");
+		map.put("CDSUPPLIER", supplier);
+		map.put("CDCUSTOMER", customer);
+		map.put("CDITEM", cditem);
 		map.put("CDTYPE", type);
-		map.put("CDATE", "");
-		map.put("ACTION", 3);
-		mapper.getCompanyList(map);
+		map.put("CDATE", cdate);
+		map.put("ACTION", action);
+		mapper.getItemList(map);
 
 		try {
 			JSONArray arryObj = new JSONArray();
-			for(CompanyVO data : (ArrayList<CompanyVO>)map.get("resultCursor")) {
+			for(ItemVO data : (ArrayList<ItemVO>)map.get("resultCursor")) {
 				JSONObject jsonObj = new JSONObject();
-				jsonObj.put("CD_COMPANY", data.getCD_COMPANY());
-				jsonObj.put("NM_COMPANY", URLDecoder.decode(data.getNM_COMPANY(), "UTF-8"));
+				
+				if(data.getNM_COMPANY() != null) {
+					data.setNM_COMPANY(URLDecoder.decode(data.getNM_COMPANY(), "UTF-8").toString());
+				}
+				if(data.getFREE_AREA() != null) {
+					data.setFREE_AREA(URLDecoder.decode(data.getFREE_AREA(), "UTF-8").toString());
+				}
+				jsonObj.put("ItemVO", data);
 				arryObj.add(jsonObj);
 			}
-
 			return arryObj;
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
 			return null;
 		}
 	}

@@ -31,7 +31,7 @@ public class HomeController {
 	//home을 리턴했으니 경로는 '/WEB-INF/views/home.jsp'가 된다. '/WEB-INF/views/*.jsp'라 Servlet에 지정했으니
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+		logger.info("Welcome joyson system! The client locale is {}.", locale);
 		
 //		Date date = new Date();
 //		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);

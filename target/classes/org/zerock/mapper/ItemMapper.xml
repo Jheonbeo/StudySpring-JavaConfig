@@ -36,21 +36,22 @@
 	where cd_item = #{CD_ITEM}
 </update>
 
-<resultMap id="companyResult" type="org.zerock.domain.CompanyVO">
+<resultMap id="ItemResult" type="org.zerock.domain.ItemVO">
 		<result column="CORRESPONDENT" property="CD_COMPANY" javaType="string"/>
 		<result column="NM_CORRESPONDENT" property="NM_COMPANY" javaType="string"/>
 </resultMap>
-<select id="getCompanyList" statementType="CALLABLE">            
+<select id="getItemList" statementType="CALLABLE">            
 	{
 		CALL SP_JBJ_GET_ITEM(
-				#{CDITEM, mode=IN, jdbcType=VARCHAR, javaType=String},
 				#{CDSUPPLIER, mode=IN, jdbcType=VARCHAR, javaType=String},
 				#{CDCUSTOMER, mode=IN, jdbcType=VARCHAR, javaType=String},
-				#{CDTYPE, mode=IN, jdbcType=VARCHAR, javaType=String},
+				#{CDITEM, mode=IN, jdbcType=VARCHAR, javaType=String},
+				#{CDTYPE, mode=IN, jdbcType=NUMERIC, javaType=INTEGER},
 				#{CDATE, mode=IN, jdbcType=VARCHAR, javaType=String},
 				#{ACTION, mode=IN, jdbcType=NUMERIC, javaType=INTEGER},
-                #{resultCursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=companyResult}
+                #{resultCursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=ItemResult}
             )
     }
 </select>
+
 </mapper>
