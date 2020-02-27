@@ -28,6 +28,10 @@ fieldset {
 	bottom: 9px;
 }
 
+.btn-s-size{
+	height: 30px;
+	width: 30%; 
+}
 .btn-m-size{
 	height: 30px;
 	width: 50%; 

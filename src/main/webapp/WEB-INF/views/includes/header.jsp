@@ -22,7 +22,7 @@
   <link href="/resources/css/sb-admin-2.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="/resources/css/user-style.css?version=1" rel="stylesheet" type="text/css">
+  <link href="/resources/css/user-style.css?version=2" rel="stylesheet" type="text/css">
   
   <!-- Custom styles for this page -->
   <link href="/resources/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -52,7 +52,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="/dashboard/index">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -102,7 +102,7 @@
 
       <!-- Heading -->
       <div class="sidebar-heading">
-        Addons
+      	생산 관리
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->

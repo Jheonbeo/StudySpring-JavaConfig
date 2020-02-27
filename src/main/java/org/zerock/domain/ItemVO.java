@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class ItemVO {
-	private String CD_ITEM;
+	private String cD_ITEM;
 	private String NM_ITEM;
 	private String CD_LINE;
 	private String CD_STOCK;
@@ -51,4 +51,6 @@ public class ItemVO {
 	private String CRT_USR;
 	private Date UPD_DAT;
 	private String UPD_USR;
+	
+	private int ACTION;
 }

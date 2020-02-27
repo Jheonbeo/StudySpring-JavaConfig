@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -60,11 +61,11 @@ public class ItemController {
 	public void register(Model model) throws UnsupportedEncodingException {        
 		log.info("register");
 		
-        model.addAttribute("supplierList", service.getItemDataList("", 30, "", "", "", 3));
-        model.addAttribute("customerList", service.getItemDataList("", 60, "", "", "", 3));
-        model.addAttribute("jssLineList", service.getItemDataList("", 70, "", "", "", 3));
-        model.addAttribute("tomasLineList", service.getItemDataList("", 80, "", "", "", 3));
-        model.addAttribute("tomasWarehouseList", service.getItemDataList("", 85, "", "", "", 3));
+        model.addAttribute("supplierList", service.getItemDataList(paramToMap("", "30", "", "", ""), 3));
+        model.addAttribute("customerList", service.getItemDataList(paramToMap("", "60", "", "", ""), 3));
+        model.addAttribute("jssLineList", service.getItemDataList(paramToMap("", "70", "", "", ""), 3));
+        model.addAttribute("tomasLineList", service.getItemDataList(paramToMap("", "80", "", "", ""), 3));
+        model.addAttribute("tomasWarehouseList", service.getItemDataList(paramToMap("", "85", "", "", ""), 3));
 	}
 	
 	//RedirectAttributes를 매개변수로 받는 이유는 등록 작업 후 목록화면으로 돌아가기 위함
@@ -116,7 +117,7 @@ public class ItemController {
 		Map<String, Object> map = new HashMap<>();
 		
 		if(segValue.equals("30")) {
-			JSONArray arryObj = service.getItemDataList("", Integer.parseInt(segValue), "", "", "", 3);
+			JSONArray arryObj = service.getItemDataList(paramToMap("", segValue, "", "", ""), 3);
 			map.put("supplierList", mapping(arryObj));
 		}
 		else {
@@ -131,25 +132,46 @@ public class ItemController {
 	@ResponseBody
 	public Object getItem(@RequestBody Map<String, Object> param) throws IOException {
 		Integer action = (Integer) param.get("action");
-		String cd_item = (String) param.get("cd_item");
-		String seg_asset = (String) param.get("seg_asset");
-		String supplier = (String) param.get("supplier");
-		String customer = (String) param.get("customer");
-
+		String data = paramToMap((String) param.get("cd_item"), (String) param.get("seg_asset"), (String) param.get("supplier"), (String) param.get("customer"), "NG");
+		
 		Map<String, Object> map = new HashMap<>();
 
 		if(action == 1) {
-			JSONArray arryObj = service.getItemDataList(cd_item, 0, "", "", "NG", action);
+			JSONArray arryObj = service.getItemDataList(data, action);
 			map.put("itemData", mapping(arryObj));
 		    
 			return map;
 		}
 		else {
-			JSONArray arryObj = service.getItemDataList(cd_item, Integer.parseInt(seg_asset), supplier, customer, "NG", action);
+			JSONArray arryObj = service.getItemDataList(data, action);
 			map.put("itemData", mapping(arryObj));
 		    
 			return map;
 		}
+	}
+
+	@PostMapping("/setItem")
+	@ResponseBody
+	public Object setItem(@RequestBody Map<String, Object> param) throws IOException {
+		String data = transVOtoString(param);
+		JSONArray arryObj = service.getItemDataList(data, 5);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("itemData", mapping(arryObj));
+		
+		return map;
+	}
+	
+	private String paramToMap(String cdItem, String seg_Asset, String supplier, String customer, String discon) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		
+		param.put("CDITEM", cdItem);
+		param.put("CDTYPE", seg_Asset);
+		param.put("CDSUPPLIER", supplier);
+		param.put("CDCUSTOMER", customer);
+		param.put("CDDISCON", discon);
+		
+		return transVOtoString(param);
 	}
 	
 	private ArrayList<ItemVO> mapping(JSONArray arryObj) {
@@ -164,5 +186,20 @@ public class ItemController {
 	    
 		return list;
 	}
+
 	
+	//기존 get 정보를 가지고오기 위한 parameter -> string convert
+	private String transVOtoString(Map<String, Object> param) {
+		String data = "";
+        Iterator<String> keys = param.keySet().iterator();
+
+		while(keys.hasNext()){
+            String key = keys.next();
+            data += key + ":" + (param.get(key)==null? "" : param.get(key)) + ",";
+        }
+		//임시
+		data += "CRT_USR:jheonbeo,";
+		
+		return data;
+	}
 }

@@ -9,7 +9,6 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
-import org.zerock.domain.CompanyVO;
 import org.zerock.domain.ItemVO;
 import org.zerock.mapper.ItemMapper;
 
@@ -65,17 +64,12 @@ public class ItemServiceImpl implements ItemService{
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
-	public JSONArray getItemDataList(String cditem, int type, String supplier, String customer, String cdate, int action) {
+	public JSONArray getItemDataList(String array_data, int action) {
 		// TODO Auto-generated method stub
 		log.info("Service : getItemDataList");
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("CDSUPPLIER", supplier);
-		map.put("CDCUSTOMER", customer);
-		map.put("CDITEM", cditem);
-		map.put("CDTYPE", type);
-		map.put("CDATE", cdate);
+		map.put("ARRAY_DATA", array_data);
 		map.put("ACTION", action);
 		mapper.getItemList(map);
 

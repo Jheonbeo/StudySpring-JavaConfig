@@ -1,11 +1,8 @@
 package org.zerock.service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.json.simple.JSONArray;
-import org.zerock.domain.CompanyVO;
 import org.zerock.domain.ItemVO;
 
 public interface ItemService {
@@ -19,5 +16,5 @@ public interface ItemService {
 	
 	public List<ItemVO> getList();
 	
-	public JSONArray getItemDataList(String cditem, int type, String supplier, String customer, String cdate, int action);
+	public JSONArray getItemDataList(String array_data, int action);
 }

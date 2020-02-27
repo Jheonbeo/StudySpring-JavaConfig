@@ -43,11 +43,7 @@
 <select id="getItemList" statementType="CALLABLE">            
 	{
 		CALL SP_JBJ_GET_ITEM(
-				#{CDSUPPLIER, mode=IN, jdbcType=VARCHAR, javaType=String},
-				#{CDCUSTOMER, mode=IN, jdbcType=VARCHAR, javaType=String},
-				#{CDITEM, mode=IN, jdbcType=VARCHAR, javaType=String},
-				#{CDTYPE, mode=IN, jdbcType=NUMERIC, javaType=INTEGER},
-				#{CDATE, mode=IN, jdbcType=VARCHAR, javaType=String},
+				#{ARRAY_DATA, mode=IN, jdbcType=VARCHAR, javaType=String},
 				#{ACTION, mode=IN, jdbcType=NUMERIC, javaType=INTEGER},
                 #{resultCursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=ItemResult}
             )
