@@ -4,7 +4,7 @@
 	 select id 값도 역시 메서드 이름과 일치하게 작성해야한다.-->
 <mapper namespace="org.zerock.mapper.ItemMapper">
 <select id="getList" resultType="org.zerock.domain.ItemVO">
-	<![CDATA[select * from tkk_item where crt_dat >= sysdate - 10]]>
+	<![CDATA[SELECT /*+ INDEX_ASC(TKK_ITEM PK_TKK_ITEM) */ * FROM TKK_ITEM WHERE UPD_DAT > SYSDATE - 10]]>
 </select>
 
 <insert id="insert">

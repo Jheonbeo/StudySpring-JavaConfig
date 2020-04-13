@@ -15,7 +15,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 /* View 지원 bean을 설정 */
 @EnableWebMvc
-@ComponentScan(basePackages= {"org.zerock.controller", "org.zerock.exception"})
+@ComponentScan(basePackages= {"org.zerock.controller", "org.zerock.exception", "org.zerock.common"})
 public class ServletConfig implements WebMvcConfigurer{
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {

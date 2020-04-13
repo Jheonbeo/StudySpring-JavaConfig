@@ -1,28 +1,28 @@
 package org.zerock.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.common.CommonMethod;
 import org.zerock.domain.ItemVO;
 import org.zerock.service.ItemService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 @Controller	//스프링의 빈으로 인식토록
 @Log4j
@@ -50,6 +50,7 @@ public class ItemController {
 	//@Setter(onMethod_= {@Autowired})
 	//위 @AllArgsConstructor를 이용한 생성자를 안 만들 경우 Setter 이용 
 	private ItemService service;  
+	CommonMethod cm = new CommonMethod();
 
 	@GetMapping("/list")
 	public void list(Model model) {
@@ -136,24 +137,16 @@ public class ItemController {
 		
 		Map<String, Object> map = new HashMap<>();
 
-		if(action == 1) {
-			JSONArray arryObj = service.getItemDataList(data, action);
-			map.put("itemData", mapping(arryObj));
-		    
-			return map;
-		}
-		else {
-			JSONArray arryObj = service.getItemDataList(data, action);
-			map.put("itemData", mapping(arryObj));
-		    
-			return map;
-		}
+		JSONArray arryObj = service.getItemDataList(data, action);
+		map.put("itemData", mapping(arryObj));
+	    
+		return map;
 	}
 
 	@PostMapping("/setItem")
 	@ResponseBody
 	public Object setItem(@RequestBody Map<String, Object> param) throws IOException {
-		String data = transVOtoString(param);
+		String data = cm.transVOtoString(param);
 		JSONArray arryObj = service.getItemDataList(data, 5);
 		
 		Map<String, Object> map = new HashMap<>();
@@ -171,7 +164,7 @@ public class ItemController {
 		param.put("CDCUSTOMER", customer);
 		param.put("CDDISCON", discon);
 		
-		return transVOtoString(param);
+		return cm.transVOtoString(param);
 	}
 	
 	private ArrayList<ItemVO> mapping(JSONArray arryObj) {
@@ -185,21 +178,5 @@ public class ItemController {
 		}
 	    
 		return list;
-	}
-
-	
-	//기존 get 정보를 가지고오기 위한 parameter -> string convert
-	private String transVOtoString(Map<String, Object> param) {
-		String data = "";
-        Iterator<String> keys = param.keySet().iterator();
-
-		while(keys.hasNext()){
-            String key = keys.next();
-            data += key + ":" + (param.get(key)==null? "" : param.get(key)) + ",";
-        }
-		//임시
-		data += "CRT_USR:jheonbeo,";
-		
-		return data;
 	}
 }
