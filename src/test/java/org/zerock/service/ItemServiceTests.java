@@ -39,7 +39,6 @@ public class ItemServiceTests {
 		
 		log.info("생성된 품번 : " + item.getCD_ITEM());
 	}
-	*/
 	
 	@Test
 	public void testGetList() {
@@ -66,4 +65,5 @@ public class ItemServiceTests {
 		item.setBOX_SNP(5);
 		log.info("MODIFY RESULT: " + service.modify(item));
 	}
+	*/
 }

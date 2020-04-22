@@ -46,8 +46,8 @@ $('.dropdown-item').click(function(){
 	lineValue = $(this).attr("data-value");
 
 	generateData(lineValue);
-	config.data.labels = labels;
-	config.data.datasets= valueByLabels;
+	myBarChart.data.labels = labels;
+	myBarChart.data.datasets.data = valueByLabels;
 	myBarChart.update();
 });
 
@@ -68,7 +68,9 @@ var config = {
 			'rgba(255, 159, 64, 0.2)',
 			'rgba(30, 190, 125, 0.2)',
 			'rgba(250, 90, 185, 0.2)',
-			'rgba(184, 215, 60, 0.2)'
+			'rgba(184, 215, 60, 0.2)',
+			'rgba(52, 255, 153, 0.2)',
+			'rgba(153, 153, 255, 0.2)'
 			],
 			borderColor: [
 			'rgba(255,99,132,1)',
@@ -79,7 +81,9 @@ var config = {
 			'rgba(255, 159, 64, 1)',
 			'rgba(30, 190, 125, 1)',
 			'rgba(250, 90, 185, 1)',
-			'rgba(184, 215, 60, 1)'
+			'rgba(184, 215, 60, 0.2)',
+			'rgba(52, 255, 153, 1)',
+			'rgba(153, 153, 255, 1)'
 			],
 		borderWidth: 1
 		}]

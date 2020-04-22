@@ -22,7 +22,7 @@
   <link href="/resources/css/sb-admin-2.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="/resources/css/user-style.css?version=2" rel="stylesheet" type="text/css">
+  <link href="/resources/css/user-style.css?version=1" rel="stylesheet" type="text/css">
   
   <!-- Custom styles for this page -->
   <link href="/resources/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -140,8 +140,8 @@
           <div id="collapsePart" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Management Part:</h6>
-            <a class="collapse-item" href="/item/list">조회 및 수정</a>
-            <a class="collapse-item" href="/item/register">등록</a>
+            <a class="collapse-item" href="/item/item_list">조회 및 수정</a>
+            <a class="collapse-item" href="/item/item_register">등록</a>
           </div>
         </div>
       </li>

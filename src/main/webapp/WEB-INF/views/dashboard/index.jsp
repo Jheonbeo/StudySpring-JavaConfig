@@ -146,7 +146,7 @@
                   </div>
                   <div class="mt-4 text-center small">
                     <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> JKOR IT팀 개발자 전범준 올림
+                      <i class="fas fa-circle text-primary"></i>By JKOR IT Developer beom jun jheon
                     </span>
                   </div>
                 </div>
@@ -161,6 +161,6 @@
 <script src="/resources/vendor/chart.js/Chart.min.js"></script>
   
 <!-- Page level custom scripts -->
-<script src="/resources/js/chart/chart-area.js?version=2"></script>
+<script src="/resources/js/chart/chart-area.js"></script>
 
 <%@include file="../includes/footer.jsp" %>

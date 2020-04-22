@@ -52,14 +52,14 @@ public class ItemController {
 	private ItemService service;  
 	CommonMethod cm = new CommonMethod();
 
-	@GetMapping("/list")
+	@GetMapping("/item_list")
 	public void list(Model model) {
 		log.info("list");
 		model.addAttribute("list", service.getList());
 	}
 	
-	@GetMapping("/register")
-	public void register(Model model) throws UnsupportedEncodingException {        
+	@GetMapping("/item_register")
+	public void register(Model model) {        
 		log.info("register");
 		
         model.addAttribute("supplierList", service.getItemDataList(paramToMap("", "30", "", "", ""), 3));
@@ -68,43 +68,16 @@ public class ItemController {
         model.addAttribute("tomasLineList", service.getItemDataList(paramToMap("", "80", "", "", ""), 3));
         model.addAttribute("tomasWarehouseList", service.getItemDataList(paramToMap("", "85", "", "", ""), 3));
 	}
-	
-	//RedirectAttributes를 매개변수로 받는 이유는 등록 작업 후 목록화면으로 돌아가기 위함
-	public String register(ItemVO item, RedirectAttributes rttr) {
-		log.info("register: " + item);
-		
-		service.register(item);
-		
-		rttr.addFlashAttribute("result", item.getCD_ITEM());
-		
-		return "redirect:/item/list";	//redirect: 접두어를 사용시 response.sendRedirect()를 내부적으로 처리해줌.
-	}
-	
-	@GetMapping("/get")
-	public void get(@RequestParam("CD_ITEM") String CD_ITEM, Model model) {
-		log.info("/get");
-		model.addAttribute("item", service.get(CD_ITEM));
-	}
-	
-	@PostMapping("/modify")
-	public String modify(ItemVO item, RedirectAttributes rttr) {
-		log.info("modify:" + item);
-		
-		if(service.modify(item)) {
-			rttr.addFlashAttribute("result","success");
-		}
-		return "redirect:/item/list";
-	}
 
-	//삭제는 반드시 post
-	@PostMapping("/remove")
-	public String remove(@RequestParam("CD_ITEM") String CD_ITEM, RedirectAttributes rttr) {
-		log.info("remove:" + CD_ITEM);
+	@GetMapping("/item_modify")
+	public void modify(ItemVO itemVO, Model model) {        
+		log.info("modify");
+		String data = paramToMap(itemVO.getCD_ITEM(), itemVO.getSEG_ASSET(), itemVO.getCD_SUPPLIER(), itemVO.getCD_CUSTOMER(), "NG");
 		
-		if(service.remove(CD_ITEM)) {
-			rttr.addFlashAttribute("result","success");
-		}
-		return "redirect:/item/list";
+        model.addAttribute("jssLineList", service.getItemDataList(paramToMap("", "70", "", "", ""), 3));
+        model.addAttribute("tomasLineList", service.getItemDataList(paramToMap("", "80", "", "", ""), 3));
+        model.addAttribute("tomasWarehouseList", service.getItemDataList(paramToMap("", "85", "", "", ""), 3));
+        model.addAttribute("item", itemVO);//service.getItemDataList(data, 4));
 	}
 	
 	@PostMapping("/getSupplier")

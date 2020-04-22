@@ -4,7 +4,6 @@ $(document).ready(function() {
 	var radio = $("div[name = 'radioGroup']");
 	radio.find("label:eq(1)").css("transform", "translateX(50%)");
 	radio.find("label:eq(2)").css("transform", "translateX(100%)");
-	
 });
 
 $(function(){ 
@@ -28,7 +27,7 @@ $(function(){
 							removeOptions(supplierBox);
 							supplierBox.disabled = false;
 							for(var i = 0; i < supplierList.length; i++){
-								$("#supplierBox").append("<option value='" + supplierList[i].cd_COMPANY + "'>" + supplierList[i].cd_COMPANY + " : " + supplierList[i].nm_COMPANY + " </option>");
+								$("#supplierBox").append("<option value='" + supplierList[i].cd_SUPPLIER + "'>" + supplierList[i].cd_SUPPLIER + " : " + supplierList[i].nm_SUPPLIER + " </option>");
 							}
 							break;
 						case "50":
@@ -236,7 +235,6 @@ $(function () {
 	    ev.preventDefault();
 	    if($(this).attr("id")=="btnRegistItem"){
 	    	const queryString = $("form[name=registForm]").serializeObject();
-			console.log(JSON.stringify(queryString));
 			$.ajax({ 
 			      url:'setItem', 
 			      dataType:'json',

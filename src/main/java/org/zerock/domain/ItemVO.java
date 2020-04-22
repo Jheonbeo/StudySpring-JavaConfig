@@ -11,10 +11,10 @@ public class ItemVO {
 	private String CD_LINE;
 	private String CD_STOCK;
 	private String WAREHOUSE;
-	private String CD_COMPANY;
-	private String NM_COMPANY;
 	private String CD_SUPPLIER;
+	private String NM_SUPPLIER;
 	private String CD_CUSTOMER;
+	private String NM_CUSTOMER;
 	private int SAFETY_STOCK;
 	private int PRODUCTION_MINIMUM;
 	private int BOX_SNP;

@@ -24,43 +24,25 @@ public class ItemServiceImpl implements ItemService{
 	//그게 아니면 Lombok을 활용한
 	//@Setter(onMethod_ = @Autowired)
 	private ItemMapper mapper;
-	
-	@Override
-	public void register(ItemVO item) {
-		log.info("register........." + item);
-		
-		mapper.insertSelectKey(item);
-	}
-
-	@Override
-	public ItemVO get(String cd_item) {
-		log.info("get.........." + cd_item);
-		
-		return mapper.read(cd_item);
-	}
-
-	@Override
-	public boolean modify(ItemVO item) {
-		log.info("modify....." + item);
-		
-		//If sql success, it returns 1. 
-		return mapper.update(item) == 1;
-	}
-
-	@Override
-	public boolean remove(String cd_item) {
-		log.info("remove......" + cd_item);
-
-		//If sql success, it returns 1. 
-		return mapper.delete(cd_item) == 1;
-	}
 
 	@Override
 	public List<ItemVO> getList() {
 		// TODO Auto-generated method stub
 		log.info("Service : getTotalItemList");
-		
-		return mapper.getList();
+
+		List<ItemVO> arrResult = new ArrayList<ItemVO>();
+		try {
+			for(ItemVO result : mapper.getList()) {
+				result.setNM_ITEM(URLDecoder.decode(result.getNM_ITEM(), "UTF-8").toString());
+				arrResult.add(result);
+			}
+			
+			return arrResult;
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -78,8 +60,14 @@ public class ItemServiceImpl implements ItemService{
 			for(ItemVO data : (ArrayList<ItemVO>)map.get("resultCursor")) {
 				JSONObject jsonObj = new JSONObject();
 				
-				if(data.getNM_COMPANY() != null) {
-					data.setNM_COMPANY(URLDecoder.decode(data.getNM_COMPANY(), "UTF-8").toString());
+				if(data.getNM_SUPPLIER() != null) {
+					data.setNM_SUPPLIER(URLDecoder.decode(data.getNM_SUPPLIER(), "UTF-8").toString());
+				}
+				if(data.getNM_CUSTOMER() != null) {
+					data.setNM_CUSTOMER(URLDecoder.decode(data.getNM_CUSTOMER(), "UTF-8").toString());
+				}
+				if(data.getNM_ITEM() != null) {
+					data.setNM_ITEM(URLDecoder.decode(data.getNM_ITEM(), "UTF-8").toString());
 				}
 				if(data.getFREE_AREA() != null) {
 					data.setFREE_AREA(URLDecoder.decode(data.getFREE_AREA(), "UTF-8").toString());

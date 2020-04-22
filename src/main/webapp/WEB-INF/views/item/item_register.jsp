@@ -21,15 +21,15 @@
        			<div class="form-group row flex-container">
        				<label>협력사 코드 &nbsp</label>
        				<select id="supplierBox" name="CD_SUPPLIER" class="form-control boxcontrol">
- 	      					<c:forEach items="${supplierList}" var="supplierList">
-       						<option value="${supplierList.ItemVO.CD_COMPANY}">${supplierList.ItemVO.CD_COMPANY} : ${supplierList.ItemVO.NM_COMPANY}</option>
+ 	      				<c:forEach items="${supplierList}" var="supplierList">
+       						<option value="${supplierList.ItemVO.CD_SUPPLIER}">${supplierList.ItemVO.CD_SUPPLIER} : ${supplierList.ItemVO.NM_SUPPLIER}</option>
        					</c:forEach>
        				</select>
        				
        				<label>&nbsp 고객사 코드 &nbsp</label>
        				<select id="customerBox" name="CD_CUSTOMER" class="form-control boxcontrol">
  	      				<c:forEach items="${customerList}" var="customerList">
-       						<option value="${customerList.ItemVO.CD_COMPANY}">${customerList.ItemVO.CD_COMPANY} : ${customerList.ItemVO.NM_COMPANY}</option>
+       						<option value="${customerList.ItemVO.CD_CUSTOMER}">${customerList.ItemVO.CD_CUSTOMER} : ${customerList.ItemVO.NM_CUSTOMER}</option>
        					</c:forEach>
        				</select>
        			</div>
@@ -234,7 +234,7 @@
 					<button id="btnRegistItem" type="submit" data-toggle="modal" data-target=".bs-example-modal-sm" class="btn btn-primary btn-user btn-block btn-m-size">
 					  Register Item
 					</button>
-					<a href="list" class="btn btn-google btn-user btn-block btn-m-size btn-cancel relative-up">
+					<a href="item_list" class="btn btn-google btn-user btn-block btn-m-size btn-cancel relative-up">
 	                  Cancel
 	                </a>
        			</div>
