@@ -44,6 +44,9 @@
     </div>
   </div>
 
+  <!-- Project core JavaScript -->
+  <script type="module" src="/resources/bundle/home.js"></script>
+  
   <!-- Bootstrap core JavaScript-->
   <!-- <script src="/resources/vendor/jquery/jquery.min.js"></script> 구형이라 안먹히는 방식이 많음 -->
   <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

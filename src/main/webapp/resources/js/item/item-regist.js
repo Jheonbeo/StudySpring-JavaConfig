@@ -61,7 +61,7 @@ function removeOptions(selectbox)
 
 $(function(){ 
 	$("#btnLoadItem").click(function(){  
-		var str = "";
+		var html = "";
 		var cdItem = $("#comboItem").val();
 		
 		if(!cdItem){
@@ -78,27 +78,27 @@ $(function(){
 					var itemData = t.itemData;
 					
 					if(itemData.length > 0){
-						str+="<thead>";
-						str+="<tr><th style=\"width:150px\">품번</th><th style=\"width:40px\">구분</th><th style=\"width:70px\">협력사</th><th style=\"width:70px\">고객사</th></tr>";
-						str+="</thead>";
-						str+="<tbody>";
+						html+="<thead>";
+						html+="<tr><th style=\"width:60%\">품번</th><th style=\"width:20%\">구분</th><th style=\"width:30%\">협력사</th><th style=\"width:30%\">고객사</th></tr>";
+						html+="</thead>";
+						html+="<tbody>";
 					}
 					
 					for(var i=0; i<itemData.length; i++){
 						var supplier = (!itemData[i].cd_SUPPLIER) ? "" : itemData[i].cd_SUPPLIER;
 						var customer = (!itemData[i].cd_CUSTOMER) ? "" : itemData[i].cd_CUSTOMER;
 
-						str+="<tr>";
-						str+="<td>" + itemData[i].cd_ITEM + "</td>";
-						str+="<td>" + itemData[i].seg_ASSET + "</td>";
-						str+="<td>" + supplier + "</td>";
-						str+="<td>" + customer + "</td>";
-			   			str+="</tr>"
+						html+="<tr>";
+						html+="<td>" + itemData[i].cd_ITEM + "</td>";
+						html+="<td>" + itemData[i].seg_ASSET + "</td>";
+						html+="<td>" + supplier + "</td>";
+						html+="<td>" + customer + "</td>";
+						html+="</tr>"
 					}
-					$(".scrollTable").html(str);
+					$(".scrollTable").html(html);
 
 					if(itemData.length > 0){
-						str+="</tbody>";
+						html+="</tbody>";
 					}
 		       },
 		       error:function(t){

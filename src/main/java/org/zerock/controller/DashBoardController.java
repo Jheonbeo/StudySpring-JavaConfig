@@ -21,15 +21,15 @@ import lombok.extern.log4j.Log4j;
 
 @Controller	//스프링의 빈으로 인식토록
 @Log4j
-@RequestMapping("/dashboard/*")	//item으로 시작하는 모든 처리는 이 클래스에서 
+@RequestMapping("/dashboard/*")
 @AllArgsConstructor
 public class DashBoardController {
 	private DashService service;  
 	CommonMethod cm = new CommonMethod();
 	
-	@GetMapping("/index")
+	@GetMapping("/dashboard")
 	public void list(Model model) {
-		log.info("index");
+		log.info("dashboard");
 		
 		model.addAttribute("prodNum", service.getTotalProd("", "TOTAL_PROD").getTOTAL_PROD());
 		model.addAttribute("avgUph", service.getTotalProd("", "AVG_UPH").getAVG_UPH());

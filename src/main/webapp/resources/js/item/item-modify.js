@@ -3,9 +3,9 @@ const tag = '[item-modify]'
 $(function () {
 	$("#modifyForm button").click(function(ev){
 	    ev.preventDefault();
-	    if($(this).attr("id")=="btnModifyItem"){
+	    console.log($(".CD_SUPPLIER").val());
+	    /*if($(this).attr("id")=="btnModifyItem"){
 	    	const queryString = $("form[name=modifyForm]").serializeObject();
-			console.log(JSON.stringify(queryString));
 			$.ajax({ 
 			      url:'setItem', 
 			      dataType:'json',
@@ -25,7 +25,7 @@ $(function () {
 			    	  console.error(error);
 			      }
 			  }); 
-	    }
+	    }*/
 	});
 });
 

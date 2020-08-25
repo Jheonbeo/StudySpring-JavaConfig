@@ -298,7 +298,8 @@ $(document).ready(function() {
 				else if(form.seg_asset == "60"){
 					$("input[name = 'SEG_ASSET'][value='60']").prop("checked", true);
 					document.getElementById("customerBox").value = itemData[0].cd_CUSTOMER + " : " + itemData[0].nm_CUSTOMER;
-					$(".CD_CUSTOMER").value = itemData[0].cd_CUSTOMER;
+					$(".CD_CUSTOMER").val(itemData[0].cd_CUSTOMER);
+				    console.log($(".CD_CUSTOMER").val());
 				}
 				$("#txtItemNum").val(itemData[0].cd_ITEM);
 				$("#txtItemNM").val(itemData[0].nm_ITEM);

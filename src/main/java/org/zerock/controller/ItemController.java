@@ -72,7 +72,6 @@ public class ItemController {
 	@GetMapping("/item_modify")
 	public void modify(ItemVO itemVO, Model model) {        
 		log.info("modify");
-		String data = paramToMap(itemVO.getCD_ITEM(), itemVO.getSEG_ASSET(), itemVO.getCD_SUPPLIER(), itemVO.getCD_CUSTOMER(), "NG");
 		
         model.addAttribute("jssLineList", service.getItemDataList(paramToMap("", "70", "", "", ""), 3));
         model.addAttribute("tomasLineList", service.getItemDataList(paramToMap("", "80", "", "", ""), 3));
@@ -131,10 +130,10 @@ public class ItemController {
 	private String paramToMap(String cdItem, String seg_Asset, String supplier, String customer, String discon) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		
-		param.put("CDITEM", cdItem);
-		param.put("CDTYPE", seg_Asset);
-		param.put("CDSUPPLIER", supplier);
-		param.put("CDCUSTOMER", customer);
+		param.put("CD_ITEM", cdItem);
+		param.put("CD_TYPE", seg_Asset);
+		param.put("CD_SUPPLIER", supplier);
+		param.put("CD_CUSTOMER", customer);
 		param.put("CDDISCON", discon);
 		
 		return cm.transVOtoString(param);

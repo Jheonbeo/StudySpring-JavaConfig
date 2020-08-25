@@ -15,7 +15,8 @@ fieldset {
 	flex: 1;
   	padding-top: 0.35em;
   	padding-bottom: 0.625em;
-  	padding-right: 1em;
+  	padding-right: 3em;
+  	padding-left: 1em;
 }
 
 .relative-left{
@@ -59,7 +60,9 @@ table {
 table.scrollTable {
 	display: block;
 	height: 220px;
-	overflow: auto;
+	/* overflow: auto; */
+    overflow-y: auto;    /* Trigger vertical scroll    */
+    overflow-x: hidden;  /* Hide the horizontal scroll */
 }
 table th,table td{
 	text-align: center;
@@ -73,7 +76,7 @@ th:first-child, td:first-child {
 tr:nth-child(even) {
 	background-color: #f2f2f2
 }
-.scrollTable tbody tr:hover {
+.scrollTable .dataTable tbody tr:hover {
 	background: dodgerblue;
 }
 
@@ -85,3 +88,18 @@ tr:nth-child(even) {
 	display: inline-block;
 }
 .textbtn:hover {background: dodgerblue;}
+
+.col-md-1-5 {
+  position: relative;
+  width: 100%;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 10%;
+  flex: 0 0 10%;
+  max-width: 10%;
+}
+
+.h-80 {
+  height: 80% !important;
+}
