@@ -103,3 +103,24 @@ tr:nth-child(even) {
 .h-80 {
   height: 80% !important;
 }
+
+.logo-image-type1-20 {
+  height:50px;
+  background: url("/resources/img/JSS_Logo_Type1.jpg");
+  background-position: center;
+  background-size: cover;
+}
+.logo-image-type6 {
+  height:55vh;
+  background: url("/resources/img/JSS_Logo_Type6.jpg");
+  background-position: center;
+  background-size: cover;
+}
+.img-logout {
+  background: url("/resources/img/LogOut.png") no-repeat;
+  background-size: cover;
+  border: none;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}

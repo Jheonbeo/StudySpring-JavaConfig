@@ -1,4 +1,4 @@
-import MainController from './controllers/MainController.js'
+import MainController from './MainController.js'
 
 __webpack_public_path__ = '/resources/bundle/';
 

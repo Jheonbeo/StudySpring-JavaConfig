@@ -1,5 +1,5 @@
-import DashBoardView from '../dashboard/FormView.js'
-import InspectView from '../inspection/InspectView.js'
+import DashBoardView from './dashboard/FormView.js'
+import InspectView from './inspection/InspectView.js'
 
 const tag = '[MainController]'
 	

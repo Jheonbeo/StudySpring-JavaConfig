@@ -4,6 +4,7 @@ import javax.servlet.Filter;
 import javax.servlet.ServletRegistration;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /* 이 파일은 WAS(Web Application Server)가 최초 구동될 때 즉 톰켓이 최초 구동될 때 
@@ -12,9 +13,9 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitializer{
 		@Override
 		protected Class<?>[] getRootConfigClasses(){
-			return new Class[] {RootConfig.class};
+			return new Class[] {RootConfig.class, SecurityConfig.class};
 		}
-
+		
 		@Override
 		protected Class<?>[] getServletConfigClasses() {
 			// TODO Auto-generated method stub
@@ -37,7 +38,10 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
 			CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
 			characterEncodingFilter.setEncoding("UTF-8");
 			characterEncodingFilter.setForceEncoding(true);
-			
-			return new Filter[] {characterEncodingFilter};
+
+	        DelegatingFilterProxy delegateFilterProxy = new DelegatingFilterProxy();
+	        delegateFilterProxy.setTargetBeanName("springSecurityFilterChain");
+	        
+			return new Filter[] {characterEncodingFilter, delegateFilterProxy};
 		}
 }

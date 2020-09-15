@@ -33,14 +33,6 @@ public class HomeController {
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome joyson system! The client locale is {}.", locale);
 		
-//		Date date = new Date();
-//		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-//		
-//		String formattedDate = dateFormat.format(date);
-//		
-//		model.addAttribute("serverTime", formattedDate );
-		model.addAttribute("serverTime", timeMapper.getTime2() );
-		
-		return "home";
+		return "loginout/jssLogin";
 	}
 }

@@ -38,7 +38,7 @@ public class DashServiceImpl  implements DashService{
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<DashVO> getLineUPH(String array_data, String action) {
-		log.info("getTotalProd.........");
+		log.info("getLineUPH.........");
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("ARRAY_DATA", array_data);

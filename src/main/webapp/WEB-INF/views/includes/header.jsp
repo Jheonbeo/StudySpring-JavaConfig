@@ -188,15 +188,20 @@
             </div>
           </form>
 
+          
+          <span class="mr-2 d-lg-inline text-gray-600">전범준</span>
+          <form action="/loginout/jssLogOut" method="post">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+          	<button class="img-logout" title="LOGOUT"></button>
+          </form>
           <!-- Topbar Navbar -->
-          <ul class="navbar-nav ml-auto">
-
+          <!-- <ul class="navbar-nav ml-auto"> -->
             <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-lg-inline text-gray-600 small">jheonbeo</span>
-              </a>
+            <!-- <li class="nav-item dropdown no-arrow"> -->
               <!-- Dropdown - User Information -->
+              <!-- 
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              </a>
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -218,5 +223,6 @@
               </div>
             </li>
           </ul>
+          -->
         </nav>
         <!-- End of Topbar -->
