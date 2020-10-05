@@ -1,16 +1,13 @@
 package org.zerock.domain;
 
-import java.util.Date;
-
 import lombok.Data;
 
 @Data
 public class MemberVO {
-	private String userid;
-	private String userpw;
-	private String userName;
-	private boolean enabled;
+	private String USERID;
+	private String USERPW;
+	private String USERNAME;
+	private boolean ENABLED;
 	
-	private Date regDate;
-	private Date updateDate;
+	private String TEAM;
 }

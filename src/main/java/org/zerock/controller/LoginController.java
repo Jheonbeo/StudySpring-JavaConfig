@@ -2,7 +2,6 @@ package org.zerock.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,15 +17,13 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/loginout/*")
 @AllArgsConstructor
 public class LoginController {
-    @Autowired
-
-	@GetMapping("/jssLogin")
+	@GetMapping("/login")
 	public String login(HttpServletRequest request) {
 		log.info("login");
-        
+		
 	    return "/loginout/jssLogin";
 	}
-
+	
 	@PostMapping("/jssLogOut")
 	public void logout(HttpServletRequest request) {
 		log.info("logout");

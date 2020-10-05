@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.zerock.mapper.DashMapper">
+<mapper namespace="org.zerock.mapper.MemberMapper">
 
-<resultMap id="DashResult" type="org.zerock.domain.DashVO"></resultMap>
+<resultMap id="MemberResult" type="org.zerock.domain.MemberVO"></resultMap>
 
-<select id="getInit" statementType="CALLABLE">            
+<select id="checkMember" statementType="CALLABLE">            
 	{
-		CALL PM_WEB_GET_DASH(
+		CALL PM_WEB_GET_MEMBER(
 				#{ARRAY_DATA, mode=IN, jdbcType=VARCHAR, javaType=String},
 				#{ACTION, mode=IN, jdbcType=VARCHAR, javaType=String},
-                #{resultCursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=DashResult}
+                #{resultCursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=MemberResult}
             )
     }
 </select>
-
 </mapper>

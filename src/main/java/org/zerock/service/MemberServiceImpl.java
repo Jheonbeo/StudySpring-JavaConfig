@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.springframework.stereotype.Service;
-import org.zerock.domain.InspectVO;
-import org.zerock.mapper.InspectMapper;
+import org.zerock.domain.MemberVO;
+import org.zerock.mapper.MemberMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -13,21 +13,26 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @Service //비즈니스 영역을 담당하는 객체임을 표시
 @AllArgsConstructor
-public class InspectServiceImpl implements InspectService{
-	private InspectMapper mapper;
-	
+public class MemberServiceImpl implements MemberService{
+	private MemberMapper mapper;
+
 	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<InspectVO> getInspection(String array_data, String action) {
-		log.info("getTotalProd.........");
+	public MemberVO checkMember(String array_data, int action) {
 		// TODO Auto-generated method stub
+		log.info("Service : checkMember");
+		
+		array_data = "USERID:jheonbeo,USERPW:Tktno1,";
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("ARRAY_DATA", array_data);
 		map.put("ACTION", action);
-		mapper.getInpection(map);
+		mapper.checkMember(map);
+		log.info("PM_WEB_GET_MEMBER");
 
-		ArrayList<InspectVO> arr = (ArrayList<InspectVO>)map.get("resultCursor");
-		return arr;
+		MemberVO data = null;
+		for(MemberVO result : (ArrayList<MemberVO>)map.get("resultCursor")) {
+			data = result;
+		}
+		return data;
 	}
-
 }

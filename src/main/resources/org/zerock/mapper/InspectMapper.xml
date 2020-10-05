@@ -7,7 +7,7 @@
 
 <select id="getInpection" statementType="CALLABLE">            
 	{
-		CALL SP_JBJ_GET_INSPECTION(
+		CALL PM_WEB_GET_INSPECTION(
 				#{ACTION, mode=IN, jdbcType=VARCHAR, javaType=String},
 				#{ARRAY_DATA, mode=IN, jdbcType=VARCHAR, javaType=String},
                 #{resultCursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=InspectResult}

@@ -3,8 +3,6 @@ package org.zerock.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 import org.zerock.domain.DashVO;
 import org.zerock.mapper.DashMapper;

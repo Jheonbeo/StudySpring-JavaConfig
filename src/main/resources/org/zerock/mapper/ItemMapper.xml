@@ -44,7 +44,7 @@
 
 <select id="getItemList" statementType="CALLABLE">            
 	{
-		CALL SP_JBJ_REG_ITEM(
+		CALL PM_WEB_REG_ITEM(
 				#{ARRAY_DATA, mode=IN, jdbcType=VARCHAR, javaType=String},
 				#{ACTION, mode=IN, jdbcType=NUMERIC, javaType=INTEGER},
                 #{resultCursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=ItemResult}
