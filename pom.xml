@@ -15,7 +15,7 @@
 		<com.zaxxer.HikariCP>3.4.5</com.zaxxer.HikariCP>
 		<jackson-databind.version>2.11.2</jackson-databind.version>
 		<common-fileupload.version>1.4</common-fileupload.version>
-		<spring-security.version>5.3.4.RELEASE</spring-security.version>
+		<spring-security.version>5.3.9.RELEASE</spring-security.version>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
