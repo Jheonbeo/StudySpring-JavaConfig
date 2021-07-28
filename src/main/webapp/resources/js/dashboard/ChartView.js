@@ -12,6 +12,10 @@ ChartView.setup = function (el) {
 }
 
 ChartView.render = function(line){
+	this.el.removeChild( this.el.querySelector("#myAreaChart") )
+	this.el.innerHTML = '<canvas id="myAreaChart"></canvas>'
+
+	var canvas = document.querySelector("#myAreaChart");
 	var uphData = Model.generateData(line)
 	var config = {
 			type: 'bar',
@@ -60,8 +64,8 @@ ChartView.render = function(line){
 				}
 			}
 	};
-	
-	let myBarChart = new Chart(this.el, config);
+
+	let myBarChart = new Chart(canvas, config);
 }
 
 export default ChartView

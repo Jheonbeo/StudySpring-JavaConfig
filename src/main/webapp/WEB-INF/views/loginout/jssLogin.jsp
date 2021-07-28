@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,6 +60,13 @@
                   </div>
                   <div class="text-center">
                     <a class="small" href="">Create an Account!</a>
+                  </div>
+                  <div class="text-center">
+                  	<c:if test="${not empty loginFailMsg}">
+	                  	<font color="red">
+		                  	<p>${loginFailMsg}</p>
+	                  	</font>
+                  	</c:if>
                   </div>
                 </div>
               </div>

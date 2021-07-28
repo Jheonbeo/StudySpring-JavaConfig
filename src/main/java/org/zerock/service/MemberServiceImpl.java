@@ -3,6 +3,7 @@ package org.zerock.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.zerock.domain.MemberVO;
 import org.zerock.mapper.MemberMapper;
@@ -12,13 +13,14 @@ import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Service //비즈니스 영역을 담당하는 객체임을 표시
+@Repository
 @AllArgsConstructor
 public class MemberServiceImpl implements MemberService{
 	private MemberMapper mapper;
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public MemberVO checkMember(String array_data, int action) {
+	public MemberVO checkMember(String array_data, String action) {
 		// TODO Auto-generated method stub
 		log.info("Service : checkMember");
 		

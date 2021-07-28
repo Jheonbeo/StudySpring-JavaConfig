@@ -7,43 +7,44 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.zerock.common.CustomLoginSuccessHandler;
-import org.zerock.common.CustomUserDetailsService;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.zerock.security.CustomAuthenticationFilter;
+import org.zerock.security.CustomAuthenticationProvider;
+import org.zerock.security.CustomLoginFailure;
+import org.zerock.security.CustomLoginSuccessHandler;
 
 @Configuration 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-      auth.userDetailsService(customUserService());
-      /*.inMemoryAuthentication().user
-        .withUser("user").password(passwordEncoder().encode("user1")).roles("USER")
-        .and()
-        .withUser("admin").password(passwordEncoder().encode("admin1")).roles("ADMIN");*/
+		auth.authenticationProvider(customAuthenticationProvider());
    }
 
    @Override
    protected void configure(HttpSecurity http) throws Exception {
 	   http
 	   	.csrf().disable()
-	   	.authorizeRequests() 
+	   	.authorizeRequests()
 	    .antMatchers(
 		    "/favicon.ico",
 		    "/").permitAll()
 		   	.and()
 		.formLogin()
-			.loginPage("/loginout/login")
+			.loginPage("/loginout/jssLogin")
 			.loginProcessingUrl("/loginout/loginProcess")
 	        .successHandler(successHandler())
+	        .failureHandler(failureHandler())
+            .permitAll()
 		   	.and()
+            .addFilterBefore(customAuthenticationFilter(), BasicAuthenticationFilter.class)
 	   	.logout()
 	   		.logoutUrl("/loginout/jssLogOut")
-	   		.logoutSuccessUrl("/")
 	   		.invalidateHttpSession(true)
+	   		.deleteCookies("JSESSIONID")
 	   		.and()
 	   	.exceptionHandling()
 	   		.accessDeniedPage("/loginout/accessError");
@@ -55,12 +56,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public CustomAuthenticationProvider customAuthenticationProvider() {
+        return new CustomAuthenticationProvider();
     }
     
     @Bean
-    public UserDetailsService customUserService() {
-    	return new CustomUserDetailsService();
+    public AuthenticationFailureHandler failureHandler() {
+    	return new CustomLoginFailure();
+    }
+
+    @Bean
+    public CustomAuthenticationFilter customAuthenticationFilter() throws Exception {
+        CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManager());
+        customAuthenticationFilter.setFilterProcessesUrl("/loginout/login");
+        customAuthenticationFilter.setAuthenticationSuccessHandler(successHandler());
+        customAuthenticationFilter.afterPropertiesSet();
+        return customAuthenticationFilter;
     }
 }

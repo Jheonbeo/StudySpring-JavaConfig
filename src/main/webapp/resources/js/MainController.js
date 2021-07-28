@@ -1,25 +1,32 @@
-import DashBoardView from './dashboard/FormView.js'
-import InspectView from './inspection/InspectView.js'
+import View from './View.js'
 
 const tag = '[MainController]'
-	
-export default {
-  init() {
-	  console.log(tag, 'MainController.js')
-	  //DashBoard
-	  DashBoardView.setup(document.querySelector('#dashboard-icon'))
-      	.on('@click', e => this.onClickIcon())
-	  
-	  InspectView.setup(document.querySelector('#inspection-content'))
+const MainController = Object.create(View)
+let currentPathName = ''
 
-	  this.renderView()
-  },
-  
-  renderView(){
-	  console.log(tag, 'rednerView()')
-	  DashBoardView.render()
-  },
-  onClickIcon() {
-	  this.renderView()
-  },
+MainController.initialRoutes('/dashboard/dashboard')
+
+window.onload = () => {
+	/*const dashIcon = document.getElementById('dashboard-icon');
+	dashIcon.addEventListener('click', (evt) => {
+        const pathName = evt.target.getAttribute('route')
+        
+        MainController.historyRouterPush(pathName, dashboardDiv)
+    })*/
+    const routeLinker = document.querySelectorAll('span.routes')
+
+    routeLinker.forEach(el => {
+        el.addEventListener('click', (e) => {
+            const pathName = e.target.getAttribute('route')
+            
+            MainController.historyRouterPush(pathName)
+            e.preventDefault();
+        })
+    })
 }
+
+//refresh
+window.addEventListener("beforeunload", function(e) {
+	MainController.refreshPage()
+	e.preventDefault()
+}); 

@@ -107,7 +107,7 @@ public class ItemController {
 		Integer action = (Integer) param.get("action");
 		String data = paramToMap((String) param.get("cd_item"), (String) param.get("seg_asset"), (String) param.get("supplier"), (String) param.get("customer"), "NG");
 		
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 
 		JSONArray arryObj = service.getItemDataList(data, action);
 		map.put("itemData", mapping(arryObj));
@@ -128,7 +128,7 @@ public class ItemController {
 	}
 	
 	private String paramToMap(String cdItem, String seg_Asset, String supplier, String customer, String discon) {
-		Map<String, Object> param = new HashMap<String, Object>();
+		Map<String, Object> param = new HashMap<>();
 		
 		param.put("CD_ITEM", cdItem);
 		param.put("CD_TYPE", seg_Asset);

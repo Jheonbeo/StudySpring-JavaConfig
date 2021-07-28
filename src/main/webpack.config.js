@@ -3,7 +3,13 @@ const path = require('path');
 module.exports = {
   context: path.resolve(__dirname, 'webapp/resources/js'),
   entry: {
-    home: './app.js',
+    home: './MainController.js',
+  },
+  devtool: 'inline-source-map',
+  mode: 'development',
+  devServer: { 
+    contentBase: '/resources/bundle/',
+    hot: true 
   },
   output: {
     path: path.resolve(__dirname, 'webapp/resources/bundle'),

@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 
 <%@include file ="./header.jsp" %>
-        
-        <!-- Content -->
-        <div id="dashboard-content"></div>
-        <div id="inspection-content"></div>
+	<div id="details">
+		<!-- Begin Page Content -->
+		<div class="container-fluid" id="page-content"></div>
+	</div>
         
 <%@include file ="./footer.jsp" %>

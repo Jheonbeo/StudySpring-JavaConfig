@@ -111,7 +111,6 @@ tr:nth-child(even) {
   background-size: cover;
 }
 .logo-image-type6 {
-  height:55vh;
   background: url("/resources/img/JSS_Logo_Type6.jpg");
   background-position: center;
   background-size: cover;
@@ -123,4 +122,8 @@ tr:nth-child(even) {
   width: 32px;
   height: 32px;
   cursor: pointer;
+}
+
+.routes {
+    cursor: pointer;
 }

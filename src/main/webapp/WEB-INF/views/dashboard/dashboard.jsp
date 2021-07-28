@@ -1,7 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
          <!-- Page Heading -->
          <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -114,14 +112,19 @@
                    </a>
                    <div id="dropdownLine" class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                      <div class="dropdown-header">Dropdown Header:</div>
+                     <a class="dropdown-item" v-for="line in lines" v-on:click="onClickLine(line)">
+                     	{{line}}
+		             </a>
+		             <!-- 
                      <a class="dropdown-item" href="#" data-value="FS-F">FS라인</a>
                      <a class="dropdown-item" href="#" data-value="RS-F">RS라인</a>
+                      -->
                    </div>
                  </div>
                </div>
                <!-- Card Body -->
                <div class="card-body">
-                 <div class="chart-area">
+                 <div class="chart-area" id="chartArea">
                    <canvas id="myAreaChart"></canvas>
                  </div>
                </div>
@@ -151,11 +154,3 @@
            </div>
          </div>
 
-       </div>
-       <!-- /.container-fluid -->
-
-<!-- Page level plugins -->
-<!-- <script src="/resources/vendor/chart.js/Chart.min.js"></script> -->
-  
-<!-- Page level custom scripts -->
-<!-- <script src="/resources/js/chart/chart-area.js"></script> -->
