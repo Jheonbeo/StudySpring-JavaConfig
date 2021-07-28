@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper namespace 속성값은 interface 이름과 동일하게 해주어야한다. 
+	 select id 값도 역시 메서드 이름과 일치하게 작성해야한다.-->
+<mapper namespace="org.zerock.mapper.ItemMapper">
+<select id="getList" resultType="org.zerock.domain.ItemVO">
+	<![CDATA[SELECT /*+ INDEX_ASC(TKK_ITEM PK_TKK_ITEM) */ * 
+	FROM TKK_ITEM MAIN LEFT JOIN TKK_SUPPLIER_PART SUP ON MAIN.CD_ITEM = SUP.CD_ITEM
+	LEFT JOIN TKK_CUSTOMER_PART CUS ON MAIN.CD_ITEM = CUS.CD_ITEM
+	WHERE MAIN.UPD_DAT > SYSDATE - 7]]>
+</select>
+
+<insert id="insert">
+	insert into tkk_item(CD_ITEM, NM_ITEM, DTS_START, BOX_SNP, ITEM_UPH, SEG_ASSET, CRT_DAT, UPD_DAT)
+	values (#{CD_ITEM}, #{NM_ITEM}, TO_CHAR(SYSDATE, 'YYYYMMDD'), #{BOX_SNP}, #{ITEM_UPH}, #{SEG_ASSET}, SYSDATE, SYSDATE)
+</insert>
+
+<!-- VO에 변수가 없으면 #{}안 변수를 인식못해서 등록이 안됨 -->
+<insert id="insertSelectKey">
+	<selectKey keyProperty="DTS_START" order="BEFORE" resultType="String">
+		select TO_CHAR(SYSDATE, 'YYYYMMDD') from dual
+	</selectKey>
+	
+	insert into tkk_item(CD_ITEM, NM_ITEM, DTS_START, BOX_SNP, ITEM_UPH, SEG_ASSET, CRT_DAT, UPD_DAT)
+	values (#{CD_ITEM}, #{NM_ITEM}, #{DTS_START}, #{BOX_SNP}, #{ITEM_UPH}, #{SEG_ASSET}, SYSDATE, SYSDATE)
+</insert>
+
+<select id="read" resultType="org.zerock.domain.ItemVO">
+	select * from tkk_item where cd_item = #{CD_ITEM}
+</select>
+
+<delete id="delete">
+	delete tkk_item where cd_item = #{CD_ITEM}
+</delete>
+
+<update id="update">
+	update tkk_item set
+	upd_dat = SYSDATE
+	where cd_item = #{CD_ITEM}
+</update>
+
+<resultMap id="ItemResult" type="org.zerock.domain.ItemVO">
+</resultMap>
+
+<select id="getItemList" statementType="CALLABLE">            
+	{
+		CALL PM_WEB_REG_ITEM(
+				#{ARRAY_DATA, mode=IN, jdbcType=VARCHAR, javaType=String},
+				#{ACTION, mode=IN, jdbcType=NUMERIC, javaType=INTEGER},
+                #{resultCursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=ItemResult}
+            )
+    }
+</select>
+
+</mapper>

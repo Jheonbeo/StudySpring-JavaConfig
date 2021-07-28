@@ -1,0 +1,125 @@
+.flex-container {
+	display: flex;
+}
+
+.boxcontrol { 
+	height: 30px; 
+	font-size: 0.8rem;
+	flex: 1;
+}
+
+fieldset {
+	display:inline;
+}
+.fieldsetcontrol { 
+	flex: 1;
+  	padding-top: 0.35em;
+  	padding-bottom: 0.625em;
+  	padding-right: 3em;
+  	padding-left: 1em;
+}
+
+.relative-left{
+	position: relative;
+	left: 50px;
+}
+
+.relative-up{
+	position: relative;
+	bottom: 9px;
+}
+
+.btn-s-size{
+	height: 30px;
+	width: 30%; 
+}
+.btn-m-size{
+	height: 30px;
+	width: 50%; 
+}
+
+.btn-cancel{
+	height: 32px;
+}
+
+.attention-blue{
+	color: blue;
+}
+
+.attention-red{
+	color: red;
+	font-weight: medium;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+  	border: 1px solid #ddd;
+}
+table.scrollTable {
+	display: block;
+	height: 220px;
+	/* overflow: auto; */
+    overflow-y: auto;    /* Trigger vertical scroll    */
+    overflow-x: hidden;  /* Hide the horizontal scroll */
+}
+table th,table td{
+	text-align: center;
+	padding: 0%;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
+th:first-child, td:first-child {
+	text-align: left;
+}
+tr:nth-child(even) {
+	background-color: #f2f2f2
+}
+.scrollTable .dataTable tbody tr:hover {
+	background: dodgerblue;
+}
+
+.textbtn {
+	width : 100%;
+	border: none;
+	background-color: inherit;
+	cursor: pointer;
+	display: inline-block;
+}
+.textbtn:hover {background: dodgerblue;}
+
+.col-md-1-5 {
+  position: relative;
+  width: 100%;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 10%;
+  flex: 0 0 10%;
+  max-width: 10%;
+}
+
+.h-80 {
+  height: 80% !important;
+}
+
+.logo-image-type1-20 {
+  height:50px;
+  background: url("/resources/img/JSS_Logo_Type1.jpg");
+  background-position: center;
+  background-size: cover;
+}
+.logo-image-type6 {
+  background: url("/resources/img/JSS_Logo_Type6.jpg");
+  background-position: center;
+  background-size: cover;
+}
+.img-logout {
+  background: url("/resources/img/LogOut.png") no-repeat;
+  background-size: cover;
+  border: none;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
