@@ -9,7 +9,7 @@
 	<result property="userpw" column="USERPW"/>
 	<result property="userName" column="USERNAME"/>
 	<result property="enable" column="ENABLED"/>
-	<collection property="authList" resultMap="authMap"></collection>
+	<!-- <collection property="authList" resultMap="authMap"></collection> -->
 </resultMap>
 
 <resultMap type="org.zerock.domain.AuthVO" id="authMap">
