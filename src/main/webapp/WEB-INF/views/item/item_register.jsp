@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@include file="../includes/header.jsp" %>
 	<div class="container-fluid">
 		<h1 class="h3 mb-2 text-gray-800">Item Register</h1>
         <p class="mb-4">Management item table.</p>
@@ -18,7 +17,7 @@
 					<label><input type="radio" name="SEG_ASSET" value="50">반제품</label>
 					<label><input type="radio" name="SEG_ASSET" value="60">완제품</label>
        			</div>
-       			<div class="form-group row flex-container">
+       			<div class="form-group row">
        				<label>협력사 코드 &nbsp</label>
        				<select id="supplierBox" name="CD_SUPPLIER" class="form-control boxcontrol">
  	      				<c:forEach items="${supplierList}" var="supplierList">
@@ -33,14 +32,14 @@
        					</c:forEach>
        				</select>
        			</div>
-       			<div class="form-group row flex-container">
+       			<div class="form-group row">
        				<label>품번 &nbsp</label>
        				<input type="text" class="form-control boxcontrol" id="txtItemNum" name="CD_ITEM">
        				
        				<label>&nbsp 품명 &nbsp</label>
        				<input type="text" class="form-control boxcontrol" id="txtItemNM" name="NM_ITEM">
        			</div>
-       			<div class="form-group row flex-container">
+       			<div class="form-group row">
 					<fieldset class = "fieldsetcontrol">
 						<label>리드타임</label>
 						<input type="text" class="form-control boxcontrol" id="txtLeadTime" name="LEAD_TIME">
@@ -84,7 +83,7 @@
 						<label>안전 재고율(%)</label>
 						<input type="text" class="form-control boxcontrol" id="txtSafetyPrdersent" name="SAFETY_PERCENT" value="0">
 						<label>사용기간(<span class="attention-blue">YYYYMMDD</span>)</label>
-	        			<div class="form-group row flex-container" style="padding-left: 0.7em;">
+	        			<div class="form-group row" style="padding-left: 0.7em;">
 	        				<input type="text" class="form-control boxcontrol" id="txtItemPeriodStart" name="DTS_START">
 	        				
 	        				<label>&nbsp - &nbsp</label>
@@ -261,5 +260,3 @@
 	
 <!-- Page level custom scripts -->
 <script src="/resources/js/item/item-regist.js"></script>
-
-<%@include file="../includes/footer.jsp" %>

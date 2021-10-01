@@ -1,15 +1,29 @@
-.flex-container {
-	display: flex;
-}
-
 .boxcontrol { 
+	display: inline;
 	height: 30px; 
 	font-size: 0.8rem;
 	flex: 1;
 }
 
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
 fieldset {
-	display:inline;
+	display: flex;
+	margin-bottom: 10px;
+}
+
+fieldset > label {
+    width:95px;
+    clear:left;
+    text-align:left;
+    padding-left:10px;
+}
+fieldset > input, label {
+    float:left;
 }
 .fieldsetcontrol { 
 	flex: 1;
@@ -19,8 +33,37 @@ fieldset {
   	padding-left: 1em;
 }
 
+.grid4-4 {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-gap: 10px;
+	grid-auto-rows: auto;
+}
+.grid4-4 > .three > .bottom-align{
+	display : table-row;
+	vertical-align : bottom;
+}
+.grid4-4 > .one{
+	grid-column: 1/3;
+	grid-row: 1/3;
+}
+.grid4-4 > .two{
+	grid-column: 1/3;
+	grid-row: 3/5;
+}
+.grid4-4 > .three{
+	grid-column: 3/5;
+	grid-row: 1/3;
+    border-collapse:collapse;
+    display : table;
+}
+.grid4-4 > .four{
+	grid-column: 4/5;
+	grid-row: 3/4;
+}
+
 .relative-left{
-	position: relative;
+    display : table;
 	left: 50px;
 }
 
@@ -44,6 +87,7 @@ fieldset {
 
 .attention-blue{
 	color: blue;
+	font-weight: medium;
 }
 
 .attention-red{
@@ -122,6 +166,10 @@ tr:nth-child(even) {
   width: 32px;
   height: 32px;
   cursor: pointer;
+}
+.img {
+	max-width: 100%; 
+	height: auto;
 }
 
 .routes {

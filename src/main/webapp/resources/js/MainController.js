@@ -2,7 +2,6 @@ import View from './View.js'
 
 const tag = '[MainController]'
 const MainController = Object.create(View)
-let currentPathName = ''
 
 MainController.initialRoutes('/dashboard/dashboard')
 
@@ -19,14 +18,14 @@ window.onload = () => {
         el.addEventListener('click', (e) => {
             const pathName = e.target.getAttribute('route')
             
-            MainController.historyRouterPush(pathName)
-            e.preventDefault();
+            $("document").ready(MainController.historyRouterPush(pathName))
+            e.preventDefault()
         })
     })
 }
 
 //refresh
-window.addEventListener("beforeunload", function(e) {
+window.addEventListener("beforeunload", (e) => {
 	MainController.refreshPage()
 	e.preventDefault()
 }); 

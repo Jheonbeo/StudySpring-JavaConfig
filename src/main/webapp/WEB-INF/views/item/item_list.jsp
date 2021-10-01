@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@include file="../includes/header.jsp" %>
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
@@ -58,4 +57,3 @@
 <!-- Page level custom scripts -->
 <script src="/resources/js/chart/datatables-demo.js"></script>
   
-<%@include file="../includes/footer.jsp" %>

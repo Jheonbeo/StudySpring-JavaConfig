@@ -37,7 +37,7 @@
   <div id="wrapper">
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
+	<div class="sticky">
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
         <div class="sidebar-brand-icon rotate-n-15">
@@ -104,8 +104,8 @@
           <div id="collapsePart" class="collapse" aria-labelledby="headingPart" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Management Part:</h6>
-            <a class="collapse-item" v-bind:href=item_list>조회 및 수정</a>
-            <a class="collapse-item" v-bind:href=item_register>등록</a>
+            <span class="collapse-item routes" route="/item/item_list">조회 및 수정</span>
+            <span class="collapse-item routes" route="/item/item_register">등록</span>
           </div>
         </div>
       </li>
@@ -114,10 +114,12 @@
       <hr class="sidebar-divider d-none d-md-block">
 
       <!-- Sidebar Toggler (Sidebar) -->
-      <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-      </div>
-
+      <li class="nav-item text-center">
+		<div class="text-center d-none d-md-inline">
+		  <button class="rounded-circle border-0" id="sidebarToggle"></button>
+		</div>
+      </li>
+	</div>
     </ul>
     <!-- End of Sidebar -->
 

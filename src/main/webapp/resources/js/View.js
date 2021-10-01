@@ -63,16 +63,24 @@ export default {
   },
   
   renderModule(route){
-	  switch(route){
-		  case '/dashboard/dashboard':
-			  setTimeout(function() {
-				  delete require.cache[require.resolve('./dashboard/DashController.js')]
-				  import(/* webpackChunkName: "DashBoard" */ './dashboard/DashController.js')
-				}, 300)
-			  break;
+	var checkExist = setInterval(() => {
+		switch(route){
+			case '/dashboard/dashboard':
+				if ($('#dashboard-content').length) {
+					delete require.cache[require.resolve('./dashboard/DashController.js')]
+				  	import(/* webpackChunkName: "DashBoard" */ './dashboard/DashController.js')
+				    clearInterval(checkExist)
+				}
+				break;
 		  case '/ship/identification':
-			  break;
-	   }
+				if ($('#identification-content').length) {
+					delete require.cache[require.resolve('./ship/identification.js')]
+			  	    import(/* webpackChunkName: "Identification" */ './ship/identification.js')
+				    clearInterval(checkExist);
+			    }
+				break;
+			}
+		}, 100);
   },
   
   refreshPage(){

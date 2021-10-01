@@ -2,7 +2,7 @@ import Model from './DashModel.js'
 import Chart from '../../vendor/chart.js/Chart.min.js'
 
 new Vue({
-	el: '#page-content',
+	el: '#dashboard-content',
 	data: {
 	    lines: ['FS라인', 'RS라인']
 	},
