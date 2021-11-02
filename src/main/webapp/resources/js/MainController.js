@@ -25,7 +25,7 @@ window.onload = () => {
 }
 
 //refresh
-window.addEventListener("beforeunload", (e) => {
+window.addEventListener("beforeunload", () => {
 	MainController.refreshPage()
-	e.preventDefault()
-}); 
+});
+

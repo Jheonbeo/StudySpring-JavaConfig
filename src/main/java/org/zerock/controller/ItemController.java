@@ -1,9 +1,9 @@
 package org.zerock.controller;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.json.simple.JSONArray;
@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.common.CommonMethod;
 import org.zerock.domain.ItemVO;
 import org.zerock.service.ItemService;
@@ -54,10 +52,42 @@ public class ItemController {
 
 	@GetMapping("/item_list")
 	public void list(Model model) {
-		log.info("list");
-		model.addAttribute("list", service.getList());
+		log.info("item_list");
 	}
 	
+	@SuppressWarnings("unchecked")
+	@PostMapping("/check_item")
+	@ResponseBody
+	public List<ItemVO> check_item(@RequestBody Map<String, Object> param) throws IOException {
+		Map<String, Object> temp = (Map<String, Object>) param.get("DATA");
+		String data = cm.transVOtoString(temp);
+
+		ArrayList<ItemVO> item = service.getItemDataList(data, "CHECK_ITEM");
+	    
+		return item;
+	}
+
+	@GetMapping("/item_modify")
+	public void modify(ItemVO itemVO, Model model) {        
+		log.info("modify");
+		
+        model.addAttribute("jssLineList", service.getItemDataList(paramToMap("", "70", "", "", ""), "3"));
+        model.addAttribute("tomasLineList", service.getItemDataList(paramToMap("", "80", "", "", ""), "3"));
+        model.addAttribute("tomasWarehouseList", service.getItemDataList(paramToMap("", "85", "", "", ""), "3"));
+        model.addAttribute("item", itemVO);//service.getItemDataList(data, 4));
+	}
+	
+	@PostMapping("/getItem")
+	@ResponseBody
+	public Object getItem(@RequestBody Map<String, Object> param) throws IOException {
+		String action = (String) param.get("action");
+		String data = paramToMap((String) param.get("cd_item"), (String) param.get("seg_asset"), (String) param.get("supplier"), (String) param.get("customer"), "NG");
+		
+		ArrayList<ItemVO> item = service.getItemDataList(data, action);
+	    
+		return item;
+	}
+	/*
 	@GetMapping("/item_register")
 	public void register(Model model) {        
 		log.info("register");
@@ -67,16 +97,6 @@ public class ItemController {
         model.addAttribute("jssLineList", service.getItemDataList(paramToMap("", "70", "", "", ""), 3));
         model.addAttribute("tomasLineList", service.getItemDataList(paramToMap("", "80", "", "", ""), 3));
         model.addAttribute("tomasWarehouseList", service.getItemDataList(paramToMap("", "85", "", "", ""), 3));
-	}
-
-	@GetMapping("/item_modify")
-	public void modify(ItemVO itemVO, Model model) {        
-		log.info("modify");
-		
-        model.addAttribute("jssLineList", service.getItemDataList(paramToMap("", "70", "", "", ""), 3));
-        model.addAttribute("tomasLineList", service.getItemDataList(paramToMap("", "80", "", "", ""), 3));
-        model.addAttribute("tomasWarehouseList", service.getItemDataList(paramToMap("", "85", "", "", ""), 3));
-        model.addAttribute("item", itemVO);//service.getItemDataList(data, 4));
 	}
 	
 	@PostMapping("/getSupplier")
@@ -100,20 +120,6 @@ public class ItemController {
 		
 		return map;
 	}
-	
-	@PostMapping("/getItem")
-	@ResponseBody
-	public Object getItem(@RequestBody Map<String, Object> param) throws IOException {
-		Integer action = (Integer) param.get("action");
-		String data = paramToMap((String) param.get("cd_item"), (String) param.get("seg_asset"), (String) param.get("supplier"), (String) param.get("customer"), "NG");
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		JSONArray arryObj = service.getItemDataList(data, action);
-		map.put("itemData", mapping(arryObj));
-	    
-		return map;
-	}
 
 	@PostMapping("/setItem")
 	@ResponseBody
@@ -125,7 +131,7 @@ public class ItemController {
 		map.put("itemData", mapping(arryObj));
 		
 		return map;
-	}
+	}*/
 	
 	private String paramToMap(String cdItem, String seg_Asset, String supplier, String customer, String discon) {
 		Map<String, Object> param = new HashMap<>();

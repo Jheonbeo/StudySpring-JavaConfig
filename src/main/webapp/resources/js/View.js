@@ -31,24 +31,24 @@ export default {
   
   //entry point
   initialRoutes(pathName) {
+	  //history 초기화
 	  this.renderHTML(pathName)
-	  window.onpopstate = () => this.renderHTML(window.location.pathname)
+	  window.onpopstate = () => this.renderHTML(location.hash.replace('#',''))
   },
 
   // set browser history
   historyRouterPush(pathName) {
 	  if(prevUrl != pathName){
-		  window.history.pushState({pathName}, '', '#'+pathName)
+		  window.history.pushState({pathName}, '', '#' + pathName)
 		  this.renderHTML(pathName)
 	  }
   },
 
   // render
   renderHTML(route) {
-	  if(history.state == null && route == '/includes/index'){
+	  if(route = '/includes/index')
 		  route = '/dashboard/dashboard'
-	  }
-	  else if(history.state != null){
+	  if(history.state != null){
 		  if(history.state.pathName != null){
 			  route = history.state.pathName
 		  }
@@ -57,12 +57,12 @@ export default {
 		  }
 	  }
 	  prevUrl = route
-
   	  $("#page-content").load(route)
 	  this.renderModule(route)
   },
   
   renderModule(route){
+	//url문자열을 못찾으면 무한반복함. settimeout 이용해야하나..?
 	var checkExist = setInterval(() => {
 		switch(route){
 			case '/dashboard/dashboard':
@@ -71,16 +71,30 @@ export default {
 				  	import(/* webpackChunkName: "DashBoard" */ './dashboard/DashController.js')
 				    clearInterval(checkExist)
 				}
-				break;
-		  case '/ship/identification':
+				break
+			case '/ship/identification':
 				if ($('#identification-content').length) {
-					delete require.cache[require.resolve('./ship/identification.js')]
-			  	    import(/* webpackChunkName: "Identification" */ './ship/identification.js')
-				    clearInterval(checkExist);
+					delete require.cache[require.resolve('./ship/IdentificationController.js')]
+			  	    import(/* webpackChunkName: "Identification" */ './ship/IdentificationController.js')
+				    clearInterval(checkExist)
 			    }
-				break;
+				break
+			case '/item/item_list':
+				if ($('#item-content').length) {
+					delete require.cache[require.resolve('./item/ItemController.js')]
+			  	    import(/* webpackChunkName: "Item" */ './item/ItemController.js')
+				    clearInterval(checkExist)
+			    }
+				break
+			case '/item/item_modify':
+				if ($('#item-content').length) {
+					delete require.cache[require.resolve('./item/item-modify.js')]
+			  	    import(/* webpackChunkName: "ItemModify" */ './item/item-modify.js')
+				    clearInterval(checkExist)
+			    }
+				break
 			}
-		}, 100);
+		}, 500);
   },
   
   refreshPage(){

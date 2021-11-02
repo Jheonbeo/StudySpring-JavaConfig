@@ -11,19 +11,17 @@
   top: 0;
 }
 
-fieldset {
+.field {
 	display: flex;
 	margin-bottom: 10px;
+	flex-wrap: wrap;
 }
 
-fieldset > label {
+.field > .label95 {
     width:95px;
     clear:left;
     text-align:left;
-    padding-left:10px;
-}
-fieldset > input, label {
-    float:left;
+    padding-left:5px;
 }
 .fieldsetcontrol { 
 	flex: 1;
@@ -39,7 +37,7 @@ fieldset > input, label {
 	grid-gap: 10px;
 	grid-auto-rows: auto;
 }
-.grid4-4 > .three > .bottom-align{
+.grid4-4 .bottom-align{
 	display : table-row;
 	vertical-align : bottom;
 }
@@ -58,8 +56,28 @@ fieldset > input, label {
     display : table;
 }
 .grid4-4 > .four{
+	grid-column: 3/4;
+	grid-row: 3/4;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.grid4-4 > .five{
 	grid-column: 4/5;
 	grid-row: 3/4;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.grid4-4 > .six{
+	grid-column: 3/5;
+	grid-row: 4/5;
+	position: relative
+}
+.six button{
+    position: absolute;
+    top: 85%;
+    transform: translateY(-70%);
 }
 
 .relative-left{
@@ -79,6 +97,10 @@ fieldset > input, label {
 .btn-m-size{
 	height: 30px;
 	width: 50%; 
+}
+.btn-l-size{
+	height: 30px;
+	width: 100%; 
 }
 
 .btn-cancel{
@@ -174,4 +196,8 @@ tr:nth-child(even) {
 
 .routes {
     cursor: pointer;
+}
+
+.uppercase{
+	text-transform: uppercase
 }

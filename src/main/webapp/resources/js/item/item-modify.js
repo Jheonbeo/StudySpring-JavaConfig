@@ -1,49 +1,29 @@
-const tag = '[item-modify]'
+import Model from './ItemModel.js'
 
-$(function () {
-	$("#modifyForm button").click(function(ev){
-	    ev.preventDefault();
-	    console.log($(".CD_SUPPLIER").val());
-	    /*if($(this).attr("id")=="btnModifyItem"){
-	    	const queryString = $("form[name=modifyForm]").serializeObject();
-			$.ajax({ 
-			      url:'setItem', 
-			      dataType:'json',
-			      contentType:'application/json',
-			      data:JSON.stringify(queryString),
-			      method:'POST', 
-			      success:function(t){
-			    	  var itemData = t.itemData;
-			    	  $(".modal-title").html("갱신 성공");
-			    	  $(".modal-body").html("품번 " + itemData[0].cd_ITEM + "가 갱신되었습니다.");
-			    	  $("#myModal").modal("show");
-			      },
-			      error:function(xhr, status, error){
-			    	  $(".modal-title").html("갱신 실패");
-			    	  $(".modal-body").html("품번 갱신 에러");
-			    	  $("#myModal").modal("show");
-			    	  console.error(error);
-			      }
-			  }); 
-	    }*/
-	});
-});
-
-jQuery.fn.serializeObject = function () { 
-    var obj = null; 
-    try { 
-        if(this[0].tagName && this[0].tagName.toUpperCase() == "FORM" ) { 
-            var arr = this.serializeArray(); 
-            if(arr){ 
-            	obj = {}; 
-            	jQuery.each(arr, function() { 
-            		obj[this.name] = this.value; 
-            	}); 
-            } 
-        } 
-    }catch(e) { 
-        alert(e.message); 
-    }finally {} 
-    
-    return obj; 
-};
+new Vue({
+	el: '#item-content',
+	data: {
+		tag : '아이템 수정창'
+	},
+	created(){
+		this.loadItem()
+	},
+	methods:{
+		loadItem(){
+			var radio = $("div[name = 'radioGroup']")
+			var radio2 = $("div[name = 'radioGroup2']")
+			radio.find("label:eq(1)").css("transform", "translateX(50%)")
+			radio.find("label:eq(2)").css("transform", "translateX(100%)")
+			radio2.find("label:eq(1)").css("transform", "translateX(200%)")
+			radio2.find("label:eq(2)").css("transform", "translateX(400%)")
+			
+			var form = {
+					action:'4',
+					cd_item:'${item.CD_ITEM}',
+					seg_asset:'${item.SEG_ASSET}',
+					supplier:'${item.CD_SUPPLIER}',
+					customer:'${item.CD_CUSTOMER}'
+			}
+		}
+	}
+})

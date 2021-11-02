@@ -47,9 +47,15 @@ public class ItemVO {
 	private String BACK_FLUSH;
 	private String OTHER;
 	
+	private String IDENTIFICATION;
+	private String PBOM;
+	private String JIG;
+	private String CHECKSHEET;
+	
 	private Date CRT_DAT;
 	private String CRT_USR;
 	private Date UPD_DAT;
+	private String UPD_DAT_TEXT;
 	private String UPD_USR;
 	
 	private int ACTION;

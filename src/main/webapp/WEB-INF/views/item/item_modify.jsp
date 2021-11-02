@@ -1,16 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@include file="../includes/header.jsp" %>
-	<div class="container-fluid">
-		<h1 class="h3 mb-2 text-gray-800">Item Modify</h1>
-        <p class="mb-4">Management item table.</p>
-        
-        
+
+	<div class="container-fluid" id="item-content">
       <form name="modifyForm" id="modifyForm">
         <div class="card shadow mb-4">
         	<div class="card-header py-3">
-          	<h6 class="m-0 font-weight-bold text-primary">TKK_ITEM DataTables</h6>
+          		<h6 class="m-0 font-weight-bold text-primary">TKK_ITEM DataTables</h6>
         	</div>
         	<div class="card-body">
        			<div name="radioGroup" class="form-group row">
@@ -112,7 +108,7 @@
 	        				<select id="comboLine1" name="PROD_LINE01" class="form-control boxcontrol">
 	        					<option value=""></option>
 	  	      					<c:forEach items="${jssLineList}" var="jssLineList">
-	        						<option value="${jssLineList.ItemVO.PROD_LINE01}">${jssLineList.ItemVO.PROD_LINE01}</option>
+	        						<option value="${jssLineList.PROD_LINE01}">${jssLineList.PROD_LINE01}</option>
 	        					</c:forEach>
 	        				</select>
         				</div>
@@ -121,7 +117,7 @@
 	        				<select id="comboLine2" name="PROD_LINE02" class="form-control boxcontrol">
 	        					<option value=""></option>
 	  	      					<c:forEach items="${jssLineList}" var="jssLineList">
-	        						<option value="${jssLineList.ItemVO.PROD_LINE01}">${jssLineList.ItemVO.PROD_LINE01}</option>
+	        						<option value="${jssLineList.PROD_LINE01}">${jssLineList.PROD_LINE01}</option>
 	        					</c:forEach>
 	        				</select>
         				</div>
@@ -130,7 +126,7 @@
 	        				<select id="comboLine3" name="PROD_LINE03" class="form-control boxcontrol">
 	        					<option value=""></option>
 	  	      					<c:forEach items="${jssLineList}" var="jssLineList">
-	        						<option value="${jssLineList.ItemVO.PROD_LINE01}">${jssLineList.ItemVO.PROD_LINE01}</option>
+	        						<option value="${jssLineList.PROD_LINE01}">${jssLineList.PROD_LINE01}</option>
 	        					</c:forEach>
 	        				</select>
 	        			</div>
@@ -139,7 +135,7 @@
 	        				<select id="comboLine4" name="PROD_LINE04" class="form-control boxcontrol">
 	        					<option value=""></option>
 	  	      					<c:forEach items="${jssLineList}" var="jssLineList">
-	        						<option value="${jssLineList.ItemVO.PROD_LINE01}">${jssLineList.ItemVO.PROD_LINE01}</option>
+	        						<option value="${jssLineList.PROD_LINE01}">${jssLineList.PROD_LINE01}</option>
 	        					</c:forEach>
 	        				</select>
         				</div>
@@ -148,7 +144,7 @@
 	        				<select id="comboLine5" name="PROD_LINE05" class="form-control boxcontrol">
 	        					<option value=""></option>
 	  	      					<c:forEach items="${jssLineList}" var="jssLineList">
-	        						<option value="${jssLineList.ItemVO.PROD_LINE01}">${jssLineList.ItemVO.PROD_LINE01}</option>
+	        						<option value="${jssLineList.PROD_LINE01}">${jssLineList.PROD_LINE01}</option>
 	        					</c:forEach>
 	        				</select>
         				</div>
@@ -159,7 +155,7 @@
 	        				<select id="comboTomasLine" name="CD_LINE" class="form-control boxcontrol">
 	        					<option value=""></option>
 	  	      					<c:forEach items="${tomasLineList}" var="tomasLineList">
-	        						<option value="${tomasLineList.ItemVO.CD_LINE}">${tomasLineList.ItemVO.CD_LINE}</option>
+	        						<option value="${tomasLineList.CD_LINE}">${tomasLineList.CD_LINE}</option>
 	        					</c:forEach>
 	        				</select>
 	        			</div>
@@ -168,7 +164,7 @@
 	        				<select id="comboTomasWare" name="CD_STOCK" class="form-control boxcontrol">
 	        					<option value=""></option>
 	  	      					<c:forEach items="${tomasWarehouseList}" var="tomasWarehouseList">
-	        						<option value="${tomasWarehouseList.ItemVO.CD_STOCK}">${tomasWarehouseList.ItemVO.CD_STOCK}</option>
+	        						<option value="${tomasWarehouseList.CD_STOCK}">${tomasWarehouseList.CD_STOCK}</option>
 	        					</c:forEach>
 	        				</select>
 	        			</div>
@@ -257,7 +253,7 @@ $(document).ready(function() {
 	radio2.find("label:eq(2)").css("transform", "translateX(400%)");
 	
 	var form = {
-			action:4,
+			action:'4',
 			cd_item:'${item.CD_ITEM}',
 			seg_asset:'${item.SEG_ASSET}',
 			supplier:'${item.CD_SUPPLIER}',
@@ -265,12 +261,14 @@ $(document).ready(function() {
 	};
 	
 	$.ajax({ 
-	       url:'getItem', 
+	       url:'/item/getItem', 
 	       dataType:'json',
 	       contentType:'application/json',
 	       data:JSON.stringify(form),
 	       method:'POST', 
 	       success:function(t){
+	    	   console.log(t[0].cd_ITEM)
+	    	   /*
 				var itemData = t.itemData;
 				
 				if(form.seg_asset == "30"){
@@ -369,6 +367,7 @@ $(document).ready(function() {
 					$("input[name = 'PROCESSING6'][value='X']").prop("checked", true);
 				else
 					$("input[name = 'PROCESSING6'][value='O']").prop("checked", true);
+				*/
 					
 	       },
 	       error:function(t){
@@ -379,5 +378,3 @@ $(document).ready(function() {
 });
 
 </script>
-
-<%@include file="../includes/footer.jsp" %>

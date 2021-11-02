@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 import org.zerock.domain.ItemVO;
 import org.zerock.mapper.ItemMapper;
@@ -46,7 +44,7 @@ public class ItemServiceImpl implements ItemService{
 	}
 
 	@SuppressWarnings("unchecked")
-	public JSONArray getItemDataList(String array_data, int action) {
+	public ArrayList<ItemVO> getItemDataList(String array_data, String action) {
 		// TODO Auto-generated method stub
 		log.info("Service : getItemDataList");
 
@@ -55,10 +53,9 @@ public class ItemServiceImpl implements ItemService{
 		map.put("ACTION", action);
 		mapper.getItemList(map);
 
+		ArrayList<ItemVO> dataList = new ArrayList<ItemVO>();
 		try {
-			JSONArray arryObj = new JSONArray();
-			for(ItemVO data : (ArrayList<ItemVO>)map.get("resultCursor")) {
-				JSONObject jsonObj = new JSONObject();
+			for(ItemVO data : (List<ItemVO>)map.get("resultCursor")) {
 				
 				if(data.getNM_SUPPLIER() != null) {
 					data.setNM_SUPPLIER(URLDecoder.decode(data.getNM_SUPPLIER(), "UTF-8").toString());
@@ -72,10 +69,9 @@ public class ItemServiceImpl implements ItemService{
 				if(data.getFREE_AREA() != null) {
 					data.setFREE_AREA(URLDecoder.decode(data.getFREE_AREA(), "UTF-8").toString());
 				}
-				jsonObj.put("ItemVO", data);
-				arryObj.add(jsonObj);
+				dataList.add(data);
 			}
-			return arryObj;
+			return dataList;
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

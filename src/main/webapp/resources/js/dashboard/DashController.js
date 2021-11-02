@@ -10,7 +10,7 @@ new Vue({
 		this.onClickLine(this.lines[0])
 	},
 	methods: {
-		onClickLine : function(line) {
+		onClickLine(line) {
 			if(line == "FS라인") line = "FS-F"
 			else line = "RS-F"
 

@@ -37,7 +37,7 @@ public class InspectionController {
 	public void list(Model model) {
 		log.info("inspection");
 		
-        model.addAttribute("jssLineList", itemService.getItemDataList(paramToMap("", "70", "", "", ""), 3));
+        //model.addAttribute("jssLineList", itemService.getItemDataList(paramToMap("", "70", "", "", ""), 3));
 	}
 
 	private String paramToMap(String cdItem, String seg_Asset, String supplier, String customer, String discon) {
