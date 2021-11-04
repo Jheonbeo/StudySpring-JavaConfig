@@ -1,14 +1,14 @@
-.boxcontrol { 
+.boxcontrol {
 	display: inline;
-	height: 30px; 
+	height: 30px;
 	font-size: 0.8rem;
 	flex: 1;
 }
 
 .sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
 }
 
 .field {
@@ -17,18 +17,19 @@
 	flex-wrap: wrap;
 }
 
-.field > .label95 {
-    width:95px;
-    clear:left;
-    text-align:left;
-    padding-left:5px;
+.field>.label95 {
+	width: 95px;
+	clear: left;
+	text-align: left;
+	padding-left: 5px;
 }
-.fieldsetcontrol { 
+
+.fieldsetcontrol {
 	flex: 1;
-  	padding-top: 0.35em;
-  	padding-bottom: 0.625em;
-  	padding-right: 3em;
-  	padding-left: 1em;
+	padding-top: 0.35em;
+	padding-bottom: 0.625em;
+	padding-right: 3em;
+	padding-left: 1em;
 }
 
 .grid4-4 {
@@ -37,82 +38,92 @@
 	grid-gap: 10px;
 	grid-auto-rows: auto;
 }
-.grid4-4 .bottom-align{
-	display : table-row;
-	vertical-align : bottom;
+
+.grid4-4 .bottom-align {
+	display: table-row;
+	vertical-align: bottom;
 }
-.grid4-4 > .one{
+
+.grid4-4>.one {
 	grid-column: 1/3;
 	grid-row: 1/3;
 }
-.grid4-4 > .two{
+
+.grid4-4>.two {
 	grid-column: 1/3;
 	grid-row: 3/5;
 }
-.grid4-4 > .three{
+
+.grid4-4>.three {
 	grid-column: 3/5;
 	grid-row: 1/3;
-    border-collapse:collapse;
-    display : table;
+	border-collapse: collapse;
+	display: table;
 }
-.grid4-4 > .four{
+
+.grid4-4>.four {
 	grid-column: 3/4;
 	grid-row: 3/4;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-.grid4-4 > .five{
+
+.grid4-4>.five {
 	grid-column: 4/5;
 	grid-row: 3/4;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-.grid4-4 > .six{
+
+.grid4-4>.six {
 	grid-column: 3/5;
 	grid-row: 4/5;
 	position: relative
 }
-.six button{
-    position: absolute;
-    top: 85%;
-    transform: translateY(-70%);
+
+.six button {
+	position: absolute;
+	top: 85%;
+	transform: translateY(-70%);
 }
 
-.relative-left{
-    display : table;
+.relative-left {
+	display: table;
 	left: 50px;
 }
 
-.relative-up{
+.relative-up {
 	position: relative;
 	bottom: 9px;
 }
 
-.btn-s-size{
+.btn-s-size {
 	height: 30px;
-	width: 30%; 
-}
-.btn-m-size{
-	height: 30px;
-	width: 50%; 
-}
-.btn-l-size{
-	height: 30px;
-	width: 100%; 
+	width: 30%;
 }
 
-.btn-cancel{
+.btn-m-size {
+	height: 30px;
+	width: 50%;
+}
+
+.btn-l-size {
+	height: 30px;
+	width: 100%;
+}
+
+.btn-cancel {
 	height: 32px;
 }
 
-.attention-blue{
+.attention-blue {
 	color: blue;
 	font-weight: medium;
 }
 
-.attention-red{
+.attention-red {
 	color: red;
 	font-weight: medium;
 }
@@ -121,83 +132,94 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 	width: 100%;
-  	border: 1px solid #ddd;
+	border: 1px solid #ddd;
 }
+
 table.scrollTable {
 	display: block;
 	height: 220px;
 	/* overflow: auto; */
-    overflow-y: auto;    /* Trigger vertical scroll    */
-    overflow-x: hidden;  /* Hide the horizontal scroll */
+	overflow-y: auto; /* Trigger vertical scroll    */
+	overflow-x: hidden; /* Hide the horizontal scroll */
 }
-table th,table td{
+
+table th, table td {
 	text-align: center;
 	padding: 0%;
 	border-right: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
 }
+
 th:first-child, td:first-child {
 	text-align: left;
 }
+
 tr:nth-child(even) {
 	background-color: #f2f2f2
 }
+
 .scrollTable .dataTable tbody tr:hover {
 	background: dodgerblue;
 }
 
 .textbtn {
-	width : 100%;
+	width: 100%;
 	border: none;
 	background-color: inherit;
 	cursor: pointer;
 	display: inline-block;
 }
-.textbtn:hover {background: dodgerblue;}
+
+.textbtn:hover {
+	background: dodgerblue;
+}
 
 .col-md-1-5 {
-  position: relative;
-  width: 100%;
-  padding-right: 0.75rem;
-  padding-left: 0.75rem;
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 10%;
-  flex: 0 0 10%;
-  max-width: 10%;
+	position: relative;
+	width: 100%;
+	padding-right: 0.75rem;
+	padding-left: 0.75rem;
+	-webkit-box-flex: 0;
+	-ms-flex: 0 0 10%;
+	flex: 0 0 10%;
+	max-width: 10%;
 }
 
 .h-80 {
-  height: 80% !important;
+	height: 80% !important;
 }
 
 .logo-image-type1-20 {
-  height:50px;
-  background: url("/resources/img/JSS_Logo_Type1.jpg");
-  background-position: center;
-  background-size: cover;
+	height: 50px;
+	background: url("/resources/img/JSS_Logo_Type1.jpg");
+	background-position: center;
+	background-size: cover;
 }
+
 .logo-image-type6 {
-  background: url("/resources/img/JSS_Logo_Type6.jpg");
-  background-position: center;
-  background-size: cover;
+	background: url("/resources/img/JSS_Logo_Type6.jpg");
+	background-position: center;
+	background-size: cover;
 }
+
 .img-logout {
-  background: url("/resources/img/LogOut.png") no-repeat;
-  background-size: cover;
-  border: none;
-  width: 32px;
-  height: 32px;
-  cursor: pointer;
+	background: url("/resources/img/LogOut.png") no-repeat;
+	background-size: cover;
+	border: none;
+	width: 32px;
+	height: 32px;
+	cursor: pointer;
 }
+
 .img {
-	max-width: 100%; 
+	max-width: 100%;
 	height: auto;
 }
 
 .routes {
-    cursor: pointer;
+	cursor: pointer;
 }
 
-.uppercase{
+.uppercase {
 	text-transform: uppercase
 }

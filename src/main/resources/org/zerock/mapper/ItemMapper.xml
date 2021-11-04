@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- mapper namespace 속성값은 interface 이름과 동일하게 해주어야한다. 
-	 select id 값도 역시 메서드 이름과 일치하게 작성해야한다.-->
+<!-- mapper namespace 속성값은 interface 이름과 동일하게 해주어야한다. select id 값도 역시 메서드 
+	이름과 일치하게 작성해야한다. -->
 <mapper namespace="org.zerock.mapper.ItemMapper">
 
-<resultMap id="ItemResult" type="org.zerock.domain.ItemVO">
-</resultMap>
+	<resultMap id="ItemResult" type="org.zerock.domain.ItemVO">
+	</resultMap>
 
-<select id="getItemList" statementType="CALLABLE">            
-	{
+	<select id="getItemList" statementType="CALLABLE">
+		{
 		CALL PM_WEB_REG_ITEM(
-				#{ARRAY_DATA, mode=IN, jdbcType=VARCHAR, javaType=String},
-				#{ACTION, mode=IN, jdbcType=VARCHAR, javaType=String},
-                #{resultCursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=ItemResult}
-            )
-    }
-</select>
+		#{ARRAY_DATA, mode=IN, jdbcType=VARCHAR, javaType=String},
+		#{ACTION, mode=IN, jdbcType=VARCHAR, javaType=String},
+		#{resultCursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=ItemResult}
+		)
+		}
+	</select>
 
 </mapper>

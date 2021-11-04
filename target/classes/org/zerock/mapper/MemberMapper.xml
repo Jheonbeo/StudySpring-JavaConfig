@@ -3,37 +3,43 @@
 
 <mapper namespace="org.zerock.mapper.MemberMapper">
 
-<resultMap type="org.zerock.domain.MemberVO" id="memberMap">
-	<id property="userid" column="userid"/>
-	<result property="userid" column="USERID"/>
-	<result property="userpw" column="USERPW"/>
-	<result property="userName" column="USERNAME"/>
-	<result property="enable" column="ENABLED"/>
-	<!-- <collection property="authList" resultMap="authMap"></collection> -->
-</resultMap>
+	<resultMap type="org.zerock.domain.MemberVO" id="memberMap">
+		<id property="userid" column="userid" />
+		<result property="userid" column="USERID" />
+		<result property="userpw" column="USERPW" />
+		<result property="userName" column="USERNAME" />
+		<result property="enable" column="ENABLED" />
+		<!-- <collection property="authList" resultMap="authMap"></collection> -->
+	</resultMap>
 
-<resultMap type="org.zerock.domain.AuthVO" id="authMap">
-	<result property="userid" column="USERID"/>
-	<result property="auth" column="AUTH"/>
-</resultMap>
+	<resultMap type="org.zerock.domain.AuthVO" id="authMap">
+		<result property="userid" column="USERID" />
+		<result property="auth" column="AUTH" />
+	</resultMap>
 
-<select id="checkMember" statementType="CALLABLE">             
-	{
+	<select id="checkMember" statementType="CALLABLE">
+		{
 		CALL PM_WEB_REG_MEMBER(
-				#{ARRAY_DATA, mode=IN, jdbcType=VARCHAR, javaType=String},
-				#{ACTION, mode=IN, jdbcType=VARCHAR, javaType=String},
-                #{resultCursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap}
-            )
-    }
-</select>
+		#{ARRAY_DATA, mode=IN, jdbcType=VARCHAR, javaType=String},
+		#{ACTION,
+		mode=IN, jdbcType=VARCHAR, javaType=String},
+		#{resultCursor, mode=OUT,
+		jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap}
+		)
+		}
+	</select>
 
-<select id="checkPassword" statementType="CALLABLE">            
-	{
-		CALL PM_WEB_REG_MEMBER(
-				#{ARRAY_DATA, mode=IN, jdbcType=VARCHAR, javaType=String},
-				#{ACTION, mode=IN, jdbcType=VARCHAR, javaType=String},
-                #{resultCursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap}
-            )
-    }
-</select>
+	<select id="checkPassword" statementType="CALLABLE">
+		{
+		CALL
+		PM_WEB_REG_MEMBER(
+		#{ARRAY_DATA, mode=IN, jdbcType=VARCHAR,
+		javaType=String},
+		#{ACTION, mode=IN, jdbcType=VARCHAR,
+		javaType=String},
+		#{resultCursor, mode=OUT, jdbcType=CURSOR,
+		javaType=ResultSet, resultMap=memberMap}
+		)
+		}
+	</select>
 </mapper>

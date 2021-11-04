@@ -3,16 +3,18 @@
 
 <mapper namespace="org.zerock.mapper.DashMapper">
 
-<resultMap id="DashResult" type="org.zerock.domain.DashVO"></resultMap>
+	<resultMap id="DashResult" type="org.zerock.domain.DashVO"></resultMap>
 
-<select id="getInit" statementType="CALLABLE">            
-	{
+	<select id="getInit" statementType="CALLABLE">
+		{
 		CALL PM_WEB_GET_DASH(
-				#{ARRAY_DATA, mode=IN, jdbcType=VARCHAR, javaType=String},
-				#{ACTION, mode=IN, jdbcType=VARCHAR, javaType=String},
-                #{resultCursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=DashResult}
-            )
-    }
-</select>
+		#{ARRAY_DATA, mode=IN, jdbcType=VARCHAR, javaType=String},
+		#{ACTION,
+		mode=IN, jdbcType=VARCHAR, javaType=String},
+		#{resultCursor, mode=OUT,
+		jdbcType=CURSOR, javaType=ResultSet, resultMap=DashResult}
+		)
+		}
+	</select>
 
 </mapper>

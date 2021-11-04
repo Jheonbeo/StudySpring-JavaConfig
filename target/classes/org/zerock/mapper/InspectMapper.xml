@@ -3,16 +3,22 @@
 
 <mapper namespace="org.zerock.mapper.InspectMapper">
 
-<resultMap id="InspectResult" type="org.zerock.domain.InspectVO"></resultMap>
+	<resultMap id="InspectResult"
+		type="org.zerock.domain.InspectVO"></resultMap>
 
-<select id="getInpection" statementType="CALLABLE">            
-	{
-		CALL PM_WEB_GET_INSPECTION(
-				#{ACTION, mode=IN, jdbcType=VARCHAR, javaType=String},
-				#{ARRAY_DATA, mode=IN, jdbcType=VARCHAR, javaType=String},
-                #{resultCursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=InspectResult}
-            )
-    }
-</select>
+	<select id="getInpection" statementType="CALLABLE">
+		{
+		CALL
+		PM_WEB_GET_INSPECTION(
+		#{ACTION, mode=IN, jdbcType=VARCHAR,
+		javaType=String},
+		#{ARRAY_DATA, mode=IN, jdbcType=VARCHAR,
+		javaType=String},
+		#{resultCursor, mode=OUT, jdbcType=CURSOR,
+		javaType=ResultSet,
+		resultMap=InspectResult}
+		)
+		}
+	</select>
 
 </mapper>
