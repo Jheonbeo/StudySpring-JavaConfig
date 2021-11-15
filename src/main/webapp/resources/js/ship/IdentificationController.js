@@ -16,7 +16,17 @@ new Vue({
             { text: '핑크색', value: '%ed%95%91%ed%81%ac' }
         ]
     },
+	mounted() {
+		this.init()
+	},
     methods: {
+		init(){
+			$('input[type="text"]').keydown(e => {
+				if (e.keyCode === 13) {
+					e.preventDefault()
+				}
+			})
+		},
         search(e) {
             if (e.keyCode === 13) {
                 var val = e.target.value
@@ -61,7 +71,6 @@ new Vue({
             if (cdItem != null)
                 idenData = Model.getData(cdItem.toUpperCase())
 
-            console.log(idenData)
             if (idenData == null || idenData.m_I_NO_PART == null) {
                 $(loadCution).text('존재하지않는 품번입니다.')
             } else {

@@ -3,6 +3,7 @@ package org.zerock.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		if(user != null){
             return user;
         } 
-        throw new UsernameNotFoundException("User not exist with name :" + userId);
+        throw new AuthenticationServiceException("User not exist with name :" + userId);
     }
 }

@@ -46,6 +46,13 @@ public class ItemVO {
 	private String STOP_PRODUCTION;
 	private String BACK_FLUSH;
 	private String OTHER;
+	private String CYCLE_TIME;
+	private String PACKAGING_INFO;
+	private String REPLACEMENT_ITEM;
+	private String REPLACEMENT_ITEM1;
+	private String REPLACEMENT_ITEM2;
+	private String REPLACEMENT_ITEM3;
+	private String REPLACEMENT_ITEM4;
 	
 	private String IDENTIFICATION;
 	private String PBOM;
@@ -58,5 +65,5 @@ public class ItemVO {
 	private String UPD_DAT_TEXT;
 	private String UPD_USR;
 	
-	private int ACTION;
+	private String ACTION;
 }

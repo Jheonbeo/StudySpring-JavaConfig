@@ -3,10 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <div class="container-fluid">
-	<h1 class="h3 mb-2 text-gray-800">Item Register</h1>
-	<p class="mb-4">Management item table.</p>
-
-
 	<form name="registForm" id="registForm">
 		<div class="card shadow mb-4">
 			<div class="card-header py-3">
@@ -24,14 +20,14 @@
 					<label>협력사 코드 &nbsp</label> <select id="supplierBox"
 						name="CD_SUPPLIER" class="form-control boxcontrol">
 						<c:forEach items="${supplierList}" var="supplierList">
-							<option value="${supplierList.ItemVO.CD_SUPPLIER}">${supplierList.ItemVO.CD_SUPPLIER}
-								: ${supplierList.ItemVO.NM_SUPPLIER}</option>
+							<option value="${supplierList.CD_SUPPLIER}">${supplierList.CD_SUPPLIER}
+								: ${supplierList.NM_SUPPLIER}</option>
 						</c:forEach>
 					</select> <label>&nbsp 고객사 코드 &nbsp</label> <select id="customerBox"
 						name="CD_CUSTOMER" class="form-control boxcontrol">
 						<c:forEach items="${customerList}" var="customerList">
-							<option value="${customerList.ItemVO.CD_CUSTOMER}">${customerList.ItemVO.CD_CUSTOMER}
-								: ${customerList.ItemVO.NM_CUSTOMER}</option>
+							<option value="${customerList.CD_CUSTOMER}">${customerList.CD_CUSTOMER}
+								: ${customerList.NM_CUSTOMER}</option>
 						</c:forEach>
 					</select>
 				</div>
@@ -45,7 +41,7 @@
 				<div class="form-group row">
 					<fieldset class="fieldsetcontrol">
 						<label>리드타임</label> <input type="text"
-							class="form-control boxcontrol" id="txtLeadTime" name="LEAD_TIME">
+							class="form-control boxconrol" id="txtLeadTime" name="LEAD_TIME">
 						<label>안전 재고 기간</label> <input type="text"
 							class="form-control boxcontrol" id="txtSafty" name="SAFETY_STOCK">
 						<label>대차 수</label> <input type="text"
@@ -124,7 +120,7 @@
 								name="PROD_LINE01" class="form-control boxcontrol">
 								<option value=""></option>
 								<c:forEach items="${jssLineList}" var="jssLineList">
-									<option value="${jssLineList.ItemVO.PROD_LINE01}">${jssLineList.ItemVO.PROD_LINE01}</option>
+									<option value="${jssLineList.PROD_LINE01}">${jssLineList.PROD_LINE01}</option>
 								</c:forEach>
 							</select>
 						</div>
@@ -133,7 +129,7 @@
 								name="PROD_LINE02" class="form-control boxcontrol">
 								<option value=""></option>
 								<c:forEach items="${jssLineList}" var="jssLineList">
-									<option value="${jssLineList.ItemVO.PROD_LINE01}">${jssLineList.ItemVO.PROD_LINE01}</option>
+									<option value="${jssLineList.PROD_LINE01}">${jssLineList.PROD_LINE01}</option>
 								</c:forEach>
 							</select>
 						</div>
@@ -142,7 +138,7 @@
 								name="PROD_LINE03" class="form-control boxcontrol">
 								<option value=""></option>
 								<c:forEach items="${jssLineList}" var="jssLineList">
-									<option value="${jssLineList.ItemVO.PROD_LINE01}">${jssLineList.ItemVO.PROD_LINE01}</option>
+									<option value="${jssLineList.PROD_LINE01}">${jssLineList.PROD_LINE01}</option>
 								</c:forEach>
 							</select>
 						</div>
@@ -151,7 +147,7 @@
 								name="PROD_LINE04" class="form-control boxcontrol">
 								<option value=""></option>
 								<c:forEach items="${jssLineList}" var="jssLineList">
-									<option value="${jssLineList.ItemVO.PROD_LINE01}">${jssLineList.ItemVO.PROD_LINE01}</option>
+									<option value="${jssLineList.PROD_LINE01}">${jssLineList.PROD_LINE01}</option>
 								</c:forEach>
 							</select>
 						</div>
@@ -160,7 +156,7 @@
 								name="PROD_LINE05" class="form-control boxcontrol">
 								<option value=""></option>
 								<c:forEach items="${jssLineList}" var="jssLineList">
-									<option value="${jssLineList.ItemVO.PROD_LINE01}">${jssLineList.ItemVO.PROD_LINE01}</option>
+									<option value="${jssLineList.PROD_LINE01}">${jssLineList.PROD_LINE01}</option>
 								</c:forEach>
 							</select>
 						</div>
@@ -171,7 +167,7 @@
 								name="CD_LINE" class="form-control boxcontrol">
 								<option value=""></option>
 								<c:forEach items="${tomasLineList}" var="tomasLineList">
-									<option value="${tomasLineList.ItemVO.CD_LINE}">${tomasLineList.ItemVO.CD_LINE}</option>
+									<option value="${tomasLineList.CD_LINE}">${tomasLineList.CD_LINE}</option>
 								</c:forEach>
 							</select>
 						</div>
@@ -181,7 +177,7 @@
 								<option value=""></option>
 								<c:forEach items="${tomasWarehouseList}"
 									var="tomasWarehouseList">
-									<option value="${tomasWarehouseList.ItemVO.CD_STOCK}">${tomasWarehouseList.ItemVO.CD_STOCK}</option>
+									<option value="${tomasWarehouseList.CD_STOCK}">${tomasWarehouseList.CD_STOCK}</option>
 								</c:forEach>
 							</select>
 						</div>
@@ -253,6 +249,7 @@
 		</div>
 	</form>
 </div>
+
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -276,6 +273,3 @@
 	<!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-
-<!-- Page level custom scripts -->
-<script src="/resources/js/item/item-regist.js"></script>

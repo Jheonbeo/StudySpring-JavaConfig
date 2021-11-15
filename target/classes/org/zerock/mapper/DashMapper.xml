@@ -9,10 +9,8 @@
 		{
 		CALL PM_WEB_GET_DASH(
 		#{ARRAY_DATA, mode=IN, jdbcType=VARCHAR, javaType=String},
-		#{ACTION,
-		mode=IN, jdbcType=VARCHAR, javaType=String},
-		#{resultCursor, mode=OUT,
-		jdbcType=CURSOR, javaType=ResultSet, resultMap=DashResult}
+		#{ACTION, mode=IN, jdbcType=VARCHAR, javaType=String},
+		#{resultCursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=DashResult}
 		)
 		}
 	</select>

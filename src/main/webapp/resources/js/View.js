@@ -1,4 +1,5 @@
 const tag = '[View]'
+
 let prevUrl = ''
 
 export default {
@@ -30,22 +31,22 @@ export default {
   },
   
   //entry point
-  initialRoutes(pathName) {
+  initialRoutes(pathName, param) {
 	  //history 초기화
-	  this.renderHTML(pathName)
+	  this.renderHTML(pathName, param)
 	  window.onpopstate = () => this.renderHTML(location.hash.replace('#',''))
   },
 
   // set browser history
-  historyRouterPush(pathName) {
+  historyRouterPush(pathName, param) {
 	  if(prevUrl != pathName){
 		  window.history.pushState({pathName}, '', '#' + pathName)
-		  this.renderHTML(pathName)
+		  this.renderHTML(pathName, param)
 	  }
   },
 
   // render
-  renderHTML(route) {
+  renderHTML(route, param) {
 	  if(route = '/includes/index')
 		  route = '/dashboard/dashboard'
 	  if(history.state != null){
@@ -56,12 +57,18 @@ export default {
 			  route = history.state.prevUrl
 		  }
 	  }
+  	  $("#page-content").load(route, param)
+
 	  prevUrl = route
-  	  $("#page-content").load(route)
 	  this.renderModule(route)
   },
   
   renderModule(route){
+	var index = route.indexOf("?")
+	if(index > 0){
+		route = route.substring(0, index)
+	}
+	
 	//url문자열을 못찾으면 무한반복함. settimeout 이용해야하나..?
 	var checkExist = setInterval(() => {
 		switch(route){
@@ -90,6 +97,13 @@ export default {
 				if ($('#item-content').length) {
 					delete require.cache[require.resolve('./item/item-modify.js')]
 			  	    import(/* webpackChunkName: "ItemModify" */ './item/item-modify.js')
+				    clearInterval(checkExist)
+			    }
+				break
+			case '/item/item_register':
+				if ($('#item-content').length) {
+					delete require.cache[require.resolve('./item/item-regist.js')]
+			  	    import(/* webpackChunkName: "ItemRegist" */ './item/item-regist.js')
 				    clearInterval(checkExist)
 			    }
 				break

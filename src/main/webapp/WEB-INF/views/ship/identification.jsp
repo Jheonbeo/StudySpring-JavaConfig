@@ -12,14 +12,12 @@
 				<div class="one">
 					<h3>HKMC</h3>
 					<fieldset class="field">
-						<label class="attention-blue label95">품번</label> <input
-							type="text" class="form-control boxcontrol" @blur="showIden"
-							id="m_I_NO_PART" name="m_I_NO_PART"> <label
-							class="attention-blue label95">양식No</label> <input type="text"
-							class="form-control boxcontrol" @blur="showIden" id="no_FORM"
-							name="no_FORM"> <label class="attention-blue label95">차종</label>
-						<input type="text" class="form-control boxcontrol" id="nm_PROJECT"
-							name="nm_PROJECT">
+						<label class="attention-blue label95">품번</label> 
+						<input type="text" class="form-control boxcontrol" @blur="showIden" id="m_I_NO_PART" name="m_I_NO_PART"> 
+						<label class="attention-blue label95">양식No</label> 
+						<input type="text" class="form-control boxcontrol" @blur="showIden" id="no_FORM" name="no_FORM"> 
+						<label class="attention-blue label95">차종</label>
+						<input type="text" class="form-control boxcontrol" id="nm_PROJECT" name="nm_PROJECT">
 					</fieldset>
 					<fieldset class="field">
 						<label class="label95">품명1</label> <input type="text"
@@ -245,8 +243,7 @@
 							<label id="loadCution"></label>
 						</fieldset>
 						<fieldset class="field">
-							<label class="label95">불러오기</label> <input type="text"
-								v-on:keyup="search" class="form-control boxcontrol uppercase"
+							<label class="label95">불러오기</label> <input type="text" v-on:keyup="search" class="form-control boxcontrol uppercase"
 								id="loadItem">
 							<button type="button" id="btnLoadItem"
 								@click.stop="clickLoadItem" class="btn btn-primary btn-s-size">Load</button>

@@ -22,45 +22,30 @@ import org.zerock.service.ItemService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
-@Controller	//스프링의 빈으로 인식토록
+@Controller
 @Log4j
-@RequestMapping("/item/*")	//item으로 시작하는 모든 처리는 이 클래스에서 
+@RequestMapping("/item/*")	
 @AllArgsConstructor
-/*
-public static class Order {
-    private long cancelPrice;
-    private long orderPrice;
- 
-    @Builder
-    private Order(long cancelPrice, long orderPrice) {
-        this.cancelPrice = cancelPrice;
-        this.orderPrice = orderPrice;
-    }
-}
-아래 builder처럼 생성자를 자동으로 만들어주는 기능. 
-다만 AllArgsConstructor의 경우 두 변수 필드의 위치를 바꾸면 
-이 경우, IDE가 제공해주는 리팩토링은 전혀 작동하지 않고, 
-lombok이 개발자도 인식하지 못하는 사이에 생성자의 파라미터 순서를 필드 선언 순서에 맞춰
-orderPrice,cancelPrice로 바꿔버린다. 이러면 코드상 Order order = new Order(5000L, 10000L); 에서
-Order order = new Order(10000L, 5000L);로 바꿔줘야하는 번거로움이 발생한다. 타입도 동일해서 에러도 안발생함.
-*/
 public class ItemController {
-	//@Setter(onMethod_= {@Autowired})
-	//위 @AllArgsConstructor를 이용한 생성자를 안 만들 경우 Setter 이용 
 	private ItemService service;  
 	CommonMethod cm = new CommonMethod();
 
 	@GetMapping("/item_list")
-	public void list(Model model) {
-		log.info("item_list");
+	public void getlist(Model model) {
+		log.info("item_list(Get)");
+	}
+
+	@PostMapping("/item_list")
+	public void postlist(ItemVO itemVO, Model model) {
+		log.info("item_list(Post)");
+		
+        model.addAttribute("item", itemVO);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@PostMapping("/check_item")
 	@ResponseBody
 	public List<ItemVO> check_item(@RequestBody Map<String, Object> param) throws IOException {
-		Map<String, Object> temp = (Map<String, Object>) param.get("DATA");
-		String data = cm.transVOtoString(temp);
+		String data = cm.transVOtoString(param);
 
 		ArrayList<ItemVO> item = service.getItemDataList(data, "CHECK_ITEM");
 	    
@@ -68,35 +53,54 @@ public class ItemController {
 	}
 
 	@GetMapping("/item_modify")
-	public void modify(ItemVO itemVO, Model model) {        
-		log.info("modify");
+	public void getModify(ItemVO itemVO, Model model) {        
+		log.info("modify(Get)");
 		
         model.addAttribute("jssLineList", service.getItemDataList(paramToMap("", "70", "", "", ""), "3"));
         model.addAttribute("tomasLineList", service.getItemDataList(paramToMap("", "80", "", "", ""), "3"));
         model.addAttribute("tomasWarehouseList", service.getItemDataList(paramToMap("", "85", "", "", ""), "3"));
         model.addAttribute("item", itemVO);//service.getItemDataList(data, 4));
 	}
+
+	@PostMapping("/item_modify")
+	public void postModify(ItemVO param, Model model) {
+		log.info("modify(Post)");
+		
+        model.addAttribute("jssLineList", service.getItemDataList(paramToMap("", "70", "", "", ""), "3"));
+        model.addAttribute("tomasLineList", service.getItemDataList(paramToMap("", "80", "", "", ""), "3"));
+        model.addAttribute("tomasWarehouseList", service.getItemDataList(paramToMap("", "85", "", "", ""), "3"));
+        model.addAttribute("item", param);
+	}
 	
 	@PostMapping("/getItem")
 	@ResponseBody
 	public Object getItem(@RequestBody Map<String, Object> param) throws IOException {
-		String action = (String) param.get("action");
-		String data = paramToMap((String) param.get("cd_item"), (String) param.get("seg_asset"), (String) param.get("supplier"), (String) param.get("customer"), "NG");
+		param.put("CDDISCON", "NG");
+		String data = cm.transVOtoString(param);
 		
-		ArrayList<ItemVO> item = service.getItemDataList(data, action);
+		ArrayList<ItemVO> item = service.getItemDataList(data, "4");
 	    
 		return item;
 	}
-	/*
+
+	@PostMapping("/setItem")
+	@ResponseBody
+	public Object setItem(@RequestBody Map<String, Object> param) throws IOException {
+		String data = cm.transVOtoString(param);
+		ArrayList<ItemVO> item = service.getItemDataList(data, "5");
+		
+		return item;
+	}
+	
 	@GetMapping("/item_register")
 	public void register(Model model) {        
 		log.info("register");
 		
-        model.addAttribute("supplierList", service.getItemDataList(paramToMap("", "30", "", "", ""), 3));
-        model.addAttribute("customerList", service.getItemDataList(paramToMap("", "60", "", "", ""), 3));
-        model.addAttribute("jssLineList", service.getItemDataList(paramToMap("", "70", "", "", ""), 3));
-        model.addAttribute("tomasLineList", service.getItemDataList(paramToMap("", "80", "", "", ""), 3));
-        model.addAttribute("tomasWarehouseList", service.getItemDataList(paramToMap("", "85", "", "", ""), 3));
+        model.addAttribute("supplierList", service.getItemDataList(paramToMap("", "30", "", "", ""), "3"));
+        model.addAttribute("customerList", service.getItemDataList(paramToMap("", "60", "", "", ""), "3"));
+        model.addAttribute("jssLineList", service.getItemDataList(paramToMap("", "70", "", "", ""), "3"));
+        model.addAttribute("tomasLineList", service.getItemDataList(paramToMap("", "80", "", "", ""), "3"));
+        model.addAttribute("tomasWarehouseList", service.getItemDataList(paramToMap("", "85", "", "", ""), "3"));
 	}
 	
 	@PostMapping("/getSupplier")
@@ -104,34 +108,14 @@ public class ItemController {
 	public Object getSupplier(@RequestBody Map<String, Object> param) throws IOException {
 		String segValue = (String) param.get("seg_asset");
 		
-		//service 객체를 controller가 붙잡고 있는거 같다. 새로운 객체로 DAO에 생성해서 하면 null 에러남
-		//이유? 모르겠다; 생명주기랑 관련있는거 같은데 알수가 없네...
-
-		Map<String, Object> map = new HashMap<>();
-		
+		ArrayList<ItemVO> arryObj = new ArrayList<>();
 		if(segValue.equals("30")) {
-			JSONArray arryObj = service.getItemDataList(paramToMap("", segValue, "", "", ""), 3);
-			map.put("supplierList", mapping(arryObj));
+			arryObj = service.getItemDataList(paramToMap("", segValue, "", "", ""), "3");
 		}
-		else {
-			map.put("supplierList", "");
-		}
-		map.put("segValue", segValue);
-		
-		return map;
-	}
+		//map.put("segValue", segValue);
 
-	@PostMapping("/setItem")
-	@ResponseBody
-	public Object setItem(@RequestBody Map<String, Object> param) throws IOException {
-		String data = cm.transVOtoString(param);
-		JSONArray arryObj = service.getItemDataList(data, 5);
-		
-		Map<String, Object> map = new HashMap<>();
-		map.put("itemData", mapping(arryObj));
-		
-		return map;
-	}*/
+		return arryObj;
+	}
 	
 	private String paramToMap(String cdItem, String seg_Asset, String supplier, String customer, String discon) {
 		Map<String, Object> param = new HashMap<>();

@@ -18,7 +18,7 @@ window.onload = () => {
         el.addEventListener('click', (e) => {
             const pathName = e.target.getAttribute('route')
             
-            $("document").ready(MainController.historyRouterPush(pathName))
+            $("document").ready(MainController.historyRouterPush(pathName, null))
             e.preventDefault()
         })
     })
@@ -27,5 +27,5 @@ window.onload = () => {
 //refresh
 window.addEventListener("beforeunload", () => {
 	MainController.refreshPage()
-});
+})
 

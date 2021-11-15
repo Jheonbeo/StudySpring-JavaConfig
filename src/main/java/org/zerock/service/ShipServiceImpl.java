@@ -8,9 +8,7 @@ import org.zerock.domain.IdenVO;
 import org.zerock.mapper.ShipMapper;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j;
 
-@Log4j
 @Service //비즈니스 영역을 담당하는 객체임을 표시
 @AllArgsConstructor
 public class ShipServiceImpl implements ShipService{
