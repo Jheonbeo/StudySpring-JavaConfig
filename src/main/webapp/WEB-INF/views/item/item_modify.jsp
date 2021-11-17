@@ -6,8 +6,7 @@
 <div class="container-fluid" id="item-content">
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">TKK_ITEM
-				DataTables</h6>
+			<h6 class="m-0 font-weight-bold text-primary">TKK_ITEM DataTables</h6>
 		</div>
 		<form name="itemModifyForm" id="itemModifyForm" @submit.prevent.stop="sendPost">
 		<div class="card-body">
@@ -56,26 +55,22 @@
 					</select>
 				</fieldset>
 				<fieldset class="fieldsetcontrol">
-					<label>SNP</label> <input type="text"
-						class="form-control boxcontrol" name="BOX_SNP" id="txtSNP">
-					<label>수출SNP</label> <input type="text"
-						class="form-control boxcontrol" name="EXPORT_SNP"
-						id="txtExportSnp"> <label>소포장SNP</label> <input
-						type="text" class="form-control boxcontrol" name="SMALL_SNP"
-						id="txtSmallSNP"> <label>제품 UPH</label> <input
-						type="text" class="form-control boxcontrol" id="txtUPH"
-						name="ITEM_UPH" value="100">
-				</fieldset>
+					<label>SNP</label> 
+					<input type="text" class="form-control boxcontrol" name="BOX_SNP" id="txtSNP">
+					<label>수출SNP</label> 
+					<input type="text" class="form-control boxcontrol" name="EXPORT_SNP" id="txtExportSnp"> 
+					<label>소포장SNP</label> \
+					<input type="text" class="form-control boxcontrol" name="SMALL_SNP" id="txtSmallSNP"> 
+					<label>제품 UPH</label> 
+					<input type="text" class="form-control boxcontrol" id="txtUP ame="ITEM_UPH" value="100">
+				</fieldset>ww
 				<fieldset class="fieldsetcontrol">
-					<label>분배율(%)</label> <input type="text"
-						class="form-control boxcontrol" id="txtParallel" name="PARALLEL"
-						value="0"> <label>안전 재고율(%)</label> <input type="text"
-						class="form-control boxcontrol" id="txtSafetyPrdersent"
-						name="SAFETY_PERCENT" value="0"> <label>사용기간(<span
-						class="attention-blue">YYYYMMDD</span>)
-					</label>
-					<div class="form-group row flex-container"
-						style="padding-left: 0.7em;">
+					<label>분배율(%)</label> 
+					<input type="text" class="form-control boxcontrol" id="txtParallel" name="PARALLEL" value="0"> 
+					<label>안전 재고율(%)</label> 
+					<input type="text" class="form-control boxcontrol" id="txtSafetyPrdersent" name="SAFETY_PERCENT" value="0"> 
+					<label>사용기간(<span class="attention-blue">YYYYMMDD</span>)</label>
+					<div class="form-group row flex-container" style="padding-left: 0.7em;">
 						<input type="text" class="form-control boxcontrol"
 							id="txtItemPeriodStart" name="DTS_START"> <label>&nbsp
 							- &nbsp</label> <input type="text" class="form-control boxcontrol"

@@ -1,5 +1,70 @@
-const tag = '[item-regist]'
-	
+import Model from './ItemModel.js'
+import View from '../View.js'
+
+new Vue({
+	el: '#item-content',
+	data: {
+		tag : '아이템 등록창',
+		supplier : '',
+		cutomer : '',
+		cdSubs : ['', 'PRSTBT', 'PRABDR', 'PRABPS', 'PRABSD'],
+		cbUnits : ['', 'KG', 'MR', 'PC']
+	},
+	mounted(){
+		this.init()
+	},
+	methods:{
+		init(){
+			//$('#myModal').on("hidden.bs.modal", this.backItemMaster)
+			
+			$('input[type="text"]').keydown(e => {
+				if (e.keyCode === 13) {
+					e.preventDefault()
+				}
+			})
+			
+			var radio = $("div[name = 'radioGroup']")
+			var radio2 = $("div[name = 'radioGroup2']")
+			radio.find("label:eq(1)").css("transform", "translateX(50%)")
+			radio.find("label:eq(2)").css("transform", "translateX(100%)")
+			radio2.find("label:eq(1)").css("transform", "translateX(200%)")
+			radio2.find("label:eq(2)").css("transform", "translateX(400%)")
+			
+		},
+		backItemMaster(){
+			//Post 방식
+			var param = {CD_ITEM:this.cd_item}
+			View.historyRouterPush('/item/item_list', param)
+		},
+		sendPost(){
+            var obj = null
+            var arr = $('#itemModifyForm').serializeArray()
+
+            if (arr) {
+                obj = {};
+                jQuery.each(arr, function() {
+                    if (this.name.toUpperCase() == 'NM_ITEM')
+                        obj[this.name.toUpperCase()] = this.value
+                    else
+                        obj[this.name.toUpperCase()] = encodeURI(this.value)
+                });
+            }
+
+            var result = Model.regData(obj, '/item/setItem')
+            if (result != null) {
+                $(".modal-title").html("등록 성공")
+                $(".modal-body").html("품번 " + this.cd_item + "가 등록(갱신)되었습니다.")
+                $("#myModal").modal("show")
+            } else {
+                $(".modal-title").html("등록 실패")
+                $(".modal-body").html("품번 등록 에러")
+                $("#myModal").modal("show")
+            }
+		}
+		
+	}
+})	
+/*
 $(document).ready(function() {
 	var radio = $("div[name = 'radioGroup']");
 	radio.find("label:eq(1)").css("transform", "translateX(50%)");
@@ -305,4 +370,4 @@ jQuery.fn.serializeObject = function () {
     }finally {} 
     
     return obj; 
-};
+};*/

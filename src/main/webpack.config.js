@@ -30,15 +30,15 @@ module.exports = {
   ],
   module: {
       rules: [
-          {
-              test: /\.jsp$/,
-              use: {loader: 'html-loader'}
-          },
-	  {
-	      test: /\.css$/,
-	      use: ['style-loader', 'css-loader']
-    	  }
-      ]
+		{
+			test: /\.jsp$/,
+			use: {loader: 'html-loader'}
+        },
+		{
+	      	test: /\.css$/,
+	      	use: ['style-loader', 'css-loader']
+    	}
+	]
   },
   externals: {
     moment: 'moment'
