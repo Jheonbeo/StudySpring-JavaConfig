@@ -1,5 +1,5 @@
 const path = require('path');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   context: path.resolve(__dirname, 'webapp/resources/js'),
@@ -8,10 +8,13 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   mode: 'development',
+/*
   devServer: { 
-    contentBase: '/resources/bundle/',
+	static: path.resolve(__dirname, 'webapp/resources/bundle'),
+	port: 3000,
     hot: true 
   },
+*/
   output: {
     path: path.resolve(__dirname, 'webapp/resources/bundle'),
     publicPath: '/resources/bundle/',
@@ -23,23 +26,17 @@ module.exports = {
       chunks: 'all',
     },
   },
-  plugins: [
-    new CleanWebpackPlugin({
-      cleanAfterEveryBuildPatterns: ['bundle']
-    })
-  ],
   module: {
       rules: [
-		{
-			test: /\.jsp$/,
-			use: {loader: 'html-loader'}
-        },
 		{
 	      	test: /\.css$/,
 	      	use: ['style-loader', 'css-loader']
     	}
 	]
   },
+  plugins: [
+    new CleanWebpackPlugin()
+  ],
   externals: {
     moment: 'moment'
   }

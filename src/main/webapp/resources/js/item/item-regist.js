@@ -6,9 +6,12 @@ new Vue({
 	data: {
 		tag : '아이템 등록창',
 		supplier : '',
-		cutomer : '',
+		customer : '',
+		segAsset : '',
+		comboCdItem : '',
 		cdSubs : ['', 'PRSTBT', 'PRABDR', 'PRABPS', 'PRABSD'],
-		cbUnits : ['', 'KG', 'MR', 'PC']
+		cbUnits : ['', 'KG', 'MR', 'PC'],
+		dataList: []
 	},
 	mounted(){
 		this.init()
@@ -30,11 +33,29 @@ new Vue({
 			radio2.find("label:eq(1)").css("transform", "translateX(200%)")
 			radio2.find("label:eq(2)").css("transform", "translateX(400%)")
 			
+			$("#SEG_ASSET")[0].checked = true
 		},
 		backItemMaster(){
 			//Post 방식
 			var param = {CD_ITEM:this.cd_item}
 			View.historyRouterPush('/item/item_list', param)
+		},
+		btnLoadItem(){
+			if(!this.comboCdItem){
+				alert("품번 입력이 필요합니다.");
+				return;
+			}
+			
+			var param = {
+				ACTION : "1",
+				CD_TYPE : "0", 
+				CD_ITEM : this.comboCdItem
+			}
+			
+			this.dataList = Model.regData(param, '/item/getItem')
+		},
+		trLoadItem(e){
+			console.log(e)
 		},
 		sendPost(){
             var obj = null
@@ -61,117 +82,59 @@ new Vue({
                 $("#myModal").modal("show")
             }
 		}
-		
+	},
+	watch: {
+		segAsset(){
+			var param = {seg_asset:this.segAsset}
+			
+			var supplierList = Model.regData(param, '/item/getSupplier')
+			
+			switch(this.segAsset){
+				case "30":
+					$("#supplierBox").find('option').remove().end()
+					supplierBox.disabled = false;
+					for(var i = 0; i < supplierList.length; i++){
+						$("#supplierBox").append("<option value='" + supplierList[i].cd_SUPPLIER + "'>" + supplierList[i].cd_SUPPLIER + " : " + supplierList[i].nm_SUPPLIER + " </option>")
+					}
+					break
+				case "50":
+					$("#supplierBox").find('option').remove().end()
+					.append("<option value='1049'>1049 : 조이슨세이프티시스템스코리아</option>")
+					supplierBox.disabled = false
+					break
+				case "60":
+					supplierBox.disabled = true
+					break
+				default:
+					alert("DEFAULT")
+					break
+			}
+		},
+		dataList(){
+			var html = "";
+			html+="<teleport to=\"body\"><thead style=\"position:sticky;top:0;background:#f2f2f2;\">"
+			html+="<tr><th>품번</th><th>구분</th><th style=\"width:30%\">협력사</th><th style=\"width:30%\">고객사</th></tr>"
+			html+="</thead>"
+			html+="<tbody>"
+			
+			for(var i=0; i<this.dataList.length; i++){
+				var supplier = (!this.dataList[i].cd_SUPPLIER) ? "" : this.dataList[i].cd_SUPPLIER
+				var customer = (!this.dataList[i].cd_CUSTOMER) ? "" : this.dataList[i].cd_CUSTOMER
+
+				html+="<tr @click=\"trLoadItem\">"
+				html+="<td @click=\"trLoadItem\">" + this.dataList[i].cd_ITEM + "</td>"
+				html+="<td>" + this.dataList[i].seg_ASSET + "</td>"
+				html+="<td>" + supplier + "</td>"
+				html+="<td>" + customer + "</td>"
+				html+="</tr>"
+			}
+			html+="</tbody></teleport>"
+			
+			$(".scrollTable").html(html);
+		}
 	}
 })	
 /*
-$(document).ready(function() {
-	var radio = $("div[name = 'radioGroup']");
-	radio.find("label:eq(1)").css("transform", "translateX(50%)");
-	radio.find("label:eq(2)").css("transform", "translateX(100%)");
-});
-
-$(function(){ 
-	$("input[name = 'SEG_ASSET']").click(function(){ 
-			var supplierBox = document.getElementById("supplierBox");
-			var cbSub = document.getElementById("cbSub");
-		    var segValue = this.value;
-		    var supplierList = [];
-		    $.ajax({ 
-			       url:'getSupplier', 
-			       dataType:'json',
-			       contentType:'application/json',
-			       data:JSON.stringify({seg_asset : segValue}),
-				   async: false,
-			       method:'POST', 
-			       success:function(t){
-			    	   	supplierList = t.supplierList;
-			    	   	
-						switch(segValue){
-						case "30":
-							removeOptions(supplierBox);
-							supplierBox.disabled = false;
-							for(var i = 0; i < supplierList.length; i++){
-								$("#supplierBox").append("<option value='" + supplierList[i].cd_SUPPLIER + "'>" + supplierList[i].cd_SUPPLIER + " : " + supplierList[i].nm_SUPPLIER + " </option>");
-							}
-							break;
-						case "50":
-							removeOptions(supplierBox);
-							$("#supplierBox").append("<option value='1049'>1049 : 조이슨세이프티시스템스코리아</option>");
-							supplierBox.disabled = false;
-							break;
-						case "60":
-							supplierBox.disabled = true;
-							break;
-						default:
-							alert("DEFAULT");
-							break;
-						}
-			       },
-			       error:function(t){
-			    	   console.error("Error! Company load fail.");
-			       }
-		    });
-	});
-}); 
-
-function removeOptions(selectbox)
-{
-    var i;
-    for(i = selectbox.options.length - 1 ; i >= 0 ; i--)
-    {
-        selectbox.remove(i);
-    }
-}
-
-$(function(){ 
-	$("#btnLoadItem").click(function(){  
-		var html = "";
-		var cdItem = $("#comboItem").val();
-		
-		if(!cdItem){
-			alert("품번 입력이 필요합니다.");
-			return;
-		}
-		 $.ajax({ 
-		       url:'getItem', 
-		       dataType:'json',
-		       contentType:'application/json',
-		       data:JSON.stringify({action : 1, cd_item : cdItem}),
-		       method:'POST', 
-		       success:function(t){
-					var itemData = t.itemData;
-					
-					if(itemData.length > 0){
-						html+="<thead>";
-						html+="<tr><th style=\"width:60%\">품번</th><th style=\"width:20%\">구분</th><th style=\"width:30%\">협력사</th><th style=\"width:30%\">고객사</th></tr>";
-						html+="</thead>";
-						html+="<tbody>";
-					}
-					
-					for(var i=0; i<itemData.length; i++){
-						var supplier = (!itemData[i].cd_SUPPLIER) ? "" : itemData[i].cd_SUPPLIER;
-						var customer = (!itemData[i].cd_CUSTOMER) ? "" : itemData[i].cd_CUSTOMER;
-
-						html+="<tr>";
-						html+="<td>" + itemData[i].cd_ITEM + "</td>";
-						html+="<td>" + itemData[i].seg_ASSET + "</td>";
-						html+="<td>" + supplier + "</td>";
-						html+="<td>" + customer + "</td>";
-						html+="</tr>"
-					}
-					$(".scrollTable").html(html);
-
-					if(itemData.length > 0){
-						html+="</tbody>";
-					}
-		       },
-		       error:function(t){
-		    	   console.error("Error! Table load fail.");
-		       }
-	    }); 
-	}); 
-});
 
 $("#tbLoadItem").on('click', 'tr', function(){
 	var td = $(this).children();

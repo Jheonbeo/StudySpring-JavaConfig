@@ -78,7 +78,7 @@ public class ItemController {
 		param.put("CDDISCON", "NG");
 		String data = cm.transVOtoString(param);
 		
-		ArrayList<ItemVO> item = service.getItemDataList(data, "4");
+		ArrayList<ItemVO> item = service.getItemDataList(data, (String) param.get("ACTION"));
 	    
 		return item;
 	}

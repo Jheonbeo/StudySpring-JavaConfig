@@ -12,19 +12,19 @@
 		<form name="itemRegistForm" id="itemRegistForm" @submit.prevent.stop="sendPost">
 		<div class="card-body">
 			<div name="radioGroup" class="form-group row">
-				<label><input type="radio" name="SEG_ASSET" value="30" checked>부품</label> 
-				<label><input type="radio"name="SEG_ASSET" value="50">반제품</label> 
-				<label><input type="radio" name="SEG_ASSET" value="60">완제품</label>
+				<label><input type="radio" id="SEG_ASSET" name="SEG_ASSET" value="30" v-model="segAsset">부품</label> 
+				<label><input type="radio" id="SEG_ASSET" name="SEG_ASSET" value="50" v-model="segAsset">반제품</label> 
+				<label><input type="radio" id="SEG_ASSET" name="SEG_ASSET" value="60" v-model="segAsset">완제품</label>
 			</div>
 			<div class="form-group row">
 				<label>협력사 코드 &nbsp</label> 
-				<select id="supplierBox" name="CD_SUPPLIER" class="form-control boxcontrol">
+				<select id="supplierBox" name="CD_SUPPLIER" v-model="supplier" class="form-control boxcontrol">
 					<c:forEach items="${supplierList}" var="supplierList">
 						<option value="${supplierList.CD_SUPPLIER}">${supplierList.CD_SUPPLIER} : ${supplierList.NM_SUPPLIER}</option>
 					</c:forEach>
 				</select> 
 				<label>&nbsp 고객사 코드 &nbsp</label> 
-				<select id="customerBox" name="CD_CUSTOMER" class="form-control boxcontrol">
+				<select id="customerBox" name="CD_CUSTOMER" v-model="customer" class="form-control boxcontrol">
 					<c:forEach items="${customerList}" var="customerList">
 						<option value="${customerList.CD_CUSTOMER}">${customerList.CD_CUSTOMER} : ${customerList.NM_CUSTOMER}</option>
 					</c:forEach>
@@ -100,6 +100,13 @@
 						checked>유검사 &nbsp</label> <label><input type="radio"
 						name="FREE_AREA" value="무검사" checked>무검사</label><br> <label
 						class="attention-blue">※ 품번은 수정할 수 없습니다.</label>
+						
+					<label>PBOM</label>
+					<br> <input type="checkbox" id="rbPbomOnlyReg" name="OTHER" value="P2"> 
+					<label style="font-size: 1rem" for="rbPbomOnlyReg">해당 품번만 적용</label><br>
+					<input type="checkbox" id="rbPbomAllReg" name="OTHER" value="P1">
+					<label style="font-size: 1rem" for="rbPbomAllReg">하위 품번 모두 적용</label><br> 
+					<input id="rbPbomRegHidden" type="hidden" name="OTHER" value="">
 				</fieldset>
 			</div>
 			<div class="form-group row">
@@ -154,6 +161,7 @@
 							</c:forEach>
 						</select>
 					</div>
+					<label class="attention-blue">※ 반제품, 제품의 경우 라인 정보가 필수입니다.</label>
 				</fieldset>
 				<fieldset class="fieldsetcontrol">
 					<div class="form-group row no-gutters">
@@ -175,43 +183,57 @@
 							</c:forEach>
 						</select>
 					</div>
-					<label>PBOM</label><br> <input type="checkbox"
-						id="rbPbomOnlyReg" name="OTHER" value="P2"> <label
-						style="font-size: 1rem" for="rbPbomOnlyReg">해당 품번만 적용</label><br>
-					<input type="checkbox" id="rbPbomAllReg" name="OTHER" value="P1">
-					<label style="font-size: 1rem" for="rbPbomAllReg">하위 품번 모두
-						적용</label><br> <input id="rbPbomRegHidden" type="hidden"
-						name="OTHER" value=""> <label class="attention-blue">※
-						반제품, 제품의 경우 라인 정보가 필수입니다.</label>
+					<div class="form-group row no-gutters">
+						<label>CYCLE TIME &nbsp</label>
+						<input type="text" class="form-control boxcontrol" id="txtCycleTime" name="CYCLE_TIME" value="0">
+					</div>
+					<div class="form-group row no-gutters">
+						<label>이미지 &nbsp</label>
+						<input type="text" class="form-control boxcontrol" id="txtPackingInfo" name="PACKAGING_INFO">
+					</div>
+					<label class="attention-blue"># UPH : 한 제품당 생산 시간을 적어주세요.</label>
+					<label class="attention-blue"># 이미지 : 포장 사양 이미지 이름을 입력해주세요.(필수X)</label>
+				</fieldset>
+				<fieldset class="fieldsetcontrol">
+					<label>자품번 정사양 인식</label><br>
+					<input type="text" class="form-control boxcontrol" id="txtReplacementItem" name="REPLACEMENT_ITEM">
+					<label>자품번 정사양 인식1</label><br>
+					<input type="text" class="form-control boxcontrol" id="txtReplacementItem1" name="REPLACEMENT_ITEM1">
+					<label>자품번 정사양 인식2</label><br>
+					<input type="text" class="form-control boxcontrol" id="txtReplacementItem2" name="REPLACEMENT_ITEM2">
+					<label>자품번 정사양 인식3</label><br>
+					<input type="text" class="form-control boxcontrol" id="txtReplacementItem3" name="REPLACEMENT_ITEM3">
+					<label>자품번 정사양 인식4</label><br>
+					<input type="text" class="form-control boxcontrol" id="txtReplacementItem4" name="REPLACEMENT_ITEM4">
 				</fieldset>
 				<fieldset class="fieldsetcontrol">
 					<label>검사 데이터</label><br>
-					<div name="radioGroup">
+					<div name="radioGroup2">
 						<label>1공정</label> <label><input type="radio"
 							name="PROCESSING1" value="O">O</label> <label><input
 							type="radio" name="PROCESSING1" value="X" checked>X</label>
 					</div>
-					<div name="radioGroup">
+					<div name="radioGroup2">
 						<label>2공정</label> <label><input type="radio"
 							name="PROCESSING2" value="O">O</label> <label><input
 							type="radio" name="PROCESSING2" value="X" checked>X</label>
 					</div>
-					<div name="radioGroup">
+					<div name="radioGroup2">
 						<label>3공정</label> <label><input type="radio"
 							name="PROCESSING3" value="O">O</label> <label><input
 							type="radio" name="PROCESSING3" value="X" checked>X</label>
 					</div>
-					<div name="radioGroup">
+					<div name="radioGroup2">
 						<label>4공정</label> <label><input type="radio"
 							name="PROCESSING4" value="O">O</label> <label><input
 							type="radio" name="PROCESSING4" value="X" checked>X</label>
 					</div>
-					<div name="radioGroup">
+					<div name="radioGroup2">
 						<label>5공정</label> <label><input type="radio"
 							name="PROCESSING5" value="O">O</label> <label><input
 							type="radio" name="PROCESSING5" value="X" checked>X</label>
 					</div>
-					<div name="radioGroup">
+					<div name="radioGroup2">
 						<label>6공정</label> <label><input type="radio"
 							name="PROCESSING6" value="O">O</label> <label><input
 							type="radio" name="PROCESSING6" value="X" checked>X</label>
@@ -221,8 +243,8 @@
 				</fieldset>
 				<fieldset class="fieldsetcontrol">
 					<div class="form-group row">
-						<input type="text" class="form-control boxcontrol" id="comboItem">&nbsp
-						<button id="btnLoadItem" class="btn btn-primary btn-s-size">Load</button>
+						<input type="text" class="form-control boxcontrol" id="comboItem" v-model="comboCdItem">&nbsp
+						<button type="button" @click.stop="btnLoadItem" class="btn btn-primary btn-s-size">Load</button>
 					</div>
 					<div class="form-group row">
 						<table class="scrollTable" id="tbLoadItem">
@@ -231,7 +253,7 @@
 				</fieldset>
 			</div>
 			<div class="form-group row">
-				<button id="btnRegistItem" type="submit" data-toggle="modal"
+				<button type="button" id="btnRegistItem" type="submit" data-toggle="modal"
 					data-target=".bs-example-modal-sm"
 					class="btn btn-primary btn-user btn-block btn-m-size">
 					Register Item</button>

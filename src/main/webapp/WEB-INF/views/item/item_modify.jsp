@@ -59,11 +59,11 @@
 					<input type="text" class="form-control boxcontrol" name="BOX_SNP" id="txtSNP">
 					<label>수출SNP</label> 
 					<input type="text" class="form-control boxcontrol" name="EXPORT_SNP" id="txtExportSnp"> 
-					<label>소포장SNP</label> \
+					<label>소포장SNP</label>
 					<input type="text" class="form-control boxcontrol" name="SMALL_SNP" id="txtSmallSNP"> 
 					<label>제품 UPH</label> 
-					<input type="text" class="form-control boxcontrol" id="txtUP ame="ITEM_UPH" value="100">
-				</fieldset>ww
+					<input type="text" class="form-control boxcontrol" name="ITEM_UPH" id="txtUP" value="100">
+				</fieldset>
 				<fieldset class="fieldsetcontrol">
 					<label>분배율(%)</label> 
 					<input type="text" class="form-control boxcontrol" id="txtParallel" name="PARALLEL" value="0"> 

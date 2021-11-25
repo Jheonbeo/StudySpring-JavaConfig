@@ -126,18 +126,21 @@
 }
 
 table {
-	border-collapse: collapse;
 	border-spacing: 0;
 	width: 100%;
 	border: 1px solid #ddd;
 }
 
 table.scrollTable {
-	display: block;
+    display:block;
 	height: 220px;
 	/* overflow: auto; */
 	overflow-y: auto; /* Trigger vertical scroll    */
-	overflow-x: hidden; /* Hide the horizontal scroll */
+	overflow-x: auto; /* Hide the horizontal scroll */
+}
+table.scrollTable th, table.scrollTable td{
+ text-align: center;
+ font-size: 0.875em;
 }
 
 table th, table td {
@@ -147,16 +150,13 @@ table th, table td {
 	border-bottom: 1px solid #ddd;
 }
 
-th:first-child, td:first-child {
-	text-align: left;
-}
-
 tr:nth-child(even) {
 	background-color: #f2f2f2
 }
 
-.scrollTable .dataTable tbody tr:hover {
+.scrollTable tbody tr:hover {
 	background: dodgerblue;
+	color: white;
 }
 
 .textbtn {

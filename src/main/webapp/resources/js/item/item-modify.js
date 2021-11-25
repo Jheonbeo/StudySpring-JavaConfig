@@ -33,6 +33,7 @@ new Vue({
 			radio2.find("label:eq(2)").css("transform", "translateX(400%)")
 			
 			var param = {
+					ACTION:"4",
 					CD_ITEM:this.cd_item,
 					CD_TYPE:this.seg_asset,
 					CD_SUPPLIER:this.supplier != null ? this.supplier : '',
