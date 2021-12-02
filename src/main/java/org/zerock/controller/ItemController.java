@@ -128,17 +128,4 @@ public class ItemController {
 		
 		return cm.transVOtoString(param);
 	}
-	
-	private ArrayList<ItemVO> mapping(JSONArray arryObj) {
-		JSONObject jsonObj = null;
-		ArrayList<ItemVO> list = new ArrayList<ItemVO>();
-
-		for(int i=0; i<arryObj.size(); i++) {
-			jsonObj = new JSONObject();
-			jsonObj = (JSONObject)arryObj.get(i);
-			list.add((ItemVO) jsonObj.get("ItemVO"));
-		}
-	    
-		return list;
-	}
 }

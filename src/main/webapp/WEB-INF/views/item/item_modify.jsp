@@ -78,10 +78,14 @@
 					</div>
 
 					<input type="checkbox" id="checkBoxStopItem"
-						name="STOP_PRODUCTION" value="OK"> <label
+						name="STOP_PRODUCTION" value="OK" v-model="stopProduct"> <label
 						style="font-size: 1rem" for="checkBoxStopItem">단산 적용</label> <input
 						id="checkBoxStopItemHidden" type="hidden" name="STOP_PRODUCTION"
 						value="">
+					<br/>
+					<input type="checkbox" id="checkBoxDepoItem" name="CD_TYPE" value="DEPO" v-model="cd_type"> 
+					<label style="font-size: 1rem" for="checkBoxDepoItem">DEPO 입고</label> 
+					<input id="checkBoxDepoItemHidden" type="hidden" name="CD_TYPE" value="TKK">
 				</fieldset>
 				<fieldset class="fieldsetcontrol">
 					<label>마감시 BOM 적용 여부</label><br> <label><input
@@ -92,13 +96,12 @@
 						checked>유검사 &nbsp</label> <label><input type="radio"
 						name="FREE_AREA" value="무검사" checked>무검사</label><br> <label
 						class="attention-blue">※ 품번은 수정할 수 없습니다.</label>
-					<label>PBOM</label><br> <input type="checkbox"
-						id="rbPbomOnlyReg" name="OTHER" value="P2"> <label
-						style="font-size: 1rem" for="rbPbomOnlyReg">해당 품번만 적용</label><br>
-					<input type="checkbox" id="rbPbomAllReg" name="OTHER" value="P1">
-					<label style="font-size: 1rem" for="rbPbomAllReg">하위 품번 모두
-						적용</label><br> <input id="rbPbomRegHidden" type="hidden"
-						name="OTHER" value=""> 
+					<label>PBOM</label><br>
+					<input type="checkbox" id="rbPbomOnlyReg" @change="OnlyReg" name="OTHER" value="P2"> 
+					<label style="font-size: 1rem" for="rbPbomOnlyReg">해당 품번만 적용</label><br>
+					<input type="checkbox" id="rbPbomAllReg" @change="AllReg" name="OTHER" value="P1">
+					<label style="font-size: 1rem" for="rbPbomAllReg">하위 품번 모두 적용</label><br> 
+					<input id="rbPbomRegHidden" type="hidden" name="OTHER" value="">
 				</fieldset>
 			</div>
 			<div class="form-group row">

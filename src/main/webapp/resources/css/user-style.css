@@ -25,7 +25,7 @@
 	flex: 1;
 	padding-top: 0.35em;
 	padding-bottom: 0.625em;
-	padding-right: 3em;
+	padding-right: 1em;
 	padding-left: 1em;
 }
 
@@ -132,16 +132,42 @@ table {
 }
 
 table.scrollTable {
+   display: flex;
+   flex-flow: column;
+   height: 250px ;
+   width: 100% ;
+}
+table.scrollTable thead {
+   /* head takes the height it requires, 
+   and it's not scaled when table is resized */
+   flex: 0 0 auto;
+   width: calc(100% - 1.3em);
+}
+table.scrollTable tbody {
+   /* body takes all the remaining available space */
+   flex: 1 1 auto;
+   display: block;
+   overflow-y: scroll;
+}
+table.scrollTable tbody tr {
+   width: 100% ;
+}
+table.scrollTable thead, table.scrollTable tbody tr {
+   display: table;
+   table-layout: fixed;
+	 font-size: 0.8em;
+}
+/* table.scrollTable {
     display:block;
-	height: 220px;
-	/* overflow: auto; */
-	overflow-y: auto; /* Trigger vertical scroll    */
-	overflow-x: auto; /* Hide the horizontal scroll */
+	height: 250px;
+	overflow: auto;
+	overflow-y: auto; Trigger vertical scroll   
+	overflow-x: auto; Hide the horizontal scroll
 }
 table.scrollTable th, table.scrollTable td{
- text-align: center;
- font-size: 0.875em;
-}
+	 text-align: center;
+	 font-size: 0.875em;
+} */
 
 table th, table td {
 	text-align: center;

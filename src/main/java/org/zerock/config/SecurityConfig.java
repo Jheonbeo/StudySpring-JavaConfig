@@ -42,6 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .addFilterBefore(customAuthenticationFilter(), BasicAuthenticationFilter.class)
 	   	.logout()
 	   		.logoutUrl("/loginout/jssLogOut")
+	   		.logoutSuccessUrl("/loginout/jssLogin")
 	   		.invalidateHttpSession(true)
 	   		.deleteCookies("JSESSIONID")
 	   		.and()

@@ -12,19 +12,21 @@
 		<form name="itemRegistForm" id="itemRegistForm" @submit.prevent.stop="sendPost">
 		<div class="card-body">
 			<div name="radioGroup" class="form-group row">
-				<label><input type="radio" id="SEG_ASSET" name="SEG_ASSET" value="30" v-model="segAsset">부품</label> 
-				<label><input type="radio" id="SEG_ASSET" name="SEG_ASSET" value="50" v-model="segAsset">반제품</label> 
-				<label><input type="radio" id="SEG_ASSET" name="SEG_ASSET" value="60" v-model="segAsset">완제품</label>
+				<label><input type="radio" id="SEG_ASSET" name="SEG_ASSET" value="30">부품</label> 
+				<label><input type="radio" id="SEG_ASSET" name="SEG_ASSET" value="50">반제품</label> 
+				<label><input type="radio" id="SEG_ASSET" name="SEG_ASSET" value="60">완제품</label>
 			</div>
 			<div class="form-group row">
 				<label>협력사 코드 &nbsp</label> 
 				<select id="supplierBox" name="CD_SUPPLIER" v-model="supplier" class="form-control boxcontrol">
+					<option value=""></option>
 					<c:forEach items="${supplierList}" var="supplierList">
 						<option value="${supplierList.CD_SUPPLIER}">${supplierList.CD_SUPPLIER} : ${supplierList.NM_SUPPLIER}</option>
 					</c:forEach>
 				</select> 
 				<label>&nbsp 고객사 코드 &nbsp</label> 
 				<select id="customerBox" name="CD_CUSTOMER" v-model="customer" class="form-control boxcontrol">
+					<option value=""></option>
 					<c:forEach items="${customerList}" var="customerList">
 						<option value="${customerList.CD_CUSTOMER}">${customerList.CD_CUSTOMER} : ${customerList.NM_CUSTOMER}</option>
 					</c:forEach>
@@ -32,7 +34,7 @@
 			</div>
 			<div class="form-group row">
 				<label>품번 &nbsp</label> 
-				<input type="text" class="form-control boxcontrol" id="txtItemNum" name="CD_ITEM">
+				<input type="text" class="form-control boxcontrol" id="txtItemNum" name="CD_ITEM" v-model="cd_item">
 
 				<label>&nbsp 품명 &nbsp</label> 
 				<input type="text" class="form-control boxcontrol" id="txtItemNM" name="NM_ITEM">
@@ -85,26 +87,27 @@
 							id="txtItemPeriodEnd" name="DTS_END">
 					</div>
 
-					<input type="checkbox" id="checkBoxStopItem"
-						name="STOP_PRODUCTION" value="OK"> <label
-						style="font-size: 1rem" for="checkBoxStopItem">단산 적용</label> <input
-						id="checkBoxStopItemHidden" type="hidden" name="STOP_PRODUCTION"
-						value="">
+					<input type="checkbox" id="checkBoxStopItem" name="STOP_PRODUCTION" value="OK" v-model="stopProduct"> 
+					<label style="font-size: 1rem" for="checkBoxStopItem">단산 적용</label> 
+					<input id="checkBoxStopItemHidden" type="hidden" name="STOP_PRODUCTION" value="">
+					<br/>
+					<input type="checkbox" id="checkBoxDepoItem" name="CD_TYPE" value="DEPO" v-model="cd_type"> 
+					<label style="font-size: 1rem" for="checkBoxDepoItem">DEPO 입고</label> 
+					<input id="checkBoxDepoItemHidden" type="hidden" name="CD_TYPE" value="TKK">
 				</fieldset>
 				<fieldset class="fieldsetcontrol">
-					<label>마감시 BOM 적용 여부</label><br> <label><input
-						type="radio" name="BACK_FLUSH" value="OK" checked>적용
-						&nbsp</label> <label><input type="radio" name="BACK_FLUSH"
-						value="NG" checked>비적용</label> <br> <label>입고 시 검사여부</label><br>
-					<label><input type="radio" name="FREE_AREA" value="유검사"
-						checked>유검사 &nbsp</label> <label><input type="radio"
-						name="FREE_AREA" value="무검사" checked>무검사</label><br> <label
-						class="attention-blue">※ 품번은 수정할 수 없습니다.</label>
-						
-					<label>PBOM</label>
-					<br> <input type="checkbox" id="rbPbomOnlyReg" name="OTHER" value="P2"> 
+					<label>마감시 BOM 적용 여부</label><br> 
+					<label><input type="radio" name="BACK_FLUSH" value="OK" checked>적용 &nbsp</label> 
+					<label><input type="radio" name="BACK_FLUSH" value="NG" checked>비적용</label> <br> 
+					<label>입고 시 검사여부</label><br>
+					<label><input type="radio" name="FREE_AREA" value="유검사" checked>유검사 &nbsp</label> 
+					<label><input type="radio" name="FREE_AREA" value="무검사" checked>무검사</label><br> 
+					<label class="attention-blue">※ 품번은 수정할 수 없습니다.</label>
+					<br>	
+					<label>PBOM</label><br> 
+					<input type="checkbox" id="rbPbomOnlyReg" @change="OnlyReg" name="OTHER" value="P2"> 
 					<label style="font-size: 1rem" for="rbPbomOnlyReg">해당 품번만 적용</label><br>
-					<input type="checkbox" id="rbPbomAllReg" name="OTHER" value="P1">
+					<input type="checkbox" id="rbPbomAllReg" @change="AllReg" name="OTHER" value="P1">
 					<label style="font-size: 1rem" for="rbPbomAllReg">하위 품번 모두 적용</label><br> 
 					<input id="rbPbomRegHidden" type="hidden" name="OTHER" value="">
 				</fieldset>
@@ -253,13 +256,12 @@
 				</fieldset>
 			</div>
 			<div class="form-group row">
-				<button type="button" id="btnRegistItem" type="submit" data-toggle="modal"
-					data-target=".bs-example-modal-sm"
-					class="btn btn-primary btn-user btn-block btn-m-size">
-					Register Item</button>
-				<a href="item_list"
-					class="btn btn-google btn-user btn-block btn-m-size btn-cancel relative-up">
-					Cancel </a>
+				<button id="btnModifyItem" class="btn btn-primary btn-user btn-block btn-m-size">
+					Register Item
+				</button>
+				<button type="button" id="btnLoadItem" @click.stop="backItemMaster" class="btn btn-google btn-user btn-block btn-m-size btn-cancel relative-up">
+					Cancel
+				</button>
 			</div>
 		</div>
 		</form>

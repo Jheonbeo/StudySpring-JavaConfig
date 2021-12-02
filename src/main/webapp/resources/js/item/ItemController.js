@@ -17,14 +17,14 @@ new Vue({
 				var obj = {}
 				$('#loadItem').val(this.callBackItem)
 	            obj['CD_ITEM'] = ($('#loadItem').val()).toUpperCase()
-				this.dataList = Model.regData(obj, '/item/check_item')
+				Model.regData(obj, '/item/check_item').then((resolvedData)=>this.dataList = resolvedData)
 			}
 		},
 		onSearchItem(){
 			if($('#loadItem').val().length > 5){
 				var obj = {}
 	            obj['CD_ITEM'] = ($('#loadItem').val()).toUpperCase()
-				this.dataList = Model.regData(obj, '/item/check_item')
+				Model.regData(obj, '/item/check_item').then((resolvedData)=>this.dataList = resolvedData)
 			}
 			else{
 				$(".modal-body").html("6글자 이상 검색해주세요.")

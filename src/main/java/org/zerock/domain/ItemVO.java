@@ -44,6 +44,7 @@ public class ItemVO {
 	private int PARALLEL;
 	private String FREE_AREA;
 	private String STOP_PRODUCTION;
+	private String CD_TYPE;
 	private String BACK_FLUSH;
 	private String OTHER;
 	private String CYCLE_TIME;
