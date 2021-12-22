@@ -1,6 +1,5 @@
 package org.zerock.service;
 
-import org.json.simple.JSONObject;
 import org.zerock.domain.IdenVO;
 
 public interface ShipService {

@@ -11,6 +11,11 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
  * web.xml을 읽고 그에 해당하는 설정을 구성한다. 
  * 즉 각종 설정을 위한 설정파일이라고 할 수 있다. */
 public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitializer{
+	/*
+	 * static { ConfigurationFactory custom = new log4j2Config();
+	 * ConfigurationFactory.setConfigurationFactory(custom); }
+	 */
+		
 		@Override
 		protected Class<?>[] getRootConfigClasses(){
 			return new Class[] {RootConfig.class, SecurityConfig.class};

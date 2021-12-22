@@ -15,8 +15,7 @@
 <title>Product Manager</title>
 
 <!-- Custom fonts for this template -->
-<link href="/resources/vendor/fontawesome-free/css/all.min.css"
-	rel="stylesheet" type="text/css">
+<link href="/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 <link
 	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
 	rel="stylesheet">
@@ -24,15 +23,17 @@
 <!-- Custom styles for this template -->
 <link href="/resources/css/sb-admin-2.min.css" rel="stylesheet">
 <link href="/resources/css/user-style.css" rel="stylesheet">
-<link href="/resources/css/bootstrap-datepicker.min.css"
-	rel="stylesheet">
+<link href="/resources/css/bootstrap-datepicker.min.css" rel="stylesheet">
 
 <!-- Custom styles for this page -->
-<link href="/resources/vendor/datatables/dataTables.bootstrap4.min.css"
-	rel="stylesheet">
+<link href="/resources/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 <script src="/resources/vendor/jquery/jquery-3.5.1.min.js"></script>
 <script src="https://unpkg.com/vue@2.6.12/dist/vue.js"></script>
+<script src="/resources/js/datepicker/bootstrap-datepicker.js"></script>
+<script src="/resources/js/datepicker/bootstrap-datepicker.ko.min.js"></script>
+<script src="/resources/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/resources/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -56,7 +57,7 @@
 
 				<!-- Divider -->
 				<hr class="sidebar-divider my-0">
-
+				
 				<!-- Nav Item - Dashboard -->
 				<li class="nav-item">
 					<a class="nav-link" id="dashboard-icon">
@@ -69,56 +70,70 @@
 				<hr class="sidebar-divider">
 
 				<!-- Heading -->
-				<div class="sidebar-heading">생산 관리</div>
+				<div class="sidebar-heading">제품 관리</div>
 
 				<!-- Nav Item - Pages Collapse Menu -->
-				<li class="nav-item"><a class="nav-link collapsed" href="#"
-					data-toggle="collapse" data-target="#collapsePages"
-					aria-expanded="true" aria-controls="collapsePages"> <i
-						class="fas fa-fw fa-folder"></i> <span>출입고관리</span>
-				</a>
-					<div id="collapsePages" class="collapse"
-						aria-labelledby="headingPages" data-parent="#accordionSidebar">
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInOutBound" aria-expanded="true" aria-controls="collapseInOutBound"> 
+						<i class="fas fa-fw fa-folder"></i> 
+						<span>입출고</span>
+					</a>
+					<div id="collapseInOutBound" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
-							<h6 class="collapse-header">입고:</h6>
-							<a class="collapse-item">-</a>
+							<h6 class="collapse-header">입고</h6>
+							<span class="collapse-item routes" route="/warehouse/warehouse">현황정보</span>
 							<div class="collapse-divider"></div>
-							<h6 class="collapse-header">출고:</h6>
+							<h6 class="collapse-header">출고</h6>
 							<span class="collapse-item routes" route="/ship/identification">식별지</span>
 						</div>
-					</div></li>
+					</div>
+				</li>
 
 				<!-- Nav Item - Inspection Collapse Menu -->
-				<li class="nav-item"><a class="nav-link collapsed" href="#"
-					data-toggle="collapse" data-target="#collapseProd"
-					aria-expanded="true" aria-controls="#collapseProd"> <i
-						class="fas fa-fw fa-wrench"></i> <span>검사 관리</span>
-				</a>
-					<div id="collapseProd" class="collapse"
-						aria-labelledby="headingProd" data-parent="#accordionSidebar">
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProd" aria-expanded="true" aria-controls="collapseProd"> 
+						<i class="fas fa-fw fa-wrench"></i> 
+						<span>품질</span>
+					</a>
+					<div id="collapseProd" class="collapse" aria-labelledby="headingProd" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
-							<h6 class="collapse-header">Management Product:</h6>
-							<span class="collapse-item">검사정보 조회</span> <span
-								class="collapse-item">하드웨어 조회</span>
+							<span class="collapse-item routes" route="/developPage">제품 검사정보</span>
 						</div>
-					</div></li>
+					</div>
+				</li>
 
 				<!-- Nav Item - Parts -->
-				<li class="nav-item"><a class="nav-link collapsed" href="#"
-					data-toggle="collapse" data-target="#collapsePart"
-					aria-expanded="true" aria-controls="collapsePart"> <i
-						class="fas fa-fw fa-table"></i> <span>자재 관리</span></a>
-					<div id="collapsePart" class="collapse"
-						aria-labelledby="headingPart" data-parent="#accordionSidebar">
+				<li class="nav-item"><a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePart" aria-expanded="true" aria-controls="collapsePart"> 
+					<i class="fas fa-fw fa-table"></i> 
+					<span>자재</span></a>
+					<div id="collapsePart" class="collapse" aria-labelledby="headingPart" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
-							<h6 class="collapse-header">Management Part:</h6>
 							<span class="collapse-item routes" route="/item/item_list">품번 조회 / 수정 / 추가</span> 
 						</div>
-					</div></li>
+					</div>
+				</li>
 
 				<!-- Divider -->
-				<hr class="sidebar-divider d-none d-md-block">
+				<hr class="sidebar-divider">
 
+				<!-- Heading -->
+				<div class="sidebar-heading">단가 관리</div>
+				
+				<!-- Nav Item - Inspection Collapse Menu -->
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFinance" aria-expanded="true" aria-controls="collapseFinance"> 
+						<i class="fas fa-fw fa-coins"></i> 
+						<span>재무</span>
+					</a>
+					<div id="collapseFinance" class="collapse" aria-labelledby="headingProd" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<span class="collapse-item">-</span>
+						</div>
+					</div>
+				</li>
+				
+				<!-- Divider -->
+				<hr class="sidebar-divider d-none d-md-block">
 				<!-- Sidebar Toggler (Sidebar) -->
 				<li class="nav-item text-center">
 					<div class="text-center d-none d-md-inline">

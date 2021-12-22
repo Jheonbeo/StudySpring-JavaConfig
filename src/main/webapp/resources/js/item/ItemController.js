@@ -1,6 +1,6 @@
-import Model from './ItemModel.js'
+import Model from '../Model.js'
 import View from '../View.js'
-
+				
 new Vue({
 	el: '#item-content',
 	data: {
@@ -20,16 +20,24 @@ new Vue({
 				Model.regData(obj, '/item/check_item').then((resolvedData)=>this.dataList = resolvedData)
 			}
 		},
-		onSearchItem(){
-			if($('#loadItem').val().length > 5){
+		async onSearchItem(){
+			if($('#loadItem').val().length > 3){
+				const timeout = setTimeout(this.onShowSpinner, 300);
 				var obj = {}
 	            obj['CD_ITEM'] = ($('#loadItem').val()).toUpperCase()
-				Model.regData(obj, '/item/check_item').then((resolvedData)=>this.dataList = resolvedData)
+				await Model.regData(obj, '/item/check_item').then((resolvedData)=> this.dataList = resolvedData)
+				.then(()=>{
+					clearTimeout(timeout)
+					setTimeout(() => {$('#spinner').modal('hide')}, 500)
+				})
 			}
 			else{
-				$(".modal-body").html("6글자 이상 검색해주세요.")
+				$(".modal-body").html("4글자 이상 검색해주세요.")
 				$("#myModal").modal("show")
 			}
+		},
+		onShowSpinner(){
+			$('#spinner').modal('show')
 		},
 		onNewItem(){
 			View.historyRouterPush('/item/item_register', null)
@@ -51,7 +59,8 @@ new Vue({
 	watch: {
 		dataList(){
 			$('#dataTable').DataTable({
-    			destroy: true,
+				destroy: true,
+				ordering: false,
 				data:this.dataList,
 				columns: [
 					{data:'cd_SUPPLIER'},

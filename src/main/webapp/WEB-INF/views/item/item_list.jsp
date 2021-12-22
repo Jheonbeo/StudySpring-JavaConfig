@@ -67,7 +67,3 @@
 	<!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-
-<!-- Page level plugins -->
-<script src="/resources/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="/resources/vendor/datatables/dataTables.bootstrap4.min.js"></script>

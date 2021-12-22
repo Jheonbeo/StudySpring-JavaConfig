@@ -5,17 +5,14 @@ import java.util.HashMap;
 
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.zerock.domain.MemberVO;
 import org.zerock.mapper.MemberMapper;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j;
 
 @AllArgsConstructor
 @Service("userDetailsService")
-@Log4j
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	private MemberMapper memberMapper;
@@ -23,8 +20,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @SuppressWarnings("unchecked")
 	@Override
     public MemberVO loadUserByUsername(String userId) {
-		log.warn("Load User By UserName : " + userId);
-
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("ARRAY_DATA", "USERID:" + userId + ",");
 		map.put("ACTION", "GET MEMBER");

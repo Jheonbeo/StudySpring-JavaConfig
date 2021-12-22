@@ -11,9 +11,7 @@ import org.zerock.domain.ItemVO;
 import org.zerock.mapper.ItemMapper;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j;
 
-@Log4j
 @Service //비즈니스 영역을 담당하는 객체임을 표시
 @AllArgsConstructor
 public class ItemServiceImpl implements ItemService{
@@ -25,9 +23,6 @@ public class ItemServiceImpl implements ItemService{
 
 	@Override
 	public List<ItemVO> getList() {
-		// TODO Auto-generated method stub
-		log.info("Service : getTotalItemList");
-
 		List<ItemVO> arrResult = new ArrayList<ItemVO>();
 		try {
 			for(ItemVO result : mapper.getList()) {
@@ -45,9 +40,6 @@ public class ItemServiceImpl implements ItemService{
 
 	@SuppressWarnings("unchecked")
 	public ArrayList<ItemVO> getItemDataList(String array_data, String action) {
-		// TODO Auto-generated method stub
-		log.info("Service : getItemDataList");
-
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("ARRAY_DATA", array_data);
 		map.put("ACTION", action);

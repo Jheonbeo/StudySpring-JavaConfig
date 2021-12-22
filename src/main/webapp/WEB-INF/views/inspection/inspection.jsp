@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <!-- Begin Page Content -->
-<div class="container-fluid">
+<div class="container-fluid" id="inspection-content">
 	<h1 class="h3 mb-2 text-gray-800">Inspection Data</h1>
 	<p class="mb-4">Show inspection data.</p>
 
@@ -97,9 +97,3 @@
 	</div>
 </div>
 
-<!-- Page level custom scripts -->
-<!--
-<script src="/resources/js/datepicker/bootstrap-datepicker.js"></script>
-<script src="/resources/js/datepicker/bootstrap-datepicker.ko.min.js"></script>
-<script type="module" src="/resources/js/app.js"></script>
- <script src="/resources/js/inspection/inspection.js"></script> -->

@@ -6,6 +6,7 @@ module.exports = {
   entry: {
     home: './MainController.js',
   },
+  cache: false,
   devtool: 'inline-source-map',
   mode: 'development',
 /*

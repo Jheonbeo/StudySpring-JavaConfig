@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,32 +19,28 @@ import org.zerock.common.CommonMethod;
 import org.zerock.domain.ItemVO;
 import org.zerock.service.ItemService;
 
-import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j;
-
 @Controller
-@Log4j
 @RequestMapping("/item/*")	
-@AllArgsConstructor
 public class ItemController {
+	private Logger log = LogManager.getLogger(this.getClass());
 	private ItemService service;  
 	CommonMethod cm = new CommonMethod();
 
 	@GetMapping("/item_list")
-	public void getlist(Model model) {
-		log.info("item_list(Get)");
+	public void getlist() {
+		log.info("/item/item_list(Get)");
 	}
 
 	@PostMapping("/item_list")
 	public void postlist(ItemVO itemVO, Model model) {
-		log.info("item_list(Post)");
-		
+		log.info("/item/item_list(Post)");
         model.addAttribute("item", itemVO);
 	}
 	
 	@PostMapping("/check_item")
 	@ResponseBody
 	public List<ItemVO> check_item(@RequestBody Map<String, Object> param) throws IOException {
+		log.info("/item/check_item");
 		String data = cm.transVOtoString(param);
 
 		ArrayList<ItemVO> item = service.getItemDataList(data, "CHECK_ITEM");
@@ -53,9 +49,8 @@ public class ItemController {
 	}
 
 	@GetMapping("/item_modify")
-	public void getModify(ItemVO itemVO, Model model) {        
-		log.info("modify(Get)");
-		
+	public void getModify(ItemVO itemVO, Model model) {
+		log.info("/item/item_modify(Get)");
         model.addAttribute("jssLineList", service.getItemDataList(paramToMap("", "70", "", "", ""), "3"));
         model.addAttribute("tomasLineList", service.getItemDataList(paramToMap("", "80", "", "", ""), "3"));
         model.addAttribute("tomasWarehouseList", service.getItemDataList(paramToMap("", "85", "", "", ""), "3"));
@@ -64,8 +59,7 @@ public class ItemController {
 
 	@PostMapping("/item_modify")
 	public void postModify(ItemVO param, Model model) {
-		log.info("modify(Post)");
-		
+		log.info("/item/item_modify(Post)");
         model.addAttribute("jssLineList", service.getItemDataList(paramToMap("", "70", "", "", ""), "3"));
         model.addAttribute("tomasLineList", service.getItemDataList(paramToMap("", "80", "", "", ""), "3"));
         model.addAttribute("tomasWarehouseList", service.getItemDataList(paramToMap("", "85", "", "", ""), "3"));
@@ -75,6 +69,7 @@ public class ItemController {
 	@PostMapping("/getItem")
 	@ResponseBody
 	public Object getItem(@RequestBody Map<String, Object> param) throws IOException {
+		log.info("/item/getItem(Post)");
 		param.put("CDDISCON", "NG");
 		String data = cm.transVOtoString(param);
 		
@@ -86,6 +81,7 @@ public class ItemController {
 	@PostMapping("/setItem")
 	@ResponseBody
 	public Object setItem(@RequestBody Map<String, Object> param) throws IOException {
+		log.info("/item/setItem(Post)");
 		String data = cm.transVOtoString(param);
 		ArrayList<ItemVO> item = service.getItemDataList(data, "5");
 		
@@ -93,9 +89,8 @@ public class ItemController {
 	}
 	
 	@GetMapping("/item_register")
-	public void register(Model model) {        
-		log.info("register");
-		
+	public void register(Model model) {
+		log.info("/item/item_register(Get)");
         model.addAttribute("supplierList", service.getItemDataList(paramToMap("", "30", "", "", ""), "3"));
         model.addAttribute("customerList", service.getItemDataList(paramToMap("", "60", "", "", ""), "3"));
         model.addAttribute("jssLineList", service.getItemDataList(paramToMap("", "70", "", "", ""), "3"));
@@ -106,6 +101,7 @@ public class ItemController {
 	@PostMapping("/getSupplier")
 	@ResponseBody
 	public Object getSupplier(@RequestBody Map<String, Object> param) throws IOException {
+		log.info("/item/getSupplier(Post)");
 		String segValue = (String) param.get("seg_asset");
 		
 		ArrayList<ItemVO> arryObj = new ArrayList<>();

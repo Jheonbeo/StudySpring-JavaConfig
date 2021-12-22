@@ -10,9 +10,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import lombok.extern.log4j.Log4j;
-
-@Log4j
 public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 	private static int TIME = 60 * 60; // 1시간
 	

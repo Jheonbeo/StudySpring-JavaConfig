@@ -220,13 +220,16 @@ tr:nth-child(even) {
     background-size: contain;
     background-repeat: no-repeat;
 }
-
 .logo-image-type6 {
 	background: url("/resources/img/JSS_Logo_Type6.jpg");
 	background-position: center;
 	background-size: cover;
 }
-
+.image-develop {
+	background: url("/resources/img/BuildWebsite.jpg");
+	background-position: center;
+	background-size: cover;
+}
 .img-logout {
 	background: url("/resources/img/LogOut.png") no-repeat;
 	background-size: cover;
@@ -247,4 +250,29 @@ tr:nth-child(even) {
 
 .uppercase {
 	text-transform: uppercase
+}
+
+@media screen and (max-width: 1300px) {
+    .field>.label95 {
+    	font-size: 14px;
+    	width: 80px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .field>.label95 {
+    	font-size: 13px;
+    }
+}
+
+/* Spinner */
+.bd-example-modal-lg .modal-dialog{
+	display: table;
+	position: relative;
+	margin: 0 auto;
+	top: calc(50% - 24px);
+	color: white;
+}
+.bd-example-modal-lg .modal-dialog .modal-content{
+	background-color: transparent;
+	border: none;
 }

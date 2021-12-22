@@ -2,6 +2,8 @@ package org.zerock.controller;
 
 import java.security.Principal;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,25 +12,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j;
-
 @Controller	//스프링의 빈으로 인식토록
-@Log4j
 @RequestMapping("/includes/*")
-@AllArgsConstructor
 public class IndexController {
+	private Logger log = LogManager.getLogger(this.getClass());
 
 	@GetMapping("/index")
 	public String list(Principal principal, Model model) {
-		log.info("index");
-		
+		log.info("/includes/index");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-		if (!(authentication instanceof AnonymousAuthenticationToken)) {
-		    String currentUserName = authentication.getName();
-			log.info(currentUserName);
-		}else {
+		if (authentication instanceof AnonymousAuthenticationToken) {
 			return "/loginout/jssLogin";
 		}
 		
@@ -37,8 +31,7 @@ public class IndexController {
 
 	@GetMapping("/login")
 	public String logout() {
-		log.info("logout");
-		
+		log.info("/includes/login");
 		return "/loginout/jssLogin";
 	}
 }

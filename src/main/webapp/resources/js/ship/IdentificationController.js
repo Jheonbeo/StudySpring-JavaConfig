@@ -39,7 +39,7 @@ new Vue({
             if (e.target.value == '') {
                 return
             }
-
+			
             fetch('/resources/img/identification/' + e.target.value + '.jpg')
                 .then(res => {
                     if (res.ok) {
@@ -55,6 +55,9 @@ new Vue({
             if (e.target.value == '') {
                 return
             }
+			else if ($.trim($('#base_COLOR option:selected').text()) == ''){
+				return
+			}
 
             fetch('/resources/img/ALC/' + e.target.value + $.trim($('#base_COLOR option:selected').text()) + '.png')
                 .then(res => {
@@ -77,7 +80,7 @@ new Vue({
                 $(loadCution).text('')
 
                 for (var key in idenData) {
-                    if (idenData[key] != null) {
+                    if (idenData[key] != null && $('#' + key).length > 0) {
                         $('#' + key).val(decodeURI(idenData[key])
                             .replace(/\+/g, ' ')
                             .replaceAll('%2f', '/').replaceAll('%2F', '/')
@@ -99,6 +102,8 @@ new Vue({
             }
         },
         sendPost() {
+			this.errorCheck()
+			
             var obj = null
             var arr = $('#idenForm').serializeArray()
 
@@ -106,13 +111,24 @@ new Vue({
                 obj = {};
                 jQuery.each(arr, function() {
                     if (this.name.toUpperCase() == 'BASE_COLOR')
-                        obj[this.name.toUpperCase()] = this.value
+                        obj[this.name.toUpperCase()] = this.value.toUpperCase()
                     else
-                        obj[this.name.toUpperCase()] = encodeURI(this.value)
+                        obj[this.name.toUpperCase()] = encodeURI(this.value.toUpperCase())
                 });
             }
 
             var result = Model.setData(obj)
+			this.popUpModal(result)
+        },
+		errorCheck(){
+            if ($('#form_TYPE').val() != '' && $.trim($('#base_COLOR option:selected').text()) == ''){
+                $('#base_COLOR').css( "background-color", "red" )
+				this.popUpModal(null)
+			}
+            else
+				$('#base_COLOR').css( "background-color", "white" )
+		},
+		popUpModal(result){
             if (result != null) {
                 this.clickLoadItem(result)
                 $(".modal-title").html("등록 성공");
@@ -123,6 +139,6 @@ new Vue({
                 $(".modal-body").html("품번 등록 에러");
                 $("#myModal").modal("show");
             }
-        }
+		}
     }
 })

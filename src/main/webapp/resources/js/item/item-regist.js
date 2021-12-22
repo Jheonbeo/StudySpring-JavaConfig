@@ -1,4 +1,4 @@
-import Model from './ItemModel.js'
+import Model from '../Model.js'
 import View from '../View.js'
 
 new Vue({
