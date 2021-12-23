@@ -18,10 +18,15 @@ import org.zerock.common.CommonMethod;
 import org.zerock.domain.DashVO;
 import org.zerock.service.DashService;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 @Controller	//스프링의 빈으로 인식토록
 @RequestMapping("/dashboard/*")
+@RequiredArgsConstructor 
 public class DashBoardController {
 	private Logger log = LogManager.getLogger(this.getClass());
+	@NonNull
 	private DashService service;  
 	CommonMethod cm = new CommonMethod();
 	

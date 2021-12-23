@@ -17,12 +17,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.zerock.common.CommonMethod;
 import org.zerock.domain.ItemVO;
+import org.zerock.service.DashService;
 import org.zerock.service.ItemService;
+
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/item/*")	
+@RequiredArgsConstructor 
 public class ItemController {
 	private Logger log = LogManager.getLogger(this.getClass());
+	@NonNull
 	private ItemService service;  
 	CommonMethod cm = new CommonMethod();
 

@@ -17,12 +17,16 @@ import org.zerock.common.CommonMethod;
 import org.zerock.domain.InspectVO;
 import org.zerock.service.InspectService;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 @Controller	//스프링의 빈으로 인식토록
 @RequestMapping("/inspection/*")	//item으로 시작하는 모든 처리는 이 클래스에서 
+@RequiredArgsConstructor 
 public class InspectionController {
 	private Logger log = LogManager.getLogger(this.getClass());
+	@NonNull
 	private InspectService service;
-	
 	CommonMethod cm = new CommonMethod();
 	
 	@GetMapping("/inspection")

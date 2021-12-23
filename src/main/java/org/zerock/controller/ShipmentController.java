@@ -16,10 +16,15 @@ import org.zerock.common.CommonMethod;
 import org.zerock.domain.IdenVO;
 import org.zerock.service.ShipService;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 @Controller	//스프링의 빈으로 인식토록
 @RequestMapping("/ship/*")
+@RequiredArgsConstructor 
 public class ShipmentController {
 	private Logger log = LogManager.getLogger(this.getClass());
+	@NonNull
 	private ShipService service;  
 	CommonMethod cm = new CommonMethod();
 

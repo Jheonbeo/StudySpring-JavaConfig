@@ -16,24 +16,24 @@
 
 <!-- Custom fonts for this template -->
 <link href="/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-<link
+<link href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.13.0/themes/cupertino/jquery-ui.css" rel="stylesheet">
+<!-- <link
 	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-	rel="stylesheet">
+	rel="stylesheet">  -->
 
 <!-- Custom styles for this template -->
 <link href="/resources/css/sb-admin-2.min.css" rel="stylesheet">
 <link href="/resources/css/user-style.css" rel="stylesheet">
-<link href="/resources/css/bootstrap-datepicker.min.css" rel="stylesheet">
 
 <!-- Custom styles for this page -->
 <link href="/resources/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 <script src="/resources/vendor/jquery/jquery-3.5.1.min.js"></script>
 <script src="https://unpkg.com/vue@2.6.12/dist/vue.js"></script>
-<script src="/resources/js/datepicker/bootstrap-datepicker.js"></script>
-<script src="/resources/js/datepicker/bootstrap-datepicker.ko.min.js"></script>
 <script src="/resources/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="/resources/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js" integrity="sha256-hlKLmzaRlE8SCJC1Kw8zoUbU8BxA+8kR3gseuKfMjxA=" crossorigin="anonymous"></script>
+
 </head>
 
 <body id="page-top">

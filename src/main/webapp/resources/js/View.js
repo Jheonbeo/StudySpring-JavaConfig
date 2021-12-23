@@ -97,14 +97,14 @@ export default {
 				break
 			case '/item/item_modify':
 				if ($('#item-content').length) {
-					delete require.cache[require.resolve('./item/item-modify.js')]
-			  	    import(/* webpackChunkName: "ItemModify" */ './item/item-modify.js')
+					delete require.cache[require.resolve('./item/Item_Modify.js')]
+			  	    import(/* webpackChunkName: "ItemModify" */ './item/Item_Modify.js')
 			    }
 				break
 			case '/item/item_register':
 				if ($('#item-content').length) {
-					delete require.cache[require.resolve('./item/item-regist.js')]
-			  	    import(/* webpackChunkName: "ItemRegist" */ './item/item-regist.js')
+					delete require.cache[require.resolve('./item/Item_Regist.js')]
+			  	    import(/* webpackChunkName: "ItemRegist" */ './item/Item_Regist.js')
 			    }
 				break
 			case '/warehouse/warehouse':

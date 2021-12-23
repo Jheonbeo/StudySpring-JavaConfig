@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!-- Begin Page Content -->
-<div class="container-fluid" id="dashboardWH-content">
+<div class="container-fluid" id="warehouseDashboard-content">
 	<!-- Content Row -->
 	<div class="row">
 		<div class="col-xl-7 col-lg-7">

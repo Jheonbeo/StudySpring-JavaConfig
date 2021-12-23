@@ -11,7 +11,7 @@
 	    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">JSS 공장</a>
 	    <div class="dropdown-menu">
 	      <a class="dropdown-item" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">입고창고</a>
-	      <a class="dropdown-item" id="ship-tab" data-toggle="tab" href="#ship" role="tab" aria-controls="ship" aria-selected="false">출하창고</a>
+	      <a class="dropdown-item" id="ship-tab" data-toggle="tab" href="#ship" role="tab" aria-controls="ship" aria-selected="false" @click="test">출하창고</a>
 	      <a class="dropdown-item" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">생산라인</a>
 	    </div>
 	  </li>

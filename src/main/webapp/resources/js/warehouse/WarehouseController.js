@@ -21,6 +21,14 @@ new Vue({
 			await Model.regData('', '/warehouse/domesticCount').then((resolvedData)=> this.countList = resolvedData)
 			await Model.regData('', '/warehouse/domesticNotStockCount').then((resolvedData)=> this.notStockList = resolvedData)
 		}, 
+		test(){
+			$("#ship").load('/warehouse/wareShip', '',
+				()=>{
+					delete require.cache[require.resolve('./Warehouse_Ship.js')]
+			  	    import(/* webpackChunkName: "WareHouseShip" */ './Warehouse_Ship.js')
+				}
+			)
+		}
     },
 	watch: {
 		wareList(){

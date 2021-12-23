@@ -16,10 +16,15 @@ import org.zerock.common.CommonMethod;
 import org.zerock.domain.WarehouseVO;
 import org.zerock.service.WarehouseService;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 @Controller	//스프링의 빈으로 인식토록
 @RequestMapping("/warehouse/*")
+@RequiredArgsConstructor 
 public class WareHouseController {
 	private Logger log = LogManager.getLogger(this.getClass());
+	@NonNull
 	private WarehouseService service;  
 	CommonMethod cm = new CommonMethod();
 
@@ -29,8 +34,13 @@ public class WareHouseController {
 	}
 
 	@GetMapping("/wareMain")
-	public void getDashboard(Model model) {
+	public void getDashboard() {
 		log.info("/warehouse/wareMain");
+	}
+
+	@GetMapping("/wareShip")
+	public void getShipment() {
+		log.info("/warehouse/wareShip");
 	}
 	
 	@PostMapping("/wareInfo")

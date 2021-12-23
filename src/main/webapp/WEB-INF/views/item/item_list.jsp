@@ -15,12 +15,12 @@
 		<div class="card-body">
 			<input type="hidden" id="cancelItem" value="${item.CD_ITEM}">
 			<div class="table-responsive">
-				<fieldset class="field col-5">
-					<input type="text" class="form-control boxcontrol uppercase" id="loadItem">
-					<button type="button" id="btnLoadItem" @click.stop="onSearchItem" class="btn btn-primary btn-s-size">Search</button>
+				<div class="form-group">
+					품번 : <input type="text" class="form-control boxcontrol uppercase col-2" id="loadItem">
+					<button type="button" id="btnLoadItem" @click.stop="onSearchItem" class="btn btn-primary form-control-sm">Search</button>
 						
-					<button type="button" id="btnCreateItem" @click.stop="onNewItem" class="btn btn-secondary btn-s-size">New</button>
-				</fieldset>
+					<button type="button" id="btnCreateItem" @click.stop="onNewItem" class="btn btn-secondary form-control-sm">New</button>
+				</div>
 
 				<table class="table table-bordered" id="dataTable" style="width: 100%; cellspacing: 0;">
 					<thead>
