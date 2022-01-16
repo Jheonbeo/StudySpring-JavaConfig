@@ -39,6 +39,8 @@
 						class="form-control boxcontrol" id="txtSafty" name="SAFETY_STOCK">
 					<label>대차 수</label> <input type="text"
 						class="form-control boxcontrol" id="txtFlatCar" name="FLATCAR">
+					<label>제품 UPH</label> 
+					<input type="text" class="form-control boxcontrol" name="ITEM_UPH" id="txtUP" value="100">
 				</fieldset>
 				<fieldset class="fieldsetcontrol">
 					<label>최소 생산 단위</label> 
@@ -57,12 +59,12 @@
 				<fieldset class="fieldsetcontrol">
 					<label>SNP</label> 
 					<input type="text" class="form-control boxcontrol" name="BOX_SNP" id="txtSNP">
-					<label>수출SNP</label> 
-					<input type="text" class="form-control boxcontrol" name="EXPORT_SNP" id="txtExportSnp"> 
 					<label>소포장SNP</label>
 					<input type="text" class="form-control boxcontrol" name="SMALL_SNP" id="txtSmallSNP"> 
-					<label>제품 UPH</label> 
-					<input type="text" class="form-control boxcontrol" name="ITEM_UPH" id="txtUP" value="100">
+					<label>입고SNP</label> 
+					<input type="text" class="form-control boxcontrol" name="WARE_SNP" id="txtWareSnp"> 
+					<label>출하SNP</label> 
+					<input type="text" class="form-control boxcontrol" name="SHIP_SNP" id="txtShipSnp"> 
 				</fieldset>
 				<fieldset class="fieldsetcontrol">
 					<label>분배율(%)</label> 

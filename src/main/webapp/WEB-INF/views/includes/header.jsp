@@ -80,11 +80,10 @@
 					</a>
 					<div id="collapseInOutBound" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
-							<h6 class="collapse-header">입고</h6>
-							<span class="collapse-item routes" route="/warehouse/warehouse">현황정보</span>
-							<div class="collapse-divider"></div>
-							<h6 class="collapse-header">출고</h6>
-							<span class="collapse-item routes" route="/ship/identification">식별지</span>
+							<span class="collapse-item routes" route="/warehouse/warehouse(menu)">입고창고</span>
+							<span class="collapse-item routes" route="/warehouse/shipment">출하창고</span>
+							<span class="collapse-item">DEPO</span>
+							<span class="collapse-item">OEM</span>
 						</div>
 					</div>
 				</li>
@@ -109,6 +108,7 @@
 					<div id="collapsePart" class="collapse" aria-labelledby="headingPart" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
 							<span class="collapse-item routes" route="/item/item_list">품번 조회 / 수정 / 추가</span> 
+							<span class="collapse-item routes" route="/item/identification">식별지</span>
 						</div>
 					</div>
 				</li>

@@ -3,7 +3,7 @@ export default {
         var getInfo = null
 
         $.ajax({
-            url: '/ship/getIdenData',
+            url: '/item/getIdenData',
             dataType: 'json',
             async: false,
             contentType: 'application/json',
@@ -23,7 +23,7 @@ export default {
         var setResult = null
 
         $.ajax({
-            url: '/ship/setIdenData',
+            url: '/item/setIdenData',
             dataType: 'json',
             async: false,
             contentType: 'application/json',

@@ -18,6 +18,9 @@ public class ItemVO {
 	private int SAFETY_STOCK;
 	private int PRODUCTION_MINIMUM;
 	private int BOX_SNP;
+	private int MASTER_SNP;
+	private int SHIP_SNP;
+	private int WARE_SNP;
 	private int SMALL_SNP;
 	private int EXPORT_SNP;
 	private int MINIMUM_STOCK;

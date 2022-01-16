@@ -95,7 +95,9 @@ new Vue({
 				$("#cbUnit").val(itemData[0].unt_UNIT);
 				$("#cdSub").val(itemData[0].cd_SUB);
 				$("#txtSNP").val(itemData[0].box_SNP);
-				$("#txtExportSnp").val(itemData[0].export_SNP);
+				//$("#txtExportSnp").val(itemData[0].export_SNP);
+				$("#txtWareSnp").val(itemData[0].ware_SNP);
+				$("#txtShipSnp").val(itemData[0].ship_SNP);
 				$("#txtSmallSNP").val(itemData[0].small_SNP);
 				$("#txtUPH").val(itemData[0].item_UPH);
 				$("#txtItemPeriodStart").val(itemData[0].dts_START);
@@ -162,11 +164,26 @@ new Vue({
 					$("input[name = 'PROCESSING6'][value='O']").prop("checked", true); 
 					
 				$("#txtPackingInfo").val(itemData[0].packaging_INFO)
-				$("#txtReplacementItem").val(itemData[0].replacement_ITEM)
-				$("#txtReplacementItem1").val(itemData[0].replacement_ITEM1)
-				$("#txtReplacementItem2").val(itemData[0].replacement_ITEM2)
-				$("#txtReplacementItem3").val(itemData[0].replacement_ITEM3)
-				$("#txtReplacementItem4").val(itemData[0].replacement_ITEM4)
+                $('#txtReplacementItem').val(decodeURI(itemData[0].replacement_ITEM)
+                    .replace(/\+/g, ' ')
+                    .replaceAll('%2f', '/').replaceAll('%2F', '/')
+                    .replaceAll('%2c', ',').replaceAll('%2C', ','))
+                $('#txtReplacementItem1').val(decodeURI(itemData[0].replacement_ITEM1)
+                    .replace(/\+/g, ' ')
+                    .replaceAll('%2f', '/').replaceAll('%2F', '/')
+                    .replaceAll('%2c', ',').replaceAll('%2C', ','))
+                $('#txtReplacementItem2').val(decodeURI(itemData[0].replacement_ITEM2)
+                    .replace(/\+/g, ' ')
+                    .replaceAll('%2f', '/').replaceAll('%2F', '/')
+                    .replaceAll('%2c', ',').replaceAll('%2C', ','))
+                $('#txtReplacementItem3').val(decodeURI(itemData[0].replacement_ITEM3)
+                    .replace(/\+/g, ' ')
+                    .replaceAll('%2f', '/').replaceAll('%2F', '/')
+                    .replaceAll('%2c', ',').replaceAll('%2C', ','))
+                $('#txtReplacementItem4').val(decodeURI(itemData[0].replacement_ITEM4)
+                    .replace(/\+/g, ' ')
+                    .replaceAll('%2f', '/').replaceAll('%2F', '/')
+                    .replaceAll('%2c', ',').replaceAll('%2C', ','))
 				$("#txtCycleTime").val(itemData[0].cycle_TIME)
 			})
 		},

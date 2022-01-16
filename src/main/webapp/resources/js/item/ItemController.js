@@ -51,7 +51,7 @@ new Vue({
 			var param = 'CD_ITEM=' + $('#dataTable').find("tr:eq(" + rowIndex + ")").find("td:eq(2)").text() + '&' +
 						'CD_SUPPLIER=' + $('#dataTable').find("tr:eq(" + rowIndex + ")").find("td:eq(0)").text() + '&' +
 						'CD_CUSTOMER=' + $('#dataTable').find("tr:eq(" + rowIndex + ")").find("td:eq(1)").text() + '&' +
-						'SEG_ASSET=' + $('#dataTable').find("tr:eq(" + rowIndex + ")").find("td:eq(4)").text()
+						'SEG_ASSET=' + $('#dataTable').find("tr:eq(" + rowIndex + ")").find("td:eq(6)").text()
 			//get 방식
 			View.historyRouterPush('/item/item_modify?' + param, null)
 		}
@@ -73,7 +73,9 @@ new Vue({
 	                     
 	                    return data
                 	}},
-					{data:'box_SNP'},
+					{data:'master_SNP'},
+					{data:'ware_SNP'},
+					{data:'ship_SNP'},
 					{data:'seg_ASSET'},
 					{data:'identification'},
 					{data:'pbom'},

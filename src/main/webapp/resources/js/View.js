@@ -77,10 +77,10 @@ export default {
 				  	import(/* webpackChunkName: "DashBoard" */ './dashboard/DashController.js')
 				}
 				break
-			case '/ship/identification':
+			case '/item/identification':
 				if ($('#identification-content').length) {
-					delete require.cache[require.resolve('./ship/IdentificationController.js')]
-			  	    import(/* webpackChunkName: "Identification" */ './ship/IdentificationController.js')
+					delete require.cache[require.resolve('./item/IdentificationController.js')]
+			  	    import(/* webpackChunkName: "Identification" */ './item/IdentificationController.js')
 			    }
 				break
 			case '/inspection/inspection':
@@ -107,10 +107,16 @@ export default {
 			  	    import(/* webpackChunkName: "ItemRegist" */ './item/Item_Regist.js')
 			    }
 				break
-			case '/warehouse/warehouse':
+			case '/warehouse/warehouse(menu)':
 				if ($('#warehouse-content').length) {
 					delete require.cache[require.resolve('./warehouse/WarehouseController.js')]
 			  	    import(/* webpackChunkName: "WareHouse" */ './warehouse/WarehouseController.js')
+			    }
+				break
+			case '/warehouse/shipment':
+				if ($('#shipment-content').length) {
+					delete require.cache[require.resolve('./warehouse/ShipmentController.js')]
+			  	    import(/* webpackChunkName: "WareHouse" */ './warehouse/ShipmentController.js')
 			    }
 				break
 		}

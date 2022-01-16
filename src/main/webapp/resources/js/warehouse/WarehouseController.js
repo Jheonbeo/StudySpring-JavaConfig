@@ -14,20 +14,13 @@ new Vue({
 	},
     methods: {
 		init(){
-			$("#main").load('/warehouse/wareMain', '', this.initData)
+			$("#main").load('/warehouse/warehouse', '', this.initData)
+			//this.initData()
 		},
 		async initData(){
 			await Model.regData('', '/warehouse/wareInfo').then((resolvedData)=> this.wareList = resolvedData)
 			await Model.regData('', '/warehouse/domesticCount').then((resolvedData)=> this.countList = resolvedData)
 			await Model.regData('', '/warehouse/domesticNotStockCount').then((resolvedData)=> this.notStockList = resolvedData)
-		}, 
-		test(){
-			$("#ship").load('/warehouse/wareShip', '',
-				()=>{
-					delete require.cache[require.resolve('./Warehouse_Ship.js')]
-			  	    import(/* webpackChunkName: "WareHouseShip" */ './Warehouse_Ship.js')
-				}
-			)
 		}
     },
 	watch: {
@@ -63,6 +56,7 @@ new Vue({
 			    }],
 			  },
 			  options: {
+				responsive: true,
 			    maintainAspectRatio: false,
 			    tooltips: {
 			      backgroundColor: "rgb(255,255,255)",
@@ -73,6 +67,17 @@ new Vue({
 			      yPadding: 15,
 			      displayColors: false,
 			      caretPadding: 10,
+				  callbacks: {
+					label: function(tooltipItem, data) {
+				        var dataset = data.datasets[tooltipItem.datasetIndex]
+						var total = dataset.data.reduce(function(previousValue, currentValue) {
+				           	return parseInt(previousValue) + parseInt(currentValue);
+				        })
+				        var currentValue = dataset.data[tooltipItem.index]
+				        var percentage = Math.floor(((currentValue/total) * 100)+0.5);        
+				        return percentage + "%"
+					}
+				  }
 			    },
 			    legend: {
 			      display: true

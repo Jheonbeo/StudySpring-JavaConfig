@@ -28,7 +28,9 @@
 							<th>협력사</th>
 							<th>고객사</th>
 							<th>품번</th>
-							<th>SNP</th>
+							<th>마스터SNP</th>
+							<th>입고SNP</th>
+							<th>출고SNP</th>
 							<th>구별</th>
 							<th>식별지</th>
 							<th>P_BOM</th>

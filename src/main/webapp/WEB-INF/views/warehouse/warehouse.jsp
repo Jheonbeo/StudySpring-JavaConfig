@@ -1,32 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-
 <!-- Begin Page Content -->
 <div class="container-fluid" id="warehouse-content">
-	<ul class="nav nav-tabs">
-	  <li class="nav-item">
-	    <a class="nav-link active" id="main-tab" data-toggle="tab" href="#main" role="tab" aria-controls="main" aria-selected="true">DASH</a>
-	  </li>
-	  <li class="nav-item dropdown">
-	    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">JSS 공장</a>
-	    <div class="dropdown-menu">
-	      <a class="dropdown-item" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">입고창고</a>
-	      <a class="dropdown-item" id="ship-tab" data-toggle="tab" href="#ship" role="tab" aria-controls="ship" aria-selected="false" @click="test">출하창고</a>
-	      <a class="dropdown-item" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">생산라인</a>
-	    </div>
-	  </li>
-	  <li class="nav-item">
-	    <a class="nav-link" href="#">DEPO</a>
-	  </li>
-	  <li class="nav-item">
-	    <a class="nav-link" href="#">OEM</a>
-	  </li>
-	</ul>
-	<br>
-	<div class="tab-content" id="myTabContent">
-	  <div class="tab-pane fade show active" id="main" role="tabpanel" aria-labelledby="main-tab"></div>
-	  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">test</div>
-	  <div class="tab-pane fade" id="ship" role="tabpanel" aria-labelledby="ship-tab"></div>
-	  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">test2</div>
+	<!-- Content Row -->
+	<div class="row">
+		<div class="col-xl-7 col-lg-7">
+			<!-- Area Chart -->
+		    <div class="card shadow mb-4">
+				<div class="card-header py-2">
+		        	<h6 class="m-0 font-weight-bold text-primary">금일 입고내역</h6>
+		      	</div>
+		      	<div class="card-body">
+		      		<div class="table-responsive">
+					<table class="table table-bordered" id="dataTable" style="width: 100%; cellspacing: 0;">
+						<thead>
+							<tr>
+								<th>입고날짜</th>
+								<th>품번</th>
+								<th>수량</th>
+								<th>협력사</th>
+								<th>렉번호</th>
+							</tr>
+						</thead>
+					</table>
+					</div>
+				</div>
+		    </div>
+		</div>
+		
+		<div class="col-xl-5 col-lg-5">
+			<!-- Area Chart -->
+		    <div class="card shadow mb-4">
+				<div class="card-header py-2">
+		        	<h6 class="m-0 font-weight-bold text-primary">금일 입고차트(국내)</h6>
+		      	</div>
+		      	<!-- Card Body -->
+                <div class="card-body">
+                  <div class="chart-pie pt-4">
+                    <canvas id="myPieChart"></canvas>
+                  </div>
+                </div>
+		    </div>
+			<!-- Area Chart -->
+		    <div class="card shadow mb-4">
+				<div class="card-header py-2">
+		        	<h6 class="m-0 font-weight-bold text-primary">금일 미입고 상세내역(국내)</h6>
+		      	</div>
+		      	<!-- Card Body -->
+                <div class="card-body">
+		      		<div class="table-responsive">
+					<table class="table table-bordered" id="dataTableNotStock" style="width: 100%; cellspacing: 0;">
+						<thead>
+							<tr>
+								<th>품번</th>
+								<th>수량</th>
+								<th>협력사</th>
+							</tr>
+						</thead>
+					</table>
+					</div>
+                </div>
+		    </div>
+		</div>
+		
 	</div>
-</div>-
+</div>
