@@ -8,7 +8,7 @@
 	    <a class="nav-link active" id="MAIN_TAB" data-toggle="tab" href="#main" role="tab" aria-controls="main" aria-selected="true">금일 입고내역(국내)</a>
 	  </li>
 	  <li class="nav-item">
-	    <a class="nav-link" id="FIFO_TAB" data-toggle="tab" href="#fifo" role="tab" aria-controls="fifo" aria-selected="true">선입선출</a>
+	    <a class="nav-link" id="FIFO_TAB" data-toggle="tab" href="#fifo" role="tab" aria-controls="fifo" aria-selected="true" @click="fifo">선입선출</a>
 	  </li>
 	  <li class="nav-item">
 	    <a class="nav-link" id="STOCK_OUT_TAB" data-toggle="tab" href="#stock_out" role="tab" aria-controls="stock_out" aria-selected="true">미확인 재고분출</a>

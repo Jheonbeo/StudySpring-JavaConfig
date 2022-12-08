@@ -21,6 +21,9 @@ new Vue({
 			await Model.regData('', '/warehouse/wareInfo').then((resolvedData)=> this.wareList = resolvedData)
 			await Model.regData('', '/warehouse/domesticCount').then((resolvedData)=> this.countList = resolvedData)
 			await Model.regData('', '/warehouse/domesticNotStockCount').then((resolvedData)=> this.notStockList = resolvedData)
+		},
+		fifo(){
+			$("#fifo").load('/warehouse/fifo')
 		}
     },
 	watch: {

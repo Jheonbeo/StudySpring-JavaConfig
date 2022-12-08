@@ -36,17 +36,22 @@ public class WareHouseController {
 
 	@GetMapping("/warehouse(menu)")
 	public void getWareMenu() {
-		log.info("/warehouse/warehouse(menu)");
+		log.info("/warehouse/getWareMenu");
 	}
 	
 	@GetMapping("/warehouse")
 	public void getDashboard() {
-		log.info("/warehouse/wareMain");
+		log.info("/warehouse/getDashboard");
 	}
 
+	@GetMapping("/fifo")
+	public void getFifo() {
+		log.info("/warehouse/getFifo");
+	}
+	
 	@GetMapping("/shipment")
 	public void getShipment(Model model) {
-		log.info("/warehouse/wareShip");
+		log.info("/warehouse/getShipment");
         model.addAttribute("customerList", itemService.getItemDataList(paramToMap("", "60", "", "", ""), "3"));
 	}
 	
